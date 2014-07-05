@@ -6,10 +6,10 @@
 The latest stable version in npm is always a safe bet.
 
 ```sh
-$ npm install waterline-orientdb
+$ npm install sails-orientdb
 ```
 
-[![NPM](https://nodei.co/npm/waterline-orientdb.png?downloads=true&stars=true)](https://nodei.co/npm/waterline-orientdb/)
+[![NPM](https://nodei.co/npm/sails-orientdb.png?downloads=true&stars=true)](https://nodei.co/npm/sails-orientdb/)
 
 
 
@@ -124,4 +124,4 @@ If you feel that yours is the better approach, and should be the default, share 
 
 
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8acf2fc2ca0aca8a3018e355ad776ed7 "githalytics.com")](http://githalytics.com/balderdashy/waterline-orientdb/FAQ.md)
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8acf2fc2ca0aca8a3018e355ad776ed7 "githalytics.com")](http://githalytics.com/vjsrinath/sails-orientdb/FAQ.md)
