@@ -1,0 +1,43 @@
+{
+    "name": "waterline-orientdb",
+    "version": "0.10.0",
+    "description": "orientdb adapter for Sails / Waterline",
+    "main": "adapter.js",
+    "scripts": {
+        "test": "node test/integration/runner -R spec -b"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/balderdashy/waterline-%s.git"
+    },
+    "keywords": [
+    "orientdb",
+    "adapter",
+    "sails",
+    "waterline",
+    "sails.js",
+    "plugin"
+  ],
+    "author": "Srinath Janakiraman <vjsrinath@live.com>",
+    "license": "MIT",
+    "readmeFilename": "README.md",
+    "dependencies": {
+        "oriento": "^0.3.2",
+        "q": "^1.0.1",
+        "underscore": "^1.6.0",
+        "async": "^0.9.0"
+    },
+    "devDependencies": {
+        "waterline-adapter-tests": "~0.10.0",
+        "mocha": "*",
+        "captains-log": "~0.11.0"
+    },
+    "waterlineAdapter": {
+        "type": "orientdb",
+        "interfaces": [
+      "semantic",
+      "queryable"
+    ],
+        "waterlineVersion": "~0.10.0"
+    }
+}
