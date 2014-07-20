@@ -5,6 +5,7 @@
 Provides easy access to `orientdb` from Sails.js & Waterline.
 
 ### The adapter in early development stages, pull requests are welcome
+*The adapter automatically creates edges between model instances with the help of associations information available from Collection instance*
 
 This module is a Waterline/Sails adapter, an early implementation of a rapidly-developing, tool-agnostic data standard.  Its goal is to provide a set of declarative interfaces, conventions, and best-practices for integrating with all sorts of data sources.  Not just databases-- external APIs, proprietary web services, or even hardware.
 
@@ -46,72 +47,122 @@ This adapter exposes the following methods:
 + **Status**
   + Completed
 
+###### `createEdge(@from,@to,@options,@callback)`
+Creates edge between specified two model instances by ID in the form parameters "@from" and "@to"
++ **Status**
+  + Completed
+  
+usage: 
+  ```javascript
+ //Assume a model named "Post"
+  Post.createEdge('#12:1','#13:1',{'@class':'Comments'},function(err, result){
+  
+  });
+  ```
+  
+###### `deleteEdges(@from,@to,@options,@callback)`
+Deletes edges between specified two model instances by ID in the form parameters "@from" and "@to"
++ **Status**
+  + Completed
+  
+usage: 
+  ```javascript
+ //Assume a model named "Post"
+  Post.deleteEdges('#12:1','#13:1',null,function(err, result){
+  
+  });
+  ```
 
-
-### Interfaces
-
->TODO:
->Specify the interfaces this adapter will support.
->e.g. `This adapter implements the [semantic]() and [queryable]() interfaces.`
-> For more information, check out this repository's [FAQ](./FAQ.md) and the [adapter interface reference](https://github.com/balderdashy/sails-docs/blob/master/adapter-specification.md) in the Sails docs.
+### Example Model definitions
 
 
 ### Development
+```javascript
+/**
+ * User Model
+ *
+ * The User model represents the schema of authentication data
+ */
+module.exports = {
+
+    // Enforce model schema in the case of schemaless databases
+    schema: true,
+    tableName: 'User',
+    attributes: {
+        id: {
+            type: 'string',
+            primaryKey: true,
+            columnName: '@rid'
+        },
+        username: {
+            type: 'string',
+            unique: true
+        },
+        email: {
+            type: 'email',
+            unique: true
+        },        
+        profile: {
+            collection: 'Profile',
+            via: 'user',
+            edge: 'userProfile'
+        }
+    }
+};
+```
+
+#### Profile Model to be associated with User model
+```javascript
+/**
+ * Profile.js
+ *
+ * @description :: TODO: You might write a short summary of how this model works and what it represents here.
+ * @docs        :: http://sailsjs.org/#!documentation/models
+ */
+
+module.exports = {
+    tableName: 'Profile',
+    attributes: {
+        id: {
+            type: 'string',
+            primaryKey: true,
+            columnName: '@rid'
+        },
+        user: {
+            model: "User",
+            required: true
+        },
+        familyName: {
+            type: 'string'
+        },
+        givenName: {
+            type: 'string'
+        },
+        profilePic: {
+            type: 'string'
+        }
+    }
+};
+```
+
+An edge names **userProfile** would be created between user and profile model instances whenever an instance of profile model is saved with **user** attribute having id of **user** instance.
 
 Check out **Connections** in the Sails docs, or see the `config/connections.js` file in a new Sails project for information on setting up adapters.
 
-## Getting started
-It's usually pretty easy to add your own adapters for integrating with proprietary systems or existing open APIs.  For most things, it's as easy as `require('some-module')` and mapping the appropriate methods to match waterline semantics.  To get started:
-
-1. Fork this repository
-2. Set up your `README.md` and `package.json` file.  Sails.js adapter module names are of the form sails-*, where * is the name of the datastore or service you're integrating with.
-3. Build your adapter.
-
-
-
-
-### Running the tests
-
-Configure the interfaces you plan to support (and targeted version of Sails/Waterline) in the adapter's `package.json` file:
-
+### Sample connection configuration in connection.js
+If databas doesn't exist adapter will attempt to create a new one
 ```javascript
-{
-  //...
-  "sails": {
-  	"adapter": {
-	    "sailsVersion": "~0.10.0",
-	    "implements": [
-	      "semantic",
-	      "queryable"
-	    ]
-	  }
-  }
-}
+
+localOrientDB: {
+        adapter: 'sails-orientdb',
+        database: {
+            name: 'dataBaseName'
+        },
+        username: "userName",
+        password: "password"
+        }
+
 ```
-
-In your adapter's directory, run:
-
-```sh
-$ npm test
-```
-
-
-## Publish your adapter
-
-> You're welcome to write proprietary adapters and use them any way you wish--
-> these instructions are for releasing an open-source adapter.
-
-1. Create a [new public repo](https://github.com/new) and add it as a remote (`git remote add origin git@github.com:yourusername/sails-youradaptername.git)
-2. Make sure you attribute yourself as the author and set the license in the package.json to "MIT".
-3. Run the tests one last time.
-4. Do a [pull request to sails-docs](https://github.com/balderdashy/sails-docs/compare/) adding your repo to `data/adapters.js`.  Please let us know about any special instructions for usage/testing.
-5. We'll update the documentation with information about your new adapter
-6. Then everyone will adore you with lavish praises.  Mike might even send you jelly beans.
-
-7. Run `npm version patch`
-8. Run `git push && git push --tags`
-9. Run `npm publish`
-
 
 
 
