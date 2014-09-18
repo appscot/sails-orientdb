@@ -8,7 +8,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/vjsrinath/sails-orientdb.git"
+        "url": "git://github.com/samueljoos/sails-orientdb.git"
     },
     "keywords": [
     "orientdb",
