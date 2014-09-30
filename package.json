@@ -22,7 +22,7 @@
     "license": "MIT",
     "readmeFilename": "README.md",
     "dependencies": {
-        "oriento": "^0.3.2",
+        "oriento": "^0.5.1",
         "q": "^1.0.1",
         "underscore": "^1.6.0",
         "async": "^0.9.0"
