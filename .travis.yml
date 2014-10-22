@@ -1,0 +1,7 @@
+language: node_js
+deploy:
+  secure: "SpLp0ItRqqmcS/rURr6Lb8TjLn7m2fcX449U+ev7a4FDdGjG+ua4PL0x3jf7vDsml3WMd
+MQJLS+qJZqdpA239Zqg9uwAwdnAhBqWYfS95/UcnG63sMwnOIFsdehJNzuuNf6vf3QY2xCM7rvtuJKy7
+WtFbwuqZb1kB9jCnHZ0LtI="
+  email: vjsrinath@live.com
+  provider: npm
