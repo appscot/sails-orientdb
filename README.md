@@ -1,5 +1,7 @@
 ![image_squidhome@2x.png](http://i.imgur.com/RIvu9.png)
 
+![Build Status](https://travis-ci.org/appscot/waterline-orientdb.svg?branch=master)
+
 # sails-orientdb
 
 Provides easy access to `orientdb` from Sails.js & Waterline.
