@@ -35,7 +35,8 @@
   "waterlineAdapter": {
     "type": "orientdb",
     "interfaces": [
-      "semantic"
+      "semantic",
+      "associations"
     ],
     "waterlineVersion": "~0.10.12"
   }
