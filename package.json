@@ -1,10 +1,10 @@
 {
   "name": "waterline-orientdb",
   "version": "0.10.12",
-  "description": "orientdb adapter for Sails / Waterline",
+  "description": "OrientDB adapter for Waterline / Sails.js",
   "main": "./lib/adapter.js",
   "scripts": {
-    "test": "node test/integration/runner -R spec -b"
+    "test": "make test"
   },
   "repository": {
     "type": "git",
@@ -13,10 +13,8 @@
   "keywords": [
     "orientdb",
     "waterline",
-    "adapter",
-    "sails",
-    "sails.js",
-    "plugin"
+    "orm",
+    "sails"
   ],
   "license": "MIT",
   "readmeFilename": "README.md",
