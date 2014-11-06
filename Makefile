@@ -1,6 +1,6 @@
 
 MOCHA_OPTS= --check-leaks --timeout 30000
-REPORTER = dot
+REPORTER = spec
 
 test: test-integration
 

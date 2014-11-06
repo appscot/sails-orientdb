@@ -46,7 +46,7 @@ log.info('Running `waterline-adapter-tests` against ' + interfaces.length + ' in
 log.info('( ' + interfaces.join(', ') + ' )');
 console.log();
 log('Latest draft of Waterline adapter interface spec:');
-log('http://links.sailsjs.org/docs/plugins/adapters/interfaces');
+log('https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md');
 console.log();
 
 
@@ -71,7 +71,13 @@ new TestRunner({
 
     // The set of adapter interfaces to test against.
     // (grabbed these from this adapter's package.json file above)
-    interfaces: interfaces
+    interfaces: interfaces,
+    
+    // Mocha options
+    // reference: https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically
+    mocha: {
+      reporter: 'spec'
+    }
 
     // Most databases implement 'semantic' and 'queryable'.
     //
