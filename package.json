@@ -23,7 +23,8 @@
     "lodash": "^2.4.1",
     "oriento": "git://github.com/codemix/oriento",
     "q": "^1.0.1",
-    "underscore": "^1.6.0"
+    "underscore": "^1.6.0",
+    "waterline-cursor": "~0.0.5"
   },
   "devDependencies": {
     "waterline-adapter-tests": "^0.10.4",
