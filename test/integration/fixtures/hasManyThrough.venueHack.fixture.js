@@ -13,12 +13,22 @@ module.exports = Waterline.Collection.extend({
   attributes: {
     seats: 'integer',
     team: {
-      model: 'team',
-      columnName: 'team_id'
+      columnName: 'team',
+      type: 'string',
+      foreignKey: true,
+      references: 'team',
+      on: 'id',
+      onKey: 'id',
+      via: 'stadium'
     },
     stadium: {
-      model: 'stadium',
-      columnName: 'stadium_id'
+      columnName: 'stadium',
+      type: 'string',
+      foreignKey: true,
+      references: 'stadium',
+      on: 'id',
+      onKey: 'id',
+      via: 'team'
     }
   }
 

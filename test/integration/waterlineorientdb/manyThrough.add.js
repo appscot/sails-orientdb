@@ -15,41 +15,40 @@ describe('Association Interface', function() {
       Associations.Stadium.create({ name: 'hasManyThrough stadium'}, function(err, stadium) {
         if(err) return done(err);
         stadiumRecord = stadium;
-
-        Associations.Team.create({ name: 'hasManyThrough team', mascot: 'elephant' }, function(err, team) {
-          if(err) return done(err);
-          teamRecord = team;
-
-          Associations.Venue.create({ seats: 200, stadium: stadium.id, team: team.id }, function(err, venue) {
+          Associations.Team.create({ name: 'hasManyThrough team', mascot: 'elephant' }, function(err, team) {
             if(err) return done(err);
+            teamRecord = team;
             done();
-          });
         });
       });
     });
 
-    describe('.find', function() {
+    describe('.add', function() {
 
       /////////////////////////////////////////////////////
       // TEST METHODS
       ////////////////////////////////////////////////////
 
-      it('should return teams when the populate criteria is added', function(done) {
-        Associations.Stadium.find({ name: 'hasManyThrough stadium' })
-        .populate('teams')
-        .exec(function(err, stadiums) {
+      it('should link a stadium to a team through a join table', function(done) {
+        stadiumRecord.teams.add(teamRecord.id);
+        stadiumRecord.save(function(err){
           assert(!err, err);
-
-          assert(Array.isArray(stadiums));
-          assert(stadiums.length === 1);
-          assert(Array.isArray(stadiums[0].teams));
-          assert(stadiums[0].teams.length === 1);
-
-          done();
+        
+          Associations.Stadium.findOne(stadiumRecord.id)
+          .populate('teams')
+          .exec(function(err, stadium) {
+            assert(!err, err);
+  
+            assert(Array.isArray(stadium.teams));
+            assert(stadium.teams.length === 1);
+            assert(stadium.teams[0].mascot === 'elephant');
+  
+            done();
+          });
         });
       });
 
-      it('should not return a teams object when the populate is not added', function(done) {
+      xit('should not return a teams object when the populate is not added', function(done) {
         Associations.Stadium.find()
         .exec(function(err, stadiums) {
           assert(!err);
@@ -61,7 +60,7 @@ describe('Association Interface', function() {
         });
       });
 
-      it('should call toJSON on all associated records if available', function(done) {
+      xit('should call toJSON on all associated records if available', function(done) {
         Associations.Stadium.find({ name: 'hasManyThrough stadium' })
         .populate('teams')
         .exec(function(err, stadiums) {
