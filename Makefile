@@ -2,13 +2,23 @@
 MOCHA_OPTS= --check-leaks --timeout 30000
 REPORTER = spec
 
-test: test-integration
+test: test-integration-all
 
-test-clean: test-integration clean
+test-clean: test-integration-all clean
+
+
+test-integration-all: test-integration test-integration-generic
 
 test-integration:
-	echo "\n\nNOTICE: If tests fail, please ensure you've set the correct credentials in lib/adapter.js\n\n"
-	echo "Running integration tests..."
+	@echo "\n\nNOTICE: If tests fail, please ensure you've set the correct credentials in lib/adapter.js\n"
+	@echo "Running waterline-orientdb integration tests..."
+	@NODE_ENV=test ./node_modules/.bin/mocha \
+		--reporter $(REPORTER) \
+		--timeout 30000 --globals Associations \
+		test/integration/waterlineorientdb/**/*.js
+
+test-integration-generic:
+	@echo "\n\nRunning generic integration tests..."
 	@NODE_ENV=test node test/integration/runner.js
 
 test-unit:
@@ -22,7 +32,7 @@ test-load:
 		--reporter $(REPORTER) \
 		$(MOCHA_OPTS) \
 		test/load/**
-		
+
 clean:
-	echo 'DROPPING ALL COLLECTIONS from default db waterline'
+	@echo "\n\nDROPPING ALL COLLECTIONS from default db: waterline"
 	./node_modules/.bin/oriento db drop waterline

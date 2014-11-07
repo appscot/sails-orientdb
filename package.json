@@ -29,7 +29,8 @@
   "devDependencies": {
     "waterline-adapter-tests": "^0.10.4",
     "mocha": "*",
-    "captains-log": "~0.11.0"
+    "captains-log": "~0.11.0",
+    "waterline": "^0.10.12"
   },
   "waterlineAdapter": {
     "type": "orientdb",
