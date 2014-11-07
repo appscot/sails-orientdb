@@ -76,8 +76,12 @@ new TestRunner({
     // Mocha options
     // reference: https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically
     mocha: {
-      reporter: 'spec'
-    }
+      reporter: 'spec',
+      //grep: 'Custom Primary Keys'
+    },
+    
+    //Invert Grep
+    mochaInvert: true
 
     // Most databases implement 'semantic' and 'queryable'.
     //
