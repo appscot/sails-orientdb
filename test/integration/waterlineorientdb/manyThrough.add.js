@@ -48,29 +48,16 @@ describe('Association Interface', function() {
         });
       });
 
-      xit('should not return a teams object when the populate is not added', function(done) {
-        Associations.Stadium.find()
-        .exec(function(err, stadiums) {
-          assert(!err);
-
-          var obj = stadiums[0].toJSON();
-          assert(!obj.teams);
-
-          done();
-        });
-      });
-
-      xit('should call toJSON on all associated records if available', function(done) {
-        Associations.Stadium.find({ name: 'hasManyThrough stadium' })
-        .populate('teams')
-        .exec(function(err, stadiums) {
+      it('should link a team to a stadium through a join table', function(done) {
+        //TODO: add EventEmitter2's mediator so tests can be ran async
+        Associations.Team.findOne(teamRecord.id)
+        .populate('stadiums')
+        .exec(function(err, team) {
           assert(!err, err);
 
-          var obj = stadiums[0].toJSON();
-
-          assert(Array.isArray(obj.teams));
-          assert(obj.teams.length === 1);
-          assert(!obj.teams[0].mascot);
+          assert(Array.isArray(team.stadiums));
+            assert(team.stadiums.length === 1);
+            assert(team.stadiums[0].name === 'hasManyThrough stadium');
 
           done();
         });

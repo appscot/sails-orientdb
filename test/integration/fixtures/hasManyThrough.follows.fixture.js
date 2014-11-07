@@ -6,29 +6,28 @@ var Waterline = require('waterline');
 
 module.exports = Waterline.Collection.extend({
 
-  tableName: 'venueTable',
-  identity: 'venue',
+  tableName: 'followsTable',
+  identity: 'follows',
   connection: 'associations',
 
   attributes: {
-    seats: 'integer',
-    teamRef: {
-      columnName: 'teamRef',
+    friend: {
+      columnName: 'friend',
       type: 'string',
       foreignKey: true,
-      references: 'team',
+      references: 'friend',
       on: 'id',
       onKey: 'id',
-      via: 'stadiumRef'
+      via: 'followee'
     },
-    stadiumRef: {
-      columnName: 'stadiumRef',
+    followee: {
+      columnName: 'followee',
       type: 'string',
       foreignKey: true,
-      references: 'stadium',
+      references: 'friend',
       on: 'id',
       onKey: 'id',
-      via: 'teamRef'
+      via: 'friend'
     }
   }
 

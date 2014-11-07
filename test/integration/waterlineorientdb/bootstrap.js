@@ -29,7 +29,10 @@ var fixtures = {
   TaxiFixture: require(fixturesPath + 'manyToMany.taxi.fixture'),
   DriverFixture: require(fixturesPath + 'manyToMany.driver.fixture'),
   UserOneFixture: require(fixturesPath + 'oneToOne.fixture').user_resource,
-  ProfileOneFixture: require(fixturesPath + 'oneToOne.fixture').profile
+  ProfileOneFixture: require(fixturesPath + 'oneToOne.fixture').profile,
+  
+  FriendFixture: require('../fixtures/hasManyThrough.friend.fixture.js'),
+  FollowsFixture: require('../fixtures/hasManyThrough.follows.fixture.js')
 };
 
 
