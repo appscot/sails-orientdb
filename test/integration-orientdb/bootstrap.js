@@ -4,7 +4,7 @@
 var Waterline = require('waterline');
 var _ = require('lodash');
 var async = require('async');
-var Adapter = require('../../../');
+var Adapter = require('../../');
 
 var config = {
   schema : false
@@ -12,7 +12,7 @@ var config = {
 
 
 // Require Fixtures
-var fixturesPath = '../../../node_modules/waterline-adapter-tests/interfaces/associations/support/fixtures/';
+var fixturesPath = '../../node_modules/waterline-adapter-tests/interfaces/associations/support/fixtures/';
 
 var fixtures = {
   PaymentBelongsFixture: require(fixturesPath + 'belongsTo.child.fixture'),
@@ -25,14 +25,14 @@ var fixtures = {
   StadiumFixture: require(fixturesPath + 'hasManyThrough.stadium.fixture'),
   TeamFixture: require(fixturesPath + 'hasManyThrough.team.fixture'),
   //VenueFixture: require(fixturesPath + 'hasManyThrough.venue.fixture.js'),
-  VenueFixture: require('../fixtures/hasManyThrough.venueHack.fixture.js'),
+  VenueFixture: require('./fixtures/hasManyThrough.venueHack.fixture.js'),
   TaxiFixture: require(fixturesPath + 'manyToMany.taxi.fixture'),
   DriverFixture: require(fixturesPath + 'manyToMany.driver.fixture'),
   UserOneFixture: require(fixturesPath + 'oneToOne.fixture').user_resource,
   ProfileOneFixture: require(fixturesPath + 'oneToOne.fixture').profile,
   
-  FriendFixture: require('../fixtures/hasManyThrough.friend.fixture.js'),
-  FollowsFixture: require('../fixtures/hasManyThrough.follows.fixture.js')
+  FriendFixture: require('./fixtures/hasManyThrough.friend.fixture.js'),
+  FollowsFixture: require('./fixtures/hasManyThrough.follows.fixture.js')
 };
 
 

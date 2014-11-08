@@ -20,7 +20,7 @@ test-integration-orientdb:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
 		--reporter $(REPORTER) \
 		--timeout 30000 --globals Associations \
-		test/integration-orientdb/tests/**/*.js
+		test/integration-orientdb/*.js test/integration-orientdb/tests/**/*.js
 
 test-unit:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
