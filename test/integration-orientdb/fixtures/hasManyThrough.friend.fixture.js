@@ -15,13 +15,13 @@ module.exports = Waterline.Collection.extend({
     followees: {
       collection: 'friend',
       through: 'follows',
-      via: 'followers',
-      dominant: true
+      via: 'followee'
     },
     followers: {
       collection: 'friend',
       through: 'follows',
-      via: 'followees',
+      via: 'friend',
+      dominant: true
     }
   }
 

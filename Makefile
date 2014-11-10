@@ -4,7 +4,7 @@ REPORTER = spec
 
 test: test-unit test-integration-all
 
-test-clean: test-integration-all clean
+test-clean: test clean
 
 
 test-integration-all: test-integration-orientdb test-integration
