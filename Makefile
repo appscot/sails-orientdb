@@ -2,7 +2,7 @@
 MOCHA_OPTS= --check-leaks --timeout 30000
 REPORTER = spec
 
-test: test-integration-all
+test: test-unit test-integration-all
 
 test-clean: test-integration-all clean
 
