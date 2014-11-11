@@ -2,9 +2,9 @@
 MOCHA_OPTS= --check-leaks --timeout 10000
 REPORTER = spec
 
-test: test-unit test-integration-all
+test: test-unit test-integration
 
-test-clean: test clean
+test-clean: test-integration-all clean
 
 
 test-integration-all: test-integration-orientdb test-integration
