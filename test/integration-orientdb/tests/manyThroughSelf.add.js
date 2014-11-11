@@ -52,7 +52,7 @@ describe('Association Interface', function() {
         });
       });
       
-      xit('should populate a followee with followers through a join table', function(done) {
+      it('should populate a followee with followers through a join table', function(done) {
         //TODO: depends on previous test, add EventEmitter2's mediator so tests can be ran async safely
         Associations.Friend.findOne(followeeRecord.id)
           .populate('followers')
