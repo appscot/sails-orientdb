@@ -4,14 +4,14 @@ REPORTER = spec
 
 test: test-unit test-integration
 
-test-clean: test-integration-all clean
+test-clean: test-unit test-integration-all clean
 
 
 test-integration-all: test-integration-orientdb test-integration
 
 test-integration:
 	@echo "\n\nNOTICE: If tests fail, please ensure you've set the correct credentials in lib/adapter.js\n"
-	@echo "Running generic adapter integration tests..."
+	@echo "Running 'waterline-adapter-tests' integration tests..."
 	@NODE_ENV=test node test/integration/runner.js
 
 test-integration-orientdb:
@@ -23,6 +23,7 @@ test-integration-orientdb:
 		test/integration-orientdb/*.js test/integration-orientdb/tests/**/*.js
 
 test-unit:
+	@echo "\n\nRunning waterline-orientdb unit tests..."
 	@NODE_ENV=test ./node_modules/.bin/mocha \
 		--reporter $(REPORTER) \
 		$(MOCHA_OPTS) \
