@@ -3,7 +3,7 @@ var assert = require('assert'),
 
 describe('Association Interface', function() {
 
-  describe('Has Many Through Association', function() {
+  describe('n:m through association :: .add()', function() {
 
     /////////////////////////////////////////////////////
     // TEST SETUP
@@ -23,7 +23,7 @@ describe('Association Interface', function() {
       });
     });
 
-    describe('.add', function() {
+    describe('with an object', function() {
 
       /////////////////////////////////////////////////////
       // TEST METHODS
@@ -64,5 +64,35 @@ describe('Association Interface', function() {
       });
 
     });
-  });
+    
+    describe('create nested associations()', function() {
+
+      /////////////////////////////////////////////////////
+      // TEST METHODS
+      ////////////////////////////////////////////////////
+
+      it('should create a new stadium and team and associate them', function(done) {
+        Associations.Stadium.create({
+          name: 'hasManyThrough aggregate stadium',
+          teams: [{ name: 'hasManyThrough nested team' }] 
+          }, 
+          function(err, record) {
+            assert(!err, err);
+            
+            Associations.Stadium.findOne(record.id)
+              .populate('teams')
+              .exec(function(err, stadium) {
+                assert(!err, err);
+                
+                assert(Array.isArray(stadium.teams));
+                assert(stadium.teams.length === 1);
+                assert(stadium.teams[0].name === 'hasManyThrough nested team');
+                done();
+              });
+        });
+      });
+      
+    });
+
+  });  
 });
