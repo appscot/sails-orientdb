@@ -2,52 +2,63 @@
 
 ![Build Status](https://travis-ci.org/appscot/waterline-orientdb.svg?branch=master)
 
-# sails-orientdb
+# waterline-orientdb
 
-Provides easy access to `orientdb` from Sails.js & Waterline.
+Waterline/Sails.js adapter for Orientdb.
 
-### The adapter in early development stages, pull requests are welcome
-*The adapter automatically creates edges between model instances with the help of associations information available from Collection instance*
-
-This module is a Waterline/Sails adapter, an early implementation of a rapidly-developing, tool-agnostic data standard.  Its goal is to provide a set of declarative interfaces, conventions, and best-practices for integrating with all sorts of data sources.  Not just databases-- external APIs, proprietary web services, or even hardware.
-
-Strict adherence to an adapter specification enables the (re)use of built-in generic test suites, standardized documentation, reasonable expectations around the API for your users, and overall, a more pleasant development experience for everyone.
+> **Warning**
+>
+> `waterline-orientdb` maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID.
+> In the current version of `waterline-orientdb`, you **should not** sort by `id`.
 
 
-### Installation
+## Installation
 
-To install this adapter, run:
+Install from NPM.
 
-```sh
-$ npm install sails-orientdb
+```bash
+$ npm install appscot/waterline-orientdb --save
 ```
 
+## Waterline Configuration
+
+### Using with Waterline v0.10.x
+
+```javascript
+var orientAdapter = require('waterline-orientdb');
+var config = {
+  adapters: {
+    'default': orientAdapter,
+    orient: orientAdapter,
+  },
+  
+  connections: {
+    myLocalOrient: {
+      adapter: 'orient',
+      host: 'localhost',
+      port: 2424,
+      user: 'root',
+      password: 'root',
+      database: 'waterline'
+    }
+  }
+}
+```
+
+## Development Status
+
+From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb supports `Semantic` and `Associations` interfaces.
+Currently the following integration tests from [waterline-adapter-tests](https://github.com/balderdashy/waterline-adapter-tests) are broken:
+* Association Interface Has Many Association with Custom Primary Keys "before all" hook;
+* Association Interface Has Many Association .find should return all the populated records when a skip clause is used;
+* Association Interface Has Many Association .find should return payments using skip and limit;
+* Association Interface n:m association :: .find().populate([WHERE]) should return taxis using skip and limit;
+* Association Interface 1:1 Association .find() should return undefined for profile when the profile is a non-existent foreign key.
 
 
+## Usage
 
-### Usage
-
-This adapter exposes the following methods:
-
-###### `find()`
-
-+ **Status**
-  + Completed
-
-###### `create()`
-
-+ **Status**
-  + Completed
-
-###### `update()`
-
-+ **Status**
-  + Completed
-
-###### `destroy()`
-
-+ **Status**
-  + Completed
+This adapter adds the following methods:
 
 ###### `createEdge(@from,@to,@options,@callback)`
 Creates edge between specified two model instances by ID in the form parameters "@from" and "@to"
@@ -76,7 +87,6 @@ usage:
   ```
 
 ### Example Model definitions
-
 
 ### Development
 ```javascript
@@ -151,48 +161,32 @@ An edge names **userProfile** would be created between user and profile model in
 
 Check out **Connections** in the Sails docs, or see the `config/connections.js` file in a new Sails project for information on setting up adapters.
 
-### Sample connection configuration in connection.js
-If databas doesn't exist adapter will attempt to create a new one
-```javascript
-
-localOrientDB: {
-        adapter: 'sails-orientdb',
-        database: {
-            name: 'dataBaseName'
-        },
-        username: "userName",
-        password: "password"
-        }
-
-```
-
-
 
 ### Questions?
 
 See [`FAQ.md`](./FAQ.md).
 
 
-
 ### More Resources
 
 - [Stackoverflow](http://stackoverflow.com/questions/tagged/sails.js)
 - [#sailsjs on Freenode](http://webchat.freenode.net/) (IRC channel)
-- [Twitter](https://twitter.com/sailsjs)
-- [Professional/enterprise](https://github.com/balderdashy/sails-docs/blob/master/FAQ.md#are-there-professional-support-options)
 - [Tutorials](https://github.com/balderdashy/sails-docs/blob/master/FAQ.md#where-do-i-get-help)
 - <a href="http://sailsjs.org" target="_blank" title="Node.js framework for building realtime APIs."><img src="https://github-camo.global.ssl.fastly.net/9e49073459ed4e0e2687b80eaf515d87b0da4a6b/687474703a2f2f62616c64657264617368792e6769746875622e696f2f7361696c732f696d616765732f6c6f676f2e706e67" width=60 alt="Sails.js logo (small)"/></a>
 
+## Waterline
 
-### License
+[Waterline](https://github.com/balderdashy/waterline) is a new kind of storage and retrieval engine.
+
+It provides a uniform API for accessing stuff from different kinds of databases, protocols, and 3rd party APIs. That means you write the same code to get users, whether they live in MySQL, LDAP, MongoDB, or Facebook.
+
+## Contributors
+
+Thanks so much to Srinath Janakiraman ([vjsrinath](http://github.com/vjsrinath)) who built the original `sails-orient` adapter.
+
+## License
 
 **[MIT](./LICENSE)**
-&copy; 2014 [vjsrinath](http://github.com/vjsrinath) & [thanks to]
-[balderdashy](http://github.com/balderdashy), [Mike McNeil](http://michaelmcneil.com), [Balderdash](http://balderdash.co) & contributors
+&copy; 2014 [AppsCot](http://github.com/appscot)
 
 [Sails](http://sailsjs.org) is free and open-source under the [MIT License](http://sails.mit-license.org/).
-
-
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8acf2fc2ca0aca8a3018e355ad776ed7 "githalytics.com")](http://githalytics.com/vjsrinath/sails-orientdb/README.md)
-
-
