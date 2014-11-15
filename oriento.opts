@@ -1,0 +1,4 @@
+--server=localhost
+--port=2424
+--user=root
+--password=root
