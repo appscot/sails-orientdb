@@ -17,7 +17,7 @@ Waterline/Sails.js adapter for OrientDB.
 Install from NPM.
 
 ```bash
-$ npm install appscot/waterline-orientdb --save
+$ npm install waterline-orientdb --save
 ```
 
 
