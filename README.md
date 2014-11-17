@@ -40,6 +40,10 @@ var config = {
       password: 'root',
       database: 'waterline'
     }
+  },
+  
+	defaults: {
+    migrate: 'safe'
   }
 }
 ```
