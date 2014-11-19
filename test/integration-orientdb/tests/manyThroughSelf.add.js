@@ -44,10 +44,18 @@ describe('Association Interface', function() {
             assert(!err, err);
   
             assert(Array.isArray(friend.followees));
-            assert(friend.followees.length === 1);
+            assert(friend.followees.length === 1, 'No followees found');
             assert(friend.followees[0].name === 'hasManyThrough followee');
             
-            done();
+            Associations.Friend.findOne({'out().@rid': [followeeRecord.id] })
+            .exec(function(err, friendWhoFollows) {
+              assert(!err, err);
+              
+              assert(friendWhoFollows, "Edge has wrong direction");
+              assert(friendWhoFollows.name === 'hasManyThrough friend', "Edge has wrong direction");
+              done();
+            });
+                        
           });
         });
       });

@@ -42,8 +42,16 @@ describe('Association Interface', function() {
             assert(Array.isArray(stadium.teams));
             assert(stadium.teams.length === 1);
             assert(stadium.teams[0].mascot === 'elephant');
+            
+            Associations.Stadium.findOne({'out().@rid': [teamRecord.id] })
+            .exec(function(err, stadiumWhichHas) {
+              assert(!err, err);
+              
+              assert(stadiumWhichHas, "Edge has wrong direction");
+              assert(stadiumWhichHas.name === 'hasManyThrough stadium', "Edge has wrong direction");
+              done();
+            });
   
-            done();
           });
         });
       });
