@@ -80,7 +80,8 @@ new TestRunner({
       //grep: 'Custom Primary Keys'
     },
     
-    //Invert Grep
+    // Invert Grep
+    // Experimental, not supported by waterline-adapter-tests (yet)
     mochaInvert: true
 
     // Most databases implement 'semantic' and 'queryable'.
@@ -99,5 +100,5 @@ new TestRunner({
     // operations.
     //
     // Full interface reference:
-    // https://github.com/balderdashy/sails-docs/blob/master/adapter-specification.md
+    // https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md
 });
