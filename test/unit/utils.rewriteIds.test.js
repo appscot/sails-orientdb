@@ -65,7 +65,25 @@ describe('utils helper class', function() {
     });
 
 
-    xit('multi level result set', function(done) {
+    it('multi level result set', function(done) {
+      var resultSet1 = { '@rid': new RID('#13:1'), property: 'value', foreignKey: new RID('#13:2'), fetchedClass: { '@rid': new RID('#10:1')} };
+      var result = utils.rewriteIds(resultSet1);
+      assert.equal(result.id, '#13:1');
+      assert.equal(result.property, 'value');
+      assert.equal(typeof result.foreignKey, 'object');
+      assert(result.foreignKey instanceof RID, 'instanceof RID');
+      assert.equal(result.fetchedClass.id, '#10:1');
+      assert(!result['@rid']);
+      assert(!result.fetchedClass['@rid']);
+      
+      var resultSet2 = { '@rid': new RID('#13:1'), fetchedClass: { '@rid': new RID('#10:1'), nestedClass: { '@rid': new RID('#16:1') } } };
+      var result = utils.rewriteIds(resultSet2);
+      assert.equal(result.id, '#13:1');
+      assert.equal(result.fetchedClass.id, '#10:1');
+      assert.equal(result.fetchedClass.nestedClass.id, '#16:1');
+      assert(!result['@rid']);
+      assert(!result.fetchedClass['@rid']);
+      assert(!result.fetchedClass.nestedClass['@rid']);
       
       done();
     });
