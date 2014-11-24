@@ -1,6 +1,6 @@
 {
   "name": "waterline-orientdb",
-  "version": "0.10.12",
+  "version": "0.10.13",
   "description": "OrientDB adapter for Waterline / Sails.js",
   "main": "./lib/adapter.js",
   "scripts": {
@@ -15,6 +15,16 @@
     "waterline",
     "orm",
     "sails"
+  ],
+  "author": {
+    "name": "Dario Marcelino",
+    "email": "dario@appscot.com"
+  },
+  "contributors": [
+    {
+      "name": "Srinath Janakiraman",
+      "email": "vjsrinath@live.com"
+    }
   ],
   "license": "MIT",
   "readmeFilename": "README.md",
