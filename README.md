@@ -2,7 +2,7 @@
 
 # waterline-orientdb
 
-Waterline/Sails.js adapter for OrientDB.
+Waterline (Node.js ORM used by Sails.js) adapter for OrientDB.
 
 > **Warning**
 >
