@@ -87,6 +87,21 @@ describe('utils helper class', function() {
       
       done();
     });
+    
+    
+    it('circular reference', function(done) {
+      
+      var resultSet = { '@rid': new RID('#13:1'), child: { '@rid': new RID('#10:1') } };
+      resultSet.child.parent = resultSet; 
+      var result = utils.rewriteIds(resultSet);
+      assert.equal(result.id, '#13:1');
+      assert.equal(result.child.id, '#10:1');
+      assert.equal(result.child.parent.id, '#13:1');
+      assert(!result['@rid']);
+      assert(!result.child['@rid']);
+      
+      done();
+    });
 
   });
 });
