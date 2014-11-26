@@ -2,12 +2,12 @@
 
 # waterline-orientdb
 
-Waterline (Node.js ORM used by Sails.js) adapter for OrientDB.
+Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/waterline) is a Node.js ORM used by Sails.js.
 
 > **Warning**
 >
 > `waterline-orientdb` maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID.
-> In the current version of `waterline-orientdb`, you **should not** sort by `id`.
+> In the current version of `waterline-orientdb`.
 
 
 ## Installation
@@ -94,23 +94,23 @@ If you want to take a stab at these feel free to issue a Pull Request.
 
 This adapter adds the following methods:
 
-###### `createEdge(@from, @to, @options, @callback)`
+###### `createEdge(from, to, options, callback)`
 Creates edge between specified two model instances by ID in the form parameters "@from" and "@to"
   
 usage: 
   ```javascript
- //Assume a model named "Post"
+  //Assume a model named "Post"
   Post.createEdge('#12:1','#13:1',{'@class':'Comments'},function(err, result){
   
   });
   ```
   
-###### `deleteEdges(@from, @to, @options, @callback)`
+###### `deleteEdges(from, to, options, callback)`
 Deletes edges between specified two model instances by ID in the form parameters "@from" and "@to"
   
 usage: 
   ```javascript
- //Assume a model named "Post"
+  //Assume a model named "Post"
   Post.deleteEdges('#12:1','#13:1',null,function(err, result){
   
   });
@@ -121,8 +121,9 @@ Returns a native Oriento object
   
 usage: 
   ```javascript
- //Assume a model named "Post"
-  Post.getDB(function(err, result){
+  //Assume a model named "Post"
+  Post.getDB(function(err, db){
+  	// db.query(...
   });
   ```
 
