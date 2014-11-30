@@ -4,7 +4,18 @@
 var assert = require('assert'),
     util = require('util'),
     Associations = require('../../lib/associations');
-    associations = new Associations({ config: { fetchPlanLevel: 3 }});
+    associations = new Associations({ 
+      config: { fetchPlanLevel: 3 },
+      collections: {
+        comment: require('./fixtures/comment.model'),
+        authored_comment: require('./fixtures/authoredComment.model'),
+        comment_parent: require('./fixtures/commentParent.model')
+      },
+      collectionsByIdentity: {
+        profile: require('./fixtures/profile.model'),
+        comment: require('./fixtures/comment.model')
+      }
+      });
     
 describe('associations class', function () {
   
@@ -39,5 +50,63 @@ describe('associations class', function () {
     
     done();
   });
+  
+  it('getFetchPlan: check fetch plan query is built correctly',function(done){
+    var joins = [
+      {
+        "parent": "comment",
+        "parentKey": "id",
+        "child": "authored_comment",
+        "childKey": "commentRef",
+        "select": false,
+        "alias": "author",
+        "removeParentKey": false,
+        "model": false,
+        "collection": true
+      },
+      {
+        "parent": "authored_comment",
+        "parentKey": "profileRef",
+        "child": "profile",
+        "childKey": "id",
+        "select": false,
+        "alias": "author",
+        "junctionTable": true,
+        "removeParentKey": false,
+        "model": false,
+        "collection": true,
+        "criteria": { "where": {}}
+      },
+      {
+        "parent": "comment",
+        "parentKey": "id",
+        "child": "comment_parent",
+        "childKey": "childRef",
+        "select": false,
+        "alias": "parent",
+        "removeParentKey": false,
+        "model": false,
+        "collection": true
+      },
+      {
+        "parent": "comment_parent",
+        "child": "comment",
+        "childKey": "id",
+        "select": false,
+        "alias": "parent",
+        "junctionTable": true,
+        "removeParentKey": false,
+        "model": false,
+        "collection": true,
+        "criteria": { "where": {}} }
+    ];
+    
+    var fetchPlan = associations.getFetchPlan('comment', { joins: joins });
+    assert.equal(fetchPlan, 'in_authored_comment:1 in_authored_comment.out:1 out_comment_parent:1 out_comment_parent.in:1');
+    
+    done();
+  });
+  
+  
   
 });
