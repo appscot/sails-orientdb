@@ -107,6 +107,9 @@ describe('associations class', function () {
     var fetchPlan = associations.getFetchPlan('comment', { joins: joins });
     assert.equal(fetchPlan, 'in_authored_comment:1 in_authored_comment.out:1 out_comment_parent:1 out_comment_parent.in:1 out_comment_recipe:1');
     
+    var fetchPlan2 = associations.getFetchPlan('comment', { joins: joins }, 2);
+    assert.equal(fetchPlan2, 'in_authored_comment:1 in_authored_comment.out:2 out_comment_parent:1 out_comment_parent.in:2 out_comment_recipe:1');
+    
     done();
   });
   
