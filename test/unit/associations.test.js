@@ -4,17 +4,20 @@
 var assert = require('assert'),
     util = require('util'),
     Associations = require('../../lib/associations');
-    associations = new Associations({ 
+    
+var collections = {
+  comment: require('./fixtures/comment.model'),
+  profile: require('./fixtures/profile.model'),
+  recipe_content: require('./fixtures/recipeContent.model'),
+  authored_comment: require('./fixtures/authoredComment.model'),
+  comment_parent: require('./fixtures/commentParent.model'),
+  comment_recipe: require('./fixtures/commentRecipe.model')
+};
+    
+var associations = new Associations({ 
       config: { fetchPlanLevel: 3 },
-      collections: {
-        comment: require('./fixtures/comment.model'),
-        authored_comment: require('./fixtures/authoredComment.model'),
-        comment_parent: require('./fixtures/commentParent.model')
-      },
-      collectionsByIdentity: {
-        profile: require('./fixtures/profile.model'),
-        comment: require('./fixtures/comment.model')
-      }
+      collections: collections,
+      collectionsByIdentity: collections
       });
     
 describe('associations class', function () {
@@ -102,7 +105,7 @@ describe('associations class', function () {
     ];
     
     var fetchPlan = associations.getFetchPlan('comment', { joins: joins });
-    assert.equal(fetchPlan, 'in_authored_comment:1 in_authored_comment.out:1 out_comment_parent:1 out_comment_parent.in:1');
+    assert.equal(fetchPlan, 'in_authored_comment:1 in_authored_comment.out:1 out_comment_parent:1 out_comment_parent.in:1 out_comment_recipe:1');
     
     done();
   });
