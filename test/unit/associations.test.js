@@ -16,7 +16,7 @@ var collections = {
 };
     
 var associations = new Associations({ 
-      config: { fetchPlanLevel: 3 },
+      config: { options: {fetchPlanLevel: 1} },
       collections: collections,
       collectionsByIdentity: collections
       });
