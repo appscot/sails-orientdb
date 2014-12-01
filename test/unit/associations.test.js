@@ -3,7 +3,8 @@
  */
 var assert = require('assert'),
     util = require('util'),
-    Associations = require('../../lib/associations');
+    Associations = require('../../lib/associations'),
+    _ = require('lodash');
     
 var collections = {
   comment: require('./fixtures/comment.model'),
@@ -54,7 +55,8 @@ describe('associations class', function () {
     done();
   });
   
-  it('getFetchPlan: check fetch plan query is built correctly',function(done){
+  
+  it('getFetchPlan: check fetch plan query is built correctly', function(done){
     var joins = [
       {
         "parent": "comment",
@@ -114,5 +116,20 @@ describe('associations class', function () {
   });
   
   
+  it('expandResults: should replace foreign keys with cloned records', function(done){
+    var resultset = [
+        { id: '#5:0', name: 'Maria', out_edge: { out: '#5:0', in: '#4:0' } }
+      ];
+    
+    var expandedResultset = [
+        { id: '#5:0', name: 'Maria', out_edge: { out: { id: '#5:0', name: 'Maria', out_edge: { out: '#5:0', in: '#4:0' } },
+         in: '#4:0' } }
+      ];
+    
+    var transformed = associations.expandResults(resultset);
+    assert(_.isEqual(transformed, expandedResultset));
+    
+    done();
+  });
   
 });
