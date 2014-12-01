@@ -3,8 +3,23 @@
  */
 var assert = require('assert'),
     util = require('util'),
-    Associations = require('../../lib/associations');
-    associations = new Associations({ config: { fetchPlanLevel: 3 }});
+    Associations = require('../../lib/associations'),
+    _ = require('lodash');
+    
+var collections = {
+  comment: require('./fixtures/comment.model'),
+  profile: require('./fixtures/profile.model'),
+  recipe_content: require('./fixtures/recipeContent.model'),
+  authored_comment: require('./fixtures/authoredComment.model'),
+  comment_parent: require('./fixtures/commentParent.model'),
+  comment_recipe: require('./fixtures/commentRecipe.model')
+};
+    
+var associations = new Associations({ 
+      config: { options: {fetchPlanLevel: 1} },
+      collections: collections,
+      collectionsByIdentity: collections
+      });
     
 describe('associations class', function () {
   
@@ -36,6 +51,83 @@ describe('associations class', function () {
     assert.equal(edgeArrayMixedObjects.length, 2);
     assert.equal(edgeArrayMixedObjects[0]['@rid'], '#13:2');
     assert.equal(edgeArrayMixedObjects[1].id, '#13:1');
+    
+    done();
+  });
+  
+  
+  it('getFetchPlan: check fetch plan query is built correctly', function(done){
+    var joins = [
+      {
+        "parent": "comment",
+        "parentKey": "id",
+        "child": "authored_comment",
+        "childKey": "commentRef",
+        "select": false,
+        "alias": "author",
+        "removeParentKey": false,
+        "model": false,
+        "collection": true
+      },
+      {
+        "parent": "authored_comment",
+        "parentKey": "profileRef",
+        "child": "profile",
+        "childKey": "id",
+        "select": false,
+        "alias": "author",
+        "junctionTable": true,
+        "removeParentKey": false,
+        "model": false,
+        "collection": true,
+        "criteria": { "where": {}}
+      },
+      {
+        "parent": "comment",
+        "parentKey": "id",
+        "child": "comment_parent",
+        "childKey": "childRef",
+        "select": false,
+        "alias": "parent",
+        "removeParentKey": false,
+        "model": false,
+        "collection": true
+      },
+      {
+        "parent": "comment_parent",
+        "child": "comment",
+        "childKey": "id",
+        "select": false,
+        "alias": "parent",
+        "junctionTable": true,
+        "removeParentKey": false,
+        "model": false,
+        "collection": true,
+        "criteria": { "where": {}} }
+    ];
+    
+    var fetchPlan = associations.getFetchPlan('comment', { joins: joins });
+    assert.equal(fetchPlan, 'in_authored_comment:1 in_authored_comment.out:1 out_comment_parent:1 out_comment_parent.in:1 out_comment_recipe:1');
+    
+    var fetchPlan2 = associations.getFetchPlan('comment', { joins: joins }, 2);
+    assert.equal(fetchPlan2, 'in_authored_comment:1 in_authored_comment.out:2 out_comment_parent:1 out_comment_parent.in:2 out_comment_recipe:1');
+    
+    done();
+  });
+  
+  
+  it('expandResults: should replace foreign keys with cloned records', function(done){
+    var resultset = [
+        { id: '#5:0', name: 'Maria', out_edge: { out: '#5:0', in: '#4:0' } }
+      ];
+    
+    var expandedResultset = [
+        { id: '#5:0', name: 'Maria', out_edge: { out: { id: '#5:0', name: 'Maria', out_edge: { out: '#5:0', in: '#4:0' } },
+         in: '#4:0' } }
+      ];
+    
+    var transformed = associations.expandResults(resultset);
+    assert(_.isEqual(transformed, expandedResultset));
     
     done();
   });

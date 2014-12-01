@@ -27,7 +27,7 @@ test-unit:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
 		--reporter $(REPORTER) \
 		$(MOCHA_OPTS) \
-		test/unit/**/*.js
+		test/unit/*.js test/unit/**/*.js
 
 test-load:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
