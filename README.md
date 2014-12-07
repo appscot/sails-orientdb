@@ -7,7 +7,7 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 > **Warning**
 >
 > `waterline-orientdb` maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID.
-> In the current version of `waterline-orientdb`.
+> In the current version of `waterline-orientdb`, you should not sort by id.
 
 
 ## Installation
@@ -42,7 +42,7 @@ var config = {
     }
   },
   
-	defaults: {
+  defaults: {
     migrate: 'safe'
   }
 }
@@ -79,15 +79,11 @@ Waterline-orientdb mimics sails-mongo adapter behaviour and maps the logical `id
 
 #### Development Status
 
-From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb supports `Semantic` and `Associations` interfaces.
-Currently the following integration tests from [waterline-adapter-tests](https://github.com/balderdashy/waterline-adapter-tests) are broken:
-* Association Interface Has Many Association with Custom Primary Keys "before all" hook;
-* Association Interface Has Many Association .find should return all the populated records when a skip clause is used;
-* Association Interface Has Many Association .find should return payments using skip and limit;
-* Association Interface n:m association :: .find().populate([WHERE]) should return taxis using skip and limit;
-* Association Interface 1:1 Association .find() should return undefined for profile when the profile is a non-existent foreign key.
+From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb supports `Semantic`, `Queryable` and `Associations` interfaces.
+Waterline-orientdb passed all integrations from  [waterline-adapter-tests](https://github.com/balderdashy/waterline-adapter-tests) with the exception of:
+* Association Interface Has Many Association with Custom Primary Keys .find should return payments when the populate criteria is added.
 
-If you want to take a stab at these feel free to issue a Pull Request.
+If you want to take a stab at this feel free to issue a Pull Request.
 
 
 ## Usage
@@ -95,7 +91,7 @@ If you want to take a stab at these feel free to issue a Pull Request.
 This adapter adds the following methods:
 
 ###### `createEdge(from, to, options, callback)`
-Creates edge between specified two model instances by ID in the form parameters "@from" and "@to"
+Creates edge between specified two model instances by ID in the form parameters `from` and `to`
   
 usage: 
   ```javascript
@@ -106,7 +102,7 @@ usage:
   ```
   
 ###### `deleteEdges(from, to, options, callback)`
-Deletes edges between specified two model instances by ID in the form parameters "@from" and "@to"
+Deletes edges between specified two model instances by ID in the form parameters `from` and `to`
   
 usage: 
   ```javascript
