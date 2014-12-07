@@ -76,6 +76,7 @@ new TestRunner({
     // Mocha options
     // reference: https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically
     mocha: {
+      timeout: 5000,
       reporter: 'spec',
       //grep: 'Custom Primary Keys'
     },

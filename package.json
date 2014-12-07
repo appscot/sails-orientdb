@@ -1,6 +1,6 @@
 {
   "name": "waterline-orientdb",
-  "version": "0.10.14",
+  "version": "0.10.15",
   "description": "OrientDB adapter for Waterline / Sails.js",
   "main": "./lib/adapter.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "oriento": "git://github.com/codemix/oriento",
     "q": "^1.0.1",
     "waterline-cursor": "~0.0.5",
-    "waterline-sequel-orientdb": "git://github.com/appscot/waterline-sequel-orientdb"
+    "waterline-sequel-orientdb": "^0.0.19"
   },
   "devDependencies": {
     "waterline-adapter-tests": "^0.10.4",
