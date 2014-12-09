@@ -21,6 +21,9 @@ module.exports = Waterline.Collection.extend({
       collection: 'friend',
       through: 'owns',
       via: 'stadiumRef'
+    },
+    sponsor: {
+      model: 'friend'
     }
   }
 
