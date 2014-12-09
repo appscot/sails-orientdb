@@ -22,17 +22,19 @@ var fixtures = {
   ApartmentHasManyFixture: require(fixturesPath + 'hasMany.customPK.fixture'),
   PaymentManyFixture: require(fixturesPath + 'multipleAssociations.fixture').payment,
   CustomerManyFixture: require(fixturesPath + 'multipleAssociations.fixture').customer,
-  StadiumFixture: require(fixturesPath + 'hasManyThrough.stadium.fixture'),
+  // StadiumFixture: require(fixturesPath + 'hasManyThrough.stadium.fixture'),
+  StadiumFixture: require('./fixtures/hasManyThrough.stadium.fixture'),
   TeamFixture: require(fixturesPath + 'hasManyThrough.team.fixture'),
-  //VenueFixture: require(fixturesPath + 'hasManyThrough.venue.fixture.js'),
-  VenueFixture: require('./fixtures/hasManyThrough.venueHack.fixture.js'),
+  //VenueFixture: require(fixturesPath + 'hasManyThrough.venue.fixture'),
+  VenueFixture: require('./fixtures/hasManyThrough.venueHack.fixture'),
   TaxiFixture: require(fixturesPath + 'manyToMany.taxi.fixture'),
   DriverFixture: require(fixturesPath + 'manyToMany.driver.fixture'),
   UserOneFixture: require(fixturesPath + 'oneToOne.fixture').user_resource,
   ProfileOneFixture: require(fixturesPath + 'oneToOne.fixture').profile,
   
-  FriendFixture: require('./fixtures/hasManyThrough.friend.fixture.js'),
-  FollowsFixture: require('./fixtures/hasManyThrough.follows.fixture.js')
+  FriendFixture: require('./fixtures/hasManyThrough.friend.fixture'),
+  FollowsFixture: require('./fixtures/hasManyThrough.follows.fixture'),
+  OwnsFixture: require('./fixtures/hasManyThrough.owns.fixture')
 };
 
 
