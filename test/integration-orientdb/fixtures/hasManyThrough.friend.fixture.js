@@ -22,6 +22,12 @@ module.exports = Waterline.Collection.extend({
       collection: 'friend',
       through: 'follows',
       via: 'followee'
+    },
+    stadiums: {
+      collection: 'stadium',
+      through: 'owns',
+      via: 'friendRef',
+      dominant: true
     }
   }
 
