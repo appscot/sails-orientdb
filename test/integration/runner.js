@@ -83,8 +83,11 @@ new TestRunner({
     
     // Invert Grep
     // Experimental, not supported by waterline-adapter-tests (yet)
-    mochaInvert: true
-
+    mochaInvert: true,
+    
+    // Return code -1 if any test failed
+    failOnError: false
+    
     // Most databases implement 'semantic' and 'queryable'.
     //
     // As of Sails/Waterline v0.10, the 'associations' interface
