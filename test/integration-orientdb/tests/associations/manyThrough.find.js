@@ -50,7 +50,7 @@ describe('Association Interface', function() {
             assert(!stadium.out_venueTable);
             assert(!stadium.in_ownsTable);
             assert(!stadium['@type']);
-            assert(!stadium.sponsor['@type']);
+            assert(_.isString(stadium.sponsor));
             done();
           })
           .catch(function(err){
@@ -66,7 +66,7 @@ describe('Association Interface', function() {
             assert(!stadiums[0].out_venueTable);
             assert(!stadiums[0].in_ownsTable);
             assert(!stadiums[0]['@type']);
-            assert(!stadiums[0].sponsor['@type']);
+            assert(_.isString(stadiums[0].sponsor));
             done();
           })
           .catch(function(err){
@@ -89,6 +89,7 @@ describe('Association Interface', function() {
             assert(!stadium.teams[0].in_venueTable);
             assert(!stadium['@type']);
             assert(stadium.sponsor);
+            assert(stadium.sponsor.name === 'someBrand');
             assert(!stadium.sponsor['@type']);
             done();
           })
@@ -109,6 +110,7 @@ describe('Association Interface', function() {
             assert(!stadiums[0].teams[0].in_venueTable);
             assert(!stadiums[0]['@type']);
             assert(stadiums[0].sponsor);
+            assert(stadiums[0].sponsor.name === 'someBrand');
             assert(!stadiums[0].sponsor['@type']);
             done();
           })
@@ -123,7 +125,21 @@ describe('Association Interface', function() {
           .then(function(stadium){
             assert(!stadium['@type']);
             assert(stadium.sponsor);
+            assert(stadium.sponsor.name === 'someBrand');
             assert(!stadium.sponsor['@type']);
+            done();
+          })
+          .catch(function(err){
+            done(err);
+          });
+      });
+      
+      it('findOne: should not have sponsor object', function(done) {
+        Associations.Stadium.findOne(stadiumRecord.id)
+          .populate('teams')
+          .then(function(stadium){
+            assert(stadium.teams.length === 1);
+            assert(_.isString(stadium.sponsor));
             done();
           })
           .catch(function(err){
