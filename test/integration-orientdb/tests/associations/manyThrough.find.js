@@ -87,6 +87,7 @@ describe('Association Interface', function() {
             assert(!stadium.out_venueTable);
             assert(!stadium.in_ownsTable);
             assert(!stadium.teams[0].in_venueTable);
+            assert(!stadium.teams[0]['@type']);
             assert(!stadium['@type']);
             assert(stadium.sponsor);
             assert(stadium.sponsor.name === 'someBrand');
@@ -108,6 +109,7 @@ describe('Association Interface', function() {
             assert(!stadiums[0].out_venueTable);
             assert(!stadiums[0].in_ownsTable);
             assert(!stadiums[0].teams[0].in_venueTable);
+            assert(!stadiums[0].teams[0]['@type']);
             assert(!stadiums[0]['@type']);
             assert(stadiums[0].sponsor);
             assert(stadiums[0].sponsor.name === 'someBrand');

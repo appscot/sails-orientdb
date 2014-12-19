@@ -107,10 +107,10 @@ describe('associations class', function () {
     ];
     
     var fetchPlan = associations.getFetchPlan('comment', { joins: joins });
-    assert.equal(fetchPlan, 'in_authored_comment:1 in_authored_comment.out:1 out_comment_parent:1 out_comment_parent.in:1 out_comment_recipe:1');
+    assert.equal(fetchPlan.where, 'in_authored_comment:1 in_authored_comment.out:1 out_comment_parent:1 out_comment_parent.in:1 out_comment_recipe:1');
     
     var fetchPlan2 = associations.getFetchPlan('comment', { joins: joins }, 2);
-    assert.equal(fetchPlan2, 'in_authored_comment:1 in_authored_comment.out:2 out_comment_parent:1 out_comment_parent.in:2 out_comment_recipe:1');
+    assert.equal(fetchPlan2.where, 'in_authored_comment:1 in_authored_comment.out:2 out_comment_parent:1 out_comment_parent.in:2 out_comment_recipe:1');
     
     done();
   });
@@ -127,7 +127,7 @@ describe('associations class', function () {
       ];
     
     var transformed = associations.expandResults(resultset);
-    assert(_.isEqual(transformed, expandedResultset));
+    assert(_.isEqual(transformed, expandedResultset), 'instead got: ' + util.inspect(transformed));
     
     done();
   });
