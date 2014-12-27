@@ -216,6 +216,14 @@ describe('utils helper class', function () {
       assert.equal(collection4.circ, '[Circular]');
       assert.doesNotThrow(function() { JSON.stringify(collection4); });
       
+      var collection5 = { a: { b: { c: { name: 'deep' } } }, name: 'a' };
+      collection5.a.b.c.circ = collection5;
+      assert.throws(function() { JSON.stringify(collection5); });
+      
+      utils.removeCircularReferences(collection5);
+      assert.equal(collection5.a.b.c.circ, '[Circular]');
+      assert.doesNotThrow(function() { JSON.stringify(collection4); });
+      
       done();
     });
   });
