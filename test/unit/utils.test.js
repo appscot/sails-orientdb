@@ -184,6 +184,47 @@ describe('utils helper class', function () {
       
       done();
     });
+  });
   
+  
+  describe('removeCircularReferences:', function () {
+    it('should remove circular references from object', function (done) {
+      
+      var collection1 = { id: '#13:1' };
+      collection1.circ = collection1;
+      assert.throws(function() { JSON.stringify(collection1); });
+      
+      utils.removeCircularReferences(collection1);
+      assert.equal(collection1.circ, '#13:1');
+      assert.doesNotThrow(function() { JSON.stringify(collection1); });
+      
+      var collection2 = { name: 'col2' };
+      var collection3 = { name: 'col3', otherCol: collection2 };
+      collection2.circ = collection3;
+      assert.throws(function() { JSON.stringify(collection2); });
+      
+      utils.removeCircularReferences(collection2);
+      assert.equal(collection2.circ.name, 'col3');
+      assert.equal(collection2.circ.otherCol, '[Circular]');
+      assert.doesNotThrow(function() { JSON.stringify(collection2); });
+      
+      var collection4 = { name: 'col4' };
+      collection4.circ = collection4;
+      assert.throws(function() { JSON.stringify(collection4); });
+      
+      utils.removeCircularReferences(collection4);
+      assert.equal(collection4.circ, '[Circular]');
+      assert.doesNotThrow(function() { JSON.stringify(collection4); });
+      
+      var collection5 = { a: { b: { c: { name: 'deep' } } }, name: 'a' };
+      collection5.a.b.c.circ = collection5;
+      assert.throws(function() { JSON.stringify(collection5); });
+      
+      utils.removeCircularReferences(collection5);
+      assert.equal(collection5.a.b.c.circ, '[Circular]');
+      assert.doesNotThrow(function() { JSON.stringify(collection4); });
+      
+      done();
+    });
   });
 });

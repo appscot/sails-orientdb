@@ -111,7 +111,7 @@ usage:
   
   });
   ```
-
+  
 ###### `getDB(connection, collection, cb)`
 Returns a native Oriento object
   
@@ -123,6 +123,16 @@ usage:
   });
   ```
 
+###### `removeCircularReferences(connection, collection, object, cb)`
+Convenience method that replaces circular references with `id` when one is available, otherwise it replaces the object with string '[Circular]'
+  
+usage: 
+  ```javascript
+  //Assume a model named "Post"
+  Post.removeCircularReferences(posts, function(result){
+  	// JSON.stringify(result);  // it's safe to stringify result
+  });
+  ```
 
 #### Example Model definitions
 
