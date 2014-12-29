@@ -1,5 +1,6 @@
 var assert = require('assert'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    utils = require('../../../../lib/utils');
 
 describe('Association Interface', function() {
 
@@ -157,10 +158,9 @@ describe('Association Interface', function() {
           .populate('stadiums')
           .then(function(owner){
             assert(owner.stadiums.length === 1);
-            //console.log('owner.stadiums[0].sponsor: ' + require('util').inspect(owner.stadiums[0].sponsor));
             assert(owner.stadiums[0].sponsor);
             assert(!owner.stadiums[0].sponsor.name);
-            //assert(utils.matchRecordId(owner.stadiums[0].sponsor));
+            assert(utils.matchRecordId(owner.stadiums[0].sponsor));
             done();
           });
       });
