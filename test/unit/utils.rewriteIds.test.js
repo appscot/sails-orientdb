@@ -16,8 +16,8 @@ var testSingleLevel = function(fnName){
   var result = utils[fnName](resultSet2);
   assert.equal(result.id, '#13:1');
   assert.equal(result.property, 'value');
-  assert.equal(typeof result.foreignKey, 'object');
-  assert(result.foreignKey instanceof RID, 'instanceof RID');
+  assert.equal(result.foreignKey, '#13:2');
+  //assert.equal(typeof result.foreignKey, 'string');  // varies if its recursive or not
   assert(!result['@rid']);
   
   var resultSet3 = [{ '@rid': new RID('#13:1'), property: 'value' }, { '@rid': new RID('#13:2')}];
@@ -94,8 +94,8 @@ describe('utils helper class', function() {
       var result = utils.rewriteIdsRecursive(resultSet1);
       assert.equal(result.id, '#13:1');
       assert.equal(result.property, 'value');
-      assert.equal(typeof result.foreignKey, 'object');
-      assert(result.foreignKey instanceof RID, 'instanceof RID');
+      assert.equal(typeof result.foreignKey, 'string');
+      assert(result.foreignKey, '#13:2');
       assert.equal(result.fetchedClass.id, '#10:1');
       assert(!result['@rid']);
       assert(!result.fetchedClass['@rid']);
