@@ -65,9 +65,7 @@ new TestRunner({
     adapter: Adapter,
 
     // Default adapter config to use.
-    config: {
-        schema: false
-    },
+    config: require('../test-connection.json'),
 
     // The set of adapter interfaces to test against.
     // (grabbed these from this adapter's package.json file above)

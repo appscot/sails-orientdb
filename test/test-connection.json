@@ -1,0 +1,9 @@
+{
+  "host": "localhost",
+  "port": 2424,
+  "user": "root",
+  "password": "root",
+  "options": {
+    "storage": "memory"
+  }
+}
