@@ -2,6 +2,7 @@
 
 PARENT_DIR=$(dirname $(cd "$(dirname "$0")"; pwd))
 CI_DIR="$PARENT_DIR/ci/environment"
+DEBUG=waterline-orientdb:*,-waterline-orientdb:*:debug
 
 ODB_VERSION=${1:-"1.7-rc2"}
 ODB_DIR="${CI_DIR}/orientdb-community-${ODB_VERSION}"
