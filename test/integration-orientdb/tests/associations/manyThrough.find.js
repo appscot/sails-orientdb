@@ -1,5 +1,6 @@
 var assert = require('assert'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    utils = require('../../../../lib/utils');
 
 describe('Association Interface', function() {
 
@@ -15,26 +16,26 @@ describe('Association Interface', function() {
       Associations.Stadium.create({ name: 'populate stadium', sponsor: {name: 'someBrand'}}, function(err, stadium) {
         if(err) return done(err);
         stadiumRecord = stadium;
-          Associations.Team.create({ name: 'populate team', mascot: 'elephant' }, function(err, team) {
+        Associations.Team.create({ name: 'populate team', mascot: 'elephant' }, function(err, team) {
+          if(err) return done(err);
+          teamRecord = team;
+          
+          Associations.Friend.create({ name: 'populate friend' }, function(err, owner) {
             if(err) return done(err);
-            teamRecord = team;
+            ownerRecord = owner;
             
-            Associations.Friend.create({ name: 'populate friend' }, function(err, owner) {
-              if(err) return done(err);
-              ownerRecord = owner;
-              
               stadiumRecord.owners.add(ownerRecord.id);
               stadiumRecord.teams.add(teamRecord.id);
               stadiumRecord.save(function(err){
                 assert(!err, err);
-                done();
+                  done();
+                });
+                
               });
-            
+              
             });
-            
+          });
         });
-      });
-    });
 
 
     /////////////////////////////////////////////////////
@@ -87,6 +88,7 @@ describe('Association Interface', function() {
             assert(!stadium.out_venueTable);
             assert(!stadium.in_ownsTable);
             assert(!stadium.teams[0].in_venueTable);
+            assert(!stadium.teams[0]['@type']);
             assert(!stadium['@type']);
             assert(stadium.sponsor);
             assert(stadium.sponsor.name === 'someBrand');
@@ -108,6 +110,7 @@ describe('Association Interface', function() {
             assert(!stadiums[0].out_venueTable);
             assert(!stadiums[0].in_ownsTable);
             assert(!stadiums[0].teams[0].in_venueTable);
+            assert(!stadiums[0].teams[0]['@type']);
             assert(!stadiums[0]['@type']);
             assert(stadiums[0].sponsor);
             assert(stadiums[0].sponsor.name === 'someBrand');
@@ -146,6 +149,34 @@ describe('Association Interface', function() {
             done(err);
           });
       });
+    });
+    
+    describe('with custom adapter parameters', function() {
+      
+      it('findOne with default params: sponsor should be an id', function(done) {
+        Associations.Friend.findOne({ where: { id: ownerRecord.id } })
+          .populate('stadiums')
+          .then(function(owner){
+            assert(owner.stadiums.length === 1);
+            assert(owner.stadiums[0].sponsor);
+            assert(!owner.stadiums[0].sponsor.name);
+            assert(utils.matchRecordId(owner.stadiums[0].sponsor));
+            done();
+          });
+      });
+      
+      it('findOne with fetchplan depth 2: should have been expanded', function(done) {
+        Associations.Friend.findOne({ where: { id: ownerRecord.id }, _orientdb: { fetchPlanLevel: 2 } })
+          .populate('stadiums')
+          .then(function(owner){
+            assert(owner.stadiums.length === 1);
+            assert(owner.stadiums[0].sponsor);
+            assert(owner.stadiums[0].sponsor.name);
+            assert.equal(owner.stadiums[0].sponsor.name, 'someBrand');
+            done();
+          });
+      });
+      
     });
 
     
