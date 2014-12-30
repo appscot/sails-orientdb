@@ -86,7 +86,7 @@ new TestRunner({
     mochaInvert: true,
     
     // Return code -1 if any test failed
-    failOnError: false
+    failOnError: true
     
     // Most databases implement 'semantic' and 'queryable'.
     //
