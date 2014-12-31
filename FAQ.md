@@ -6,16 +6,16 @@
 The latest stable version in npm is always a safe bet.
 
 ```sh
-$ npm install sails-orientdb
+$ npm install waterline-orientdb --save
 ```
 
-[![NPM](https://nodei.co/npm/sails-orientdb.png?downloads=true&stars=true)](https://nodei.co/npm/sails-orientdb/)
+[![NPM](https://nodei.co/npm/waterline-orientdb.png?downloads=true&stars=true)](https://nodei.co/npm/waterline-orientdb/)
 
 
 
 ### Where is the documentation?
 + Documentation for this module is in the README.md file.
-+ Docs for the latest stable npm release of Sails itself are on [sailsjs.org](http://sailsjs.org/#!documentation).
++ Docs for the latest stable npm release of Waterline are on [balderdashy/waterline-docs](https://github.com/balderdashy/waterline-docs). Sails documentation itself is on [sailsjs.org](http://sailsjs.org/#!documentation).
 
 
 
@@ -42,7 +42,7 @@ In practice, your adapter can really do anything it likes-- any method you write
 
 ## Why would I need a custom adapter?
 
-When building a Sails app, the sending or receiving of any asynchronous communication with another piece of hardware can be normalized into an adapter.  (viz. API integrations)
+When building a Waterline / Sails app, the sending or receiving of any asynchronous communication with another piece of hardware can be normalized into an adapter.  (viz. API integrations)
 
 > **From Wikipedia:**
 > *http://en.wikipedia.org/wiki/Create,_read,_update_and_delete*
@@ -50,7 +50,7 @@ When building a Sails app, the sending or receiving of any asynchronous communic
 > Although a relational database provides a common persistence layer in software applications, numerous other persistence layers exist. CRUD functionality can be implemented with an object database, an XML database, flat text files, custom file formats, tape, or card, for example.
 
 In other words, Waterline is not just an ORM for your database.  It is a purpose-agnostic, open standard and toolset for integrating with all kinds of RESTful services, datasources, and devices, whether it's LDAP, Neo4J, or [a lamp](https://www.youtube.com/watch?v=OmcQZD_LIAE).
-I know, I know... Not everything fits perfectly into a RESTful/CRUD mold!  Sometimes the service you're integrating with has more of an RPC-style interface, with one-off method names.  That's ok-- you can define any adapter methods you like! You still get all of the trickle-down config and connection-management goodness of Waterline core.
+I know, I know... Not everything fits perfectly into a RESTful/CRUD mold!  Sometimes the service you're integrating with has more of an RPC-style interface, with one-off method names. That's ok-- you can define any adapter methods you like! You still get all of the trickle-down config and connection-management goodness of Waterline core.
 
 
 
@@ -118,10 +118,3 @@ If you feel that yours is the better approach, and should be the default, share 
 
 > If you have an unanswered question that isn't covered here, and that you feel would add value for the community, please feel free to send a PR adding it to this section.
 
-
-
-
-
-
-
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8acf2fc2ca0aca8a3018e355ad776ed7 "githalytics.com")](http://githalytics.com/vjsrinath/sails-orientdb/FAQ.md)
