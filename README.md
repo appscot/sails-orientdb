@@ -79,12 +79,10 @@ Waterline-orientdb mimics sails-mongo adapter behaviour and maps the logical `id
 
 #### Development Status
 
-From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb supports `Semantic`, `Queryable` and `Associations` interfaces.
-Waterline-orientdb passes all integration tests from  [waterline-adapter-tests](https://github.com/balderdashy/waterline-adapter-tests) with the exception of:
-* Association Interface Has Many Association with Custom Primary Keys .find should return payments when the populate criteria is added.
+* From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb fully supports `Semantic`, `Queryable` and `Associations` interfaces.
+Waterline-orientdb passes all integration tests from  [waterline-adapter-tests](https://github.com/balderdashy/waterline-adapter-tests).
 
-If you want to take a stab at this feel free to issue a Pull Request.
-
+* Many-to-many associations currently use a junction table instead of an edge and this will change at some point ([#29](https://github.com/appscot/waterline-orientdb/issues/29)).
 
 ## Usage
 
