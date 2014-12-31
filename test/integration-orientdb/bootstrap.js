@@ -7,6 +7,8 @@ var async = require('async');
 var Adapter = require('../../');
 
 var config = require('../test-connection.json');
+config.options = config.options || {};
+config.options.storage = "memory";
 
 
 // Require Fixtures
