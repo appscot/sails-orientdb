@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/appscot/waterline-orientdb.svg?branch=master)
+[![Build Status](https://travis-ci.org/appscot/waterline-orientdb.svg?branch=master)](https://travis-ci.org/appscot/waterline-orientdb)
 
 # waterline-orientdb
 
