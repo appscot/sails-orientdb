@@ -4,6 +4,6 @@
   "user": "root",
   "password": "root",
   "options": {
-    "storage": "memory"
+    "storage": "plocal"
   }
 }
