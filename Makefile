@@ -1,8 +1,8 @@
 
-MOCHA_OPTS= --check-leaks --timeout 10000
+MOCHA_OPTS= --check-leaks --timeout 6000
 REPORTER = spec
 
-test: test-unit test-integration
+test: test-unit test-integration-all
 
 test-clean: test-unit test-integration-all clean
 
@@ -19,7 +19,7 @@ test-integration-orientdb:
 	@echo "Running waterline-orientdb integration tests..."
 	@NODE_ENV=test ./node_modules/.bin/mocha \
 		--reporter $(REPORTER) \
-		--timeout 5000 --globals Associations \
+		--timeout 15000 --globals Associations \
 		test/integration-orientdb/*.js test/integration-orientdb/tests/**/*.js
 
 test-unit:

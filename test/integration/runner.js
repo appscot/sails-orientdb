@@ -65,9 +65,7 @@ new TestRunner({
     adapter: Adapter,
 
     // Default adapter config to use.
-    config: {
-        schema: false
-    },
+    config: require('../test-connection.json'),
 
     // The set of adapter interfaces to test against.
     // (grabbed these from this adapter's package.json file above)
@@ -76,15 +74,18 @@ new TestRunner({
     // Mocha options
     // reference: https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically
     mocha: {
-      timeout: 5000,
+      timeout: 15000,
       reporter: 'spec',
-      //grep: 'Custom Primary Keys'
+      //grep: 'should return model instances'
     },
     
     // Invert Grep
     // Experimental, not supported by waterline-adapter-tests (yet)
-    mochaInvert: true
-
+    mochaInvert: false,
+    
+    // Return code -1 if any test failed
+    failOnError: true
+    
     // Most databases implement 'semantic' and 'queryable'.
     //
     // As of Sails/Waterline v0.10, the 'associations' interface

@@ -6,9 +6,7 @@ var _ = require('lodash');
 var async = require('async');
 var Adapter = require('../../');
 
-var config = {
-  schema : false
-};
+var config = require('../test-connection.json');
 
 
 // Require Fixtures
