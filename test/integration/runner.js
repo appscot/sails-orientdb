@@ -20,6 +20,9 @@ var TestRunner = require('waterline-adapter-tests');
 var Adapter = require('../../');
 
 
+var config = require('../test-connection.json');
+config.database = 'waterline-tests';  // Due to https://github.com/orientechnologies/orientdb/issues/3301
+
 
 // Grab targeted interfaces from this adapter's `package.json` file:
 var package = {};
@@ -65,7 +68,7 @@ new TestRunner({
     adapter: Adapter,
 
     // Default adapter config to use.
-    config: require('../test-connection.json'),
+    config: config,
 
     // The set of adapter interfaces to test against.
     // (grabbed these from this adapter's package.json file above)
