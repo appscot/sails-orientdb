@@ -4,7 +4,9 @@
   "description": "OrientDB adapter for Waterline / Sails.js ORM",
   "main": "./lib/adapter.js",
   "scripts": {
-    "test": "make test"
+    "pretest": "./node_modules/.bin/jshint ./lib",
+    "test": "make test",
+    "lint": "./node_modules/.bin/jshint ./lib"
   },
   "repository": {
     "type": "git",
@@ -39,10 +41,11 @@
     "waterline-sequel-orientdb": "~0.0.22"
   },
   "devDependencies": {
-    "waterline-adapter-tests": "~0.10.4",
-    "mocha": "*",
     "captains-log": "~0.11.0",
-    "waterline": "~0.10.12"
+    "jshint": "~2.5.11",
+    "mocha": "*",
+    "waterline": "~0.10.12",
+    "waterline-adapter-tests": "~0.10.4"
   },
   "waterlineAdapter": {
     "type": "orientdb",
