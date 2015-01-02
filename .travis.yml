@@ -5,6 +5,9 @@ before_install:
   - npm install -g npm@latest
 before_script:
   - ./ci/initialize-ci.sh $ORIENTDB_VERSION
+after_script:
+  - npm run coverage
+  - cat coverage/lcov.info | codeclimate
 env:
   global:
     - DEBUG="waterline-orientdb:*,-waterline-orientdb:*:debug"
@@ -16,3 +19,6 @@ deploy:
   api_key: ijbUZx+cKKPD3FADy1wBzEs0OkoRDKMu8Wdra/Zrs4Ir+YkUsh7xPoyPh7C37uKuwtCbC1g+W5Mq1ZNlcIkI9lAylL/9H/2G2SPIs2PMp5OW1rbuAWmbyCapVGBT4OuWh8tRvhxBPUOkT3Z9tkUBaU6ULZezsmPnf14mS3pTJMI=
   on:
     tags: true
+addons:
+  code_climate:
+    repo_token: da62631f47073c66af8ef169090acb1f49a9aa332f3a449ef04cbf6b58c0c446
