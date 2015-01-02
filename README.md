@@ -120,10 +120,20 @@ Returns a native Oriento object
 usage: 
   ```javascript
   //Assume a model named "Post"
-  Post.getDB(function(err, db){
+  Post.getDB(function(db){
   	// db.query(...
   });
   ```
+
+###### `getServer(connection, collection, cb)`
+Returns a native Oriento connection
+  
+usage: 
+  ```javascript
+  Post.getServer(function(server){
+  	// server.list()
+  });
+  ``` 
 
 ###### `removeCircularReferences(connection, collection, object, cb)`
 Convenience method that replaces circular references with `id` when one is available, otherwise it replaces the object with string '[Circular]'
