@@ -1,8 +1,9 @@
 # Contributing to waterline-orientdb
 
 1. [Getting Involved](#getting-involved)
-2. [How To Report Bugs](#how-to-report-bugs)
-3. [Tips For Submitting Code](#tips-for-submitting-code)
+2. [Discussion](#discussion)
+3. [How To Report Bugs](#how-to-report-bugs)
+4. [Tips For Submitting Code](#tips-for-submitting-code)
 
 
 
@@ -17,7 +18,7 @@ The goal of this guide is to provide the best way to contribute to waterline-ori
 ### Gitter.im
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/appscot/waterline-orientdb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-We frequently tracks posts on the [Gitter](https://gitter.im/appscot/waterline-orientdb). If you have longer posts or questions please feel free to post them there. If you think you've found a bug please [file it in the bug tracker](#how-to-report-bugs).
+We frequently tracks posts on [Gitter](https://gitter.im/appscot/waterline-orientdb). If you have longer posts or questions please feel free to post them there. If you think you've found a bug please [file it in the bug tracker](#how-to-report-bugs).
 
 
 ## How to Report Bugs
@@ -28,7 +29,7 @@ Bugs in old versions of waterline-orientdb may have already been fixed. In order
 
 ### Report a bug
 
-Fill in a bug through: [waterline-orientdb issues](https://github.com/appscot/waterline-orientdb/issues).
+Fill in a bug by creating a [new github issue](https://github.com/appscot/waterline-orientdb/issues/new).
 
 
 
@@ -50,6 +51,22 @@ Please follow these guidelines before reporting a bug:
 
 3. **Provide a means to reproduce the problem** &mdash; Please provide as much details as possible, e.g. waterline-orientdb logs, and of course the steps to reproduce the problem.
 
+### Running The Tests
+
+The tests are based on [mocha](http://visionmedia.github.io/mocha) and [commonjs-assert](https://github.com/defunctzombie/commonjs-assert).
+
+Before running the tests, ensure you've configured your orientdb server to use the same credentials as in [test-connection.json](./test/test-connection.json).
+
+To run the tests:
+```sh
+npm test
+```
+
+To generate the code coverage report, run:
+```sh
+npm run coverage
+```
+And have a look at `coverage/lcov-report/index.html`.
 
 ### Feature requests
 
