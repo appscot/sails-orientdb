@@ -6,9 +6,7 @@ before_install:
 before_script:
   - ./ci/initialize-ci.sh $ORIENTDB_VERSION
 after_script:
-  - npm run coverage
-  - npm install -g codeclimate-test-reporter
-  - cat coverage/lcov.info | codeclimate
+  - npm run coverage && cat ./coverage/lcov.info | ./node_modules/.bin/codeclimate
 env:
   global:
     - DEBUG="waterline-orientdb:*,-waterline-orientdb:*:debug"

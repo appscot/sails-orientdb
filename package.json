@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "captains-log": "~0.11.0",
+    "codeclimate-test-reporter": "~0.0.4",
     "istanbul": "~0.3.5",
     "jshint": "~2.5.11",
     "mocha": "*",
