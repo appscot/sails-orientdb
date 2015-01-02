@@ -7,6 +7,7 @@ before_script:
   - ./ci/initialize-ci.sh $ORIENTDB_VERSION
 after_script:
   - npm run coverage
+  - npm install -g codeclimate-test-reporter
   - cat coverage/lcov.info | codeclimate
 env:
   global:
