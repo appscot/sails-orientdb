@@ -28,12 +28,18 @@ test-unit:
 		--reporter $(REPORTER) \
 		$(MOCHA_OPTS) \
 		test/unit/*.js test/unit/**/*.js
-
-test-load:
-	@NODE_ENV=test ./node_modules/.bin/mocha \
-		--reporter $(REPORTER) \
-		$(MOCHA_OPTS) \
-		test/load/**
+		
+coverage:
+	@echo "\n\nRunning coverage report..."
+	rm -rf coverage
+	./node_modules/istanbul/lib/cli.js cover --report none --dir coverage/unit \
+		./node_modules/.bin/_mocha test/unit/*.js test/unit/**/*.js \
+		-- $(MOCHA_OPTS)
+	./node_modules/istanbul/lib/cli.js cover --report none --dir coverage/integration-orientdb \
+		./node_modules/.bin/_mocha test/integration-orientdb/*.js test/integration-orientdb/tests/**/*.js \
+		-- --timeout 15000 --globals Associations
+	./node_modules/istanbul/lib/cli.js cover --report none --dir coverage/integration test/integration/runner.js
+	./node_modules/istanbul/lib/cli.js report
 
 clean:
 	@echo "\n\nDROPPING ALL COLLECTIONS from db: waterline-test-integration"
