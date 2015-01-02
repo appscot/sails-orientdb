@@ -7,6 +7,7 @@ var async = require('async');
 var Adapter = require('../../');
 
 var config = require('../test-connection.json');
+config.database = 'waterline-test-orientdb';
 config.options = config.options || {};
 config.options.storage = "memory";
 
@@ -89,7 +90,16 @@ after(function(done) {
 
   async.each(Object.keys(ontology.collections), dropCollection, function(err) {
     if(err) return done(err);
-    waterline.teardown(done);
+    
+    ontology.collections[Object.keys(ontology.collections)[0]].getServer(function(server){
+      server.drop({
+        name: config.database,
+        storage: config.options.storage
+      })
+      .then(function(err){
+        waterline.teardown(done);
+      });
+    });
   });
 
 });

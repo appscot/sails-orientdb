@@ -21,7 +21,7 @@ var Adapter = require('../../');
 
 
 var config = require('../test-connection.json');
-config.database = 'waterline-tests';  // Due to https://github.com/orientechnologies/orientdb/issues/3301
+config.database = 'waterline-test-integration';  // We need different DB's due to https://github.com/orientechnologies/orientdb/issues/3301
 
 
 // Grab targeted interfaces from this adapter's `package.json` file:

@@ -10,12 +10,12 @@ test-clean: test-unit test-integration-all clean
 test-integration-all: test-integration-orientdb test-integration
 
 test-integration:
-	@echo "\n\nNOTICE: If tests fail, please ensure you've set the correct credentials in lib/adapter.js\n"
+	@echo "\n\nNOTICE: If tests fail, please ensure you've set the correct credentials in test/test-connection.json\n"
 	@echo "Running 'waterline-adapter-tests' integration tests..."
 	@NODE_ENV=test node test/integration/runner.js
 
 test-integration-orientdb:
-	@echo "\n\nNOTICE: If tests fail, please ensure you've set the correct credentials in lib/adapter.js\n"
+	@echo "\n\nNOTICE: If tests fail, please ensure you've set the correct credentials in test/test-connection.json\n"
 	@echo "Running waterline-orientdb integration tests..."
 	@NODE_ENV=test ./node_modules/.bin/mocha \
 		--reporter $(REPORTER) \
@@ -36,5 +36,6 @@ test-load:
 		test/load/**
 
 clean:
-	@echo "\n\nDROPPING ALL COLLECTIONS from default db: waterline"
-	./node_modules/.bin/oriento db drop waterline
+	@echo "\n\nDROPPING ALL COLLECTIONS from db: waterline-test-integration"
+	@echo "NOTICE: If operation fails, please ensure you've set the correct credentials in oriento.opts file\n"
+	./node_modules/.bin/oriento db drop waterline-test-integration
