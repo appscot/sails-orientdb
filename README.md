@@ -22,7 +22,7 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 Install from NPM.
 
 ```bash
-$ npm install waterline-orientdb --save
+npm install waterline-orientdb --save
 ```
 
 
@@ -249,19 +249,11 @@ An edge named **venueTable** will be created from Team to Stadium model instance
 See [`FAQ.md`](./FAQ.md).
 
 
-### More Resources
-
-- [Stackoverflow](http://stackoverflow.com/questions/tagged/sails.js)
-- [#sailsjs on Freenode](http://webchat.freenode.net/) (IRC channel)
-- [Tutorials](https://github.com/balderdashy/sails-docs/blob/master/FAQ.md#where-do-i-get-help)
-- <a href="http://sailsjs.org" target="_blank" title="Node.js framework for building realtime APIs."><img src="https://github-camo.global.ssl.fastly.net/9e49073459ed4e0e2687b80eaf515d87b0da4a6b/687474703a2f2f62616c64657264617368792e6769746875622e696f2f7361696c732f696d616765732f6c6f676f2e706e67" width=60 alt="Sails.js logo (small)"/></a>
-
-
 ## Waterline
 
 [Waterline](https://github.com/balderdashy/waterline) is a new kind of storage and retrieval engine.
 
-It provides a uniform API for accessing stuff from different kinds of databases, protocols, and 3rd party APIs. That means you write the same code to get users, whether they live in MySQL, LDAP, MongoDB, or Facebook.
+It provides a uniform API for accessing stuff from different kinds of databases, protocols, and 3rd party APIs. That means you write the same code to get users, whether they live in OrientDB, MySQL, LDAP, MongoDB, or Facebook.
 
 
 ## Contributors
