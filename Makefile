@@ -45,3 +45,5 @@ clean:
 	@echo "\n\nDROPPING ALL COLLECTIONS from db: waterline-test-integration"
 	@echo "NOTICE: If operation fails, please ensure you've set the correct credentials in oriento.opts file\n"
 	./node_modules/.bin/oriento db drop waterline-test-integration
+
+.PHONY: coverage
