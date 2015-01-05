@@ -15,7 +15,7 @@
 
 var util = require('util');
 var mocha = require('mocha');
-var log = new (require('captains-log'))();
+var log = require('debug-logger')('waterline-orientdb:test');
 var TestRunner = require('waterline-adapter-tests');
 var Adapter = require('../../');
 
@@ -48,8 +48,8 @@ log.info('Testing `' + package.name + '`, a Sails/Waterline adapter.');
 log.info('Running `waterline-adapter-tests` against ' + interfaces.length + ' interfaces...');
 log.info('( ' + interfaces.join(', ') + ' )');
 console.log();
-log('Latest draft of Waterline adapter interface spec:');
-log('https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md');
+log.info('Latest draft of Waterline adapter interface spec:');
+log.info('https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md');
 console.log();
 
 
