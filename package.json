@@ -1,6 +1,6 @@
 {
   "name": "waterline-orientdb",
-  "version": "0.10.20",
+  "version": "0.10.21",
   "description": "OrientDB adapter for Waterline / Sails.js ORM",
   "main": "./lib/adapter.js",
   "scripts": {
@@ -15,9 +15,11 @@
   },
   "keywords": [
     "orientdb",
-    "waterline",
     "orm",
-    "sails"
+    "waterline",
+    "sails",
+    "sailsjs",
+    "sails.js"
   ],
   "author": {
     "name": "Dario Marcelino",
@@ -36,7 +38,7 @@
     "debug": "~2.1.0",
     "debug-logger": "~0.2.0",
     "lodash": "~2.4.1",
-    "oriento": "~0.7.0",
+    "oriento": "git://github.com/codemix/oriento",
     "q": "^1.0.1",
     "waterline-cursor": "~0.0.5",
     "waterline-sequel-orientdb": "~0.0.22"
