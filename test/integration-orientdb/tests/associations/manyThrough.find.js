@@ -83,6 +83,7 @@ describe('Association Interface', function() {
           .populate('teams')
           .populate('sponsor')
           .then(function(stadium){
+            assert(typeof stadium.id === 'string');
             assert(stadium.teams.length === 1);
             assert(stadium.owners.length === 0);
             assert(!stadium.out_venueTable);
@@ -95,9 +96,7 @@ describe('Association Interface', function() {
             assert(!stadium.sponsor['@type']);
             done();
           })
-          .catch(function(err){
-            done(err);
-          });
+          .catch(done);
       });
       
       it('should not have friend records, nor edges', function(done) {
@@ -105,6 +104,7 @@ describe('Association Interface', function() {
           .populate('teams')
           .populate('sponsor')
           .then(function(stadiums){
+            assert(typeof stadiums[0].id === 'string');
             assert(stadiums[0].teams.length === 1);
             assert(stadiums[0].owners.length === 0);
             assert(!stadiums[0].out_venueTable);
