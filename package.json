@@ -38,7 +38,7 @@
     "debug": "~2.1.0",
     "debug-logger": "~0.2.0",
     "lodash": "~2.4.1",
-    "oriento": "^1.0.0",
+    "oriento": "~1.0.0",
     "q": "^1.0.1",
     "waterline-cursor": "~0.0.5",
     "waterline-sequel-orientdb": "~0.0.22"
