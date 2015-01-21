@@ -1,6 +1,7 @@
 
 MOCHA_OPTS= --check-leaks --timeout 6000
 REPORTER = spec
+DB?=waterline-test-integration
 
 test: test-unit test-integration-all
 
@@ -42,8 +43,8 @@ coverage:
 	./node_modules/istanbul/lib/cli.js report
 
 clean:
-	@echo "\n\nDROPPING ALL COLLECTIONS from db: waterline-test-integration"
+	@echo "\n\nDROPPING ALL COLLECTIONS from db: $(DB)"
 	@echo "NOTICE: If operation fails, please ensure you've set the correct credentials in oriento.opts file\n"
-	./node_modules/.bin/oriento db drop waterline-test-integration
+	./node_modules/.bin/oriento db drop $(DB)
 
 .PHONY: coverage
