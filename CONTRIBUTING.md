@@ -5,8 +5,6 @@
 3. [How To Report Bugs](#how-to-report-bugs)
 4. [Tips For Submitting Code](#tips-for-submitting-code)
 
-
-
 ## Getting Involved
 
 There are a number of ways to get involved with the development of waterline-orientdb. Even if you've never contributed code to an Open Source project before, we're always looking for help identifying bugs, cleaning up code, writing documentation and testing.
@@ -25,12 +23,22 @@ We frequently tracks posts on [Gitter](https://gitter.im/appscot/waterline-orien
 
 ### Try the latest version of waterline-orientdb
 
-Bugs in old versions of waterline-orientdb may have already been fixed. In order to avoid reporting known issues, make sure you are always testing against the latest build/source.
+Bugs in old versions of waterline-orientdb may have already been fixed. In order to avoid reporting known issues, make sure you are always testing against the latest build/source. Please follow these guidelines before reporting a bug:
+
+1. **Update to the latest version** &mdash; Check if you can reproduce the issue with the latest version from the `master` branch.
+
+2. **Use the Issues search** &mdash; check if the issue has already been reported. If it has been, please comment on the existing issue.
+
+3. **Provide a means to reproduce the problem** &mdash; Please provide as much details as possible, e.g. waterline-orientdb logs, and of course the steps to reproduce the problem. Ideally, submit an automated test such as those in the [test folder](https://github.com/appscot/waterline-orientdb/tree/master/test/integration-orientdb/tests).
+
 
 ### Report a bug
 
 Fill in a bug by creating a [new github issue](https://github.com/appscot/waterline-orientdb/issues/new).
 
+### Feature requests
+
+Please follow the bug guidelines above for feature requests, i.e. update to the latest version and search for existing issues before posting a new request.
 
 
 ## Tips For Submitting Code
@@ -42,14 +50,6 @@ Fill in a bug by creating a [new github issue](https://github.com/appscot/waterl
 
 **ALWAYS USE A "TOPIC" BRANCH!** Personally I like the `issuenumber-feature_name` format that way its easy to identify the branch and feature at a glance. Also please make note of any issue number in the pull commit so we know what you are solving (it helps with cleaning up the related items later).
 
-
-Please follow these guidelines before reporting a bug:
-
-1. **Update to the latest version** &mdash; Check if you can reproduce the issue with the latest version from the `master` branch.
-
-2. **Use the Issues search** &mdash; check if the issue has already been reported. If it has been, please comment on the existing issue.
-
-3. **Provide a means to reproduce the problem** &mdash; Please provide as much details as possible, e.g. waterline-orientdb logs, and of course the steps to reproduce the problem.
 
 ### Running The Tests
 
@@ -68,9 +68,6 @@ npm run coverage
 ```
 And have a look at `coverage/lcov-report/index.html`.
 
-### Feature requests
-
-Please follow the bug guidelines above for feature requests, i.e. update to the latest version and search for existing issues before posting a new request.
 
 ### Pull requests
 
@@ -79,11 +76,8 @@ Please follow the bug guidelines above for feature requests, i.e. update to the 
 Please follow these guidelines before sending a pull request:
 
 1. Update your fork to the latest upstream version.
-
 2. Use the `master` branch to base your code off of.
-
 3. Follow the coding conventions of the original repository. Do not change line endings of the existing file, as this will rewrite the file and loses history.
-
 4. Keep your commits as autonomous as possible, i.e. create a new commit for every single bug fix or feature added.
-
 5. Always add meaningful commit messages. We should not have to guess at what your code is suppose to do.
+6. Make sure your changes pass all automated tests (old and new).
