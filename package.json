@@ -37,7 +37,7 @@
     "async": "~0.9.0",
     "debug": "~2.1.0",
     "debug-logger": "~0.2.0",
-    "lodash": "~2.4.1",
+    "lodash": "~3.0.0",
     "oriento": "~1.0.1",
     "q": "^1.0.1",
     "waterline-cursor": "~0.0.5",
@@ -46,7 +46,7 @@
   "devDependencies": {
     "codeclimate-test-reporter": "~0.0.4",
     "istanbul": "~0.3.5",
-    "jshint": "~2.5.11",
+    "jshint": "~2.6.0",
     "mocha": "*",
     "waterline": "~0.10.12",
     "waterline-adapter-tests": "~0.10.4"
