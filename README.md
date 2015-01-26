@@ -256,7 +256,9 @@ See [`FAQ.md`](./FAQ.md).
 It provides a uniform API for accessing stuff from different kinds of databases, protocols, and 3rd party APIs. That means you write the same code to get users, whether they live in OrientDB, MySQL, LDAP, MongoDB, or Facebook.
 
 
-## Contributors
+## Contributions
+
+We are always looking for the quality contributions! Please check the [CONTRIBUTING.md](./CONTRIBUTING.md) for the contribution guidelines.
 
 Thanks so much to Srinath Janakiraman ([vjsrinath](http://github.com/vjsrinath)) who built the original `sails-orient` adapter.
 
@@ -264,5 +266,5 @@ Thanks so much to Srinath Janakiraman ([vjsrinath](http://github.com/vjsrinath))
 ## License
 
 **[MIT](./LICENSE)**
-&copy; 2014 [AppsCot](http://github.com/appscot)
+&copy; 2015 [AppsCot](http://github.com/appscot)
 
