@@ -1,5 +1,3 @@
-
-
 [![npm version](https://badge.fury.io/js/waterline-orientdb.svg)](http://badge.fury.io/js/waterline-orientdb)
 [![Build Status](https://travis-ci.org/appscot/waterline-orientdb.svg?branch=master)](https://travis-ci.org/appscot/waterline-orientdb)
 [![Test Coverage](https://codeclimate.com/github/appscot/waterline-orientdb/badges/coverage.svg)](https://codeclimate.com/github/appscot/waterline-orientdb)
@@ -14,8 +12,13 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 > **Warning**
 >
 > `waterline-orientdb` maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID.
-> In the current version of `waterline-orientdb`, you should not sort by id.
 
+#### Development Status
+
+* From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb fully supports `Semantic`, `Queryable` and `Associations` interfaces.
+Waterline-orientdb passes all integration tests from  [waterline-adapter-tests](https://github.com/balderdashy/waterline-adapter-tests).
+
+* Many-to-many associations currently use a junction table instead of an edge and this will change at some point ([#29](https://github.com/appscot/waterline-orientdb/issues/29)).
 
 ## Installation
 
@@ -71,7 +74,7 @@ For One-to-One Associations waterline-orientdb creates a LINK ([OrientDB Types](
 One-to-Many Associations are represented in OrientDB by a LINKSET.
 
 ###### Many-to-Many Associations
-Many-to-Many Associations are handled by Waterline core, creating a join table holding foreign keys to the associated records. Waterline-orientdb does not change this behaviour for now but we may replace the join table by Edges in a future release. Currently it's not deemed a priority.
+Many-to-Many Associations are handled by Waterline core, creating a join table holding foreign keys to the associated records. Waterline-orientdb does not change this behaviour for now but we will replace the join table by Edges in a future release ([#29](https://github.com/appscot/waterline-orientdb/issues/29)). Currently it's not deemed a priority.
 
 ###### Many-to-Many Through Associations
 In Many-to-Many Through Association the join table is represented in OrientDB by Edges. Waterline-orientdb automatically creates the edges whenever an association is created. The Edge is named after the property tableName or identity in case tableName is missing.
@@ -83,13 +86,6 @@ The main difference between waterline-orientdb and [sails-orientdb](https://gith
 
 ###### ID
 Waterline-orientdb mimics sails-mongo adapter behaviour and maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID.
-
-#### Development Status
-
-* From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb fully supports `Semantic`, `Queryable` and `Associations` interfaces.
-Waterline-orientdb passes all integration tests from  [waterline-adapter-tests](https://github.com/balderdashy/waterline-adapter-tests).
-
-* Many-to-many associations currently use a junction table instead of an edge and this will change at some point ([#29](https://github.com/appscot/waterline-orientdb/issues/29)).
 
 ## Usage
 
