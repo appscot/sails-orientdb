@@ -76,6 +76,17 @@ describe('utils helper class', function() {
 
   describe('rewriteIdsRecursive:', function() {
     var functionToTest = 'rewriteIdsRecursive';
+    
+    it('invalid inputs', function(done) {
+      var result = utils.rewriteIdsRecursive(null);
+      assert.equal(result, null);
+      result = utils.rewriteIdsRecursive([]);
+      assert.equal(result.length, 0);
+      result = utils.rewriteIdsRecursive([{}]);
+      assert.equal(1, result.length);
+      assert.equal(result[0].id, undefined);
+      done();
+    });
 
     it('single level result set', function(done) {
       testSingleLevel(functionToTest);

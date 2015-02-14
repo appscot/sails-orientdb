@@ -12,6 +12,7 @@ env:
     - DEBUG="waterline-orientdb:*,-waterline-orientdb:*:debug"
   matrix:
     - ORIENTDB_VERSION=1.7.10
+    - ORIENTDB_VERSION=2.0.2
 deploy:
   provider: npm
   email: npm@appscot.com
