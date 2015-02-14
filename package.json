@@ -1,6 +1,6 @@
 {
   "name": "waterline-orientdb",
-  "version": "0.10.22",
+  "version": "0.10.30",
   "description": "OrientDB adapter for Waterline / Sails.js ORM",
   "main": "./lib/adapter.js",
   "scripts": {
@@ -15,11 +15,14 @@
   },
   "keywords": [
     "orientdb",
+    "orient",
     "orm",
     "waterline",
     "sails",
     "sailsjs",
-    "sails.js"
+    "sails.js",
+    "graph",
+    "graphdb"
   ],
   "author": {
     "name": "Dario Marcelino",
