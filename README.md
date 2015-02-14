@@ -98,7 +98,7 @@ Creates edge between specified two model instances by ID in the form parameters 
 usage: 
   ```javascript
   //Assume a model named "Post"
-  Post.createEdge('#12:1','#13:1',{'@class':'Comments'},function(err, result){
+  Post.createEdge('#12:1', '#13:1', { '@class':'Comments' }, function(err, result){
   
   });
   ```
@@ -109,11 +109,31 @@ Deletes edges between specified two model instances by ID in the form parameters
 usage: 
   ```javascript
   //Assume a model named "Post"
-  Post.deleteEdges('#12:1','#13:1',null,function(err, result){
+  Post.deleteEdges('#12:1', '#13:1', null, function(err, result){
   
   });
   ```
+
+###### `query(connection, collection, query, [options], cb)`
+Runs a SQL query against the database using Oriento's query method. Will attempt to convert @rid's into ids.
   
+usage: 
+  ```javascript
+  // Assume a model named "Friend"
+  Friend.query("SELECT FROM friendTable WHERE name='friend query'", function(err, retrievedUsers){
+  	console.log(retrievedUsers);
+  });
+  
+  // Using params
+  Friend.query("SELECT FROM friendTable WHERE name=:name", {
+    params: {
+      name: 'friend query'
+    }
+  }, function(err, retrievedUsers){
+  	console.log(retrievedUsers);
+  });
+  ```
+
 ###### `getDB(connection, collection, cb)`
 Returns a native Oriento object
   
