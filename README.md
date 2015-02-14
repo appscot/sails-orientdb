@@ -14,6 +14,7 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 > `waterline-orientdb` maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID.
 
 #### Development Status
+* Waterline-orientdb aims to work with Waterline v0.10.x and OrientDB v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](./CONTRIBUTING.md)!
 
 * From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb fully supports `Semantic`, `Queryable` and `Associations` interfaces.
 Waterline-orientdb passes all integration tests from  [waterline-adapter-tests](https://github.com/balderdashy/waterline-adapter-tests).
