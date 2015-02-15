@@ -43,6 +43,14 @@ describe('Association Interface', function() {
     ////////////////////////////////////////////////////
     describe('without populate', function() {
       
+      it('find: should not throw error on empty criteria', function(done) {
+        Associations.Owns.find()
+          .then(function(ownsResults){
+            done();
+          })
+          .catch(done);
+      });
+      
       it('findOne: should not have team or friend records, nor edges', function(done) {
         Associations.Stadium.findOne(stadiumRecord.id)
           .then(function(stadium){
@@ -54,9 +62,7 @@ describe('Association Interface', function() {
             assert(_.isString(stadium.sponsor));
             done();
           })
-          .catch(function(err){
-            done(err);
-          });
+          .catch(done);
       });
       
       it('should not have team or friend records, nor edges', function(done) {
@@ -70,9 +76,7 @@ describe('Association Interface', function() {
             assert(_.isString(stadiums[0].sponsor));
             done();
           })
-          .catch(function(err){
-            done(err);
-          });
+          .catch(done);
       });
     });
 
