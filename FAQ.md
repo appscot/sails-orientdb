@@ -6,7 +6,7 @@
 The latest stable version in npm is always a safe bet.
 
 ```sh
-$ npm install waterline-orientdb --save
+npm install waterline-orientdb --save
 ```
 
 [![NPM](https://nodei.co/npm/waterline-orientdb.png?downloads=true&stars=true)](https://nodei.co/npm/waterline-orientdb/)
@@ -14,14 +14,14 @@ $ npm install waterline-orientdb --save
 
 
 ### Where is the documentation?
-+ Documentation for this module is in the README.md file.
++ Documentation for this module is in the [README.md](./README.md) file.
 + Docs for the latest stable npm release of Waterline are on [balderdashy/waterline-docs](https://github.com/balderdashy/waterline-docs). Sails documentation itself is on [sailsjs.org](http://sailsjs.org/#!documentation).
 
 
 
 ### What is an adapter?
 
- Adapters expose **interfaces**, which imply a conract to implemnt certain functionality.  This allows us to guarantee conventional usage patterns across multiple models, developers, apps, and even companies, making app code more maintainable, efficient, and reliable.  Adapters are useful for integrating with databases, open APIs, internal/proprietary web services, or even hardware.
+ Adapters expose **interfaces**, which imply a contract to implement certain functionality.  This allows us to guarantee conventional usage patterns across multiple models, developers, apps, and even companies, making app code more maintainable, efficient, and reliable.  Adapters are useful for integrating with databases, open APIs, internal/proprietary web services, or even hardware.
 
 
 ### What kind of things can I do in an adapter?
