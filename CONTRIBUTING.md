@@ -25,16 +25,23 @@ We frequently tracks posts on [Gitter](https://gitter.im/appscot/waterline-orien
 
 Bugs in old versions of waterline-orientdb may have already been fixed. In order to avoid reporting known issues, make sure you are always testing against the latest build/source. Please follow these guidelines before reporting a bug:
 
-1. **Update to the latest version** &mdash; Check if you can reproduce the issue with the latest version from the `master` branch.
+1. **Update to the latest version** &mdash; Check if you can reproduce the issue with the latest version from the `master` branch. You can install from `master` by running:
+  ``` sh
+  npm install appscot/waterline-orientdb
+  ```
 
-2. **Use the Issues search** &mdash; check if the issue has already been reported. If it has been, please comment on the existing issue.
+2. **Enable logging** &mdash; `waterline-orientdb` uses [debug-logger](https://github.com/appscot/debug-logger) (a wrapper around [visionmedia/debug](https://github.com/visionmedia/debug)) and so you can enable logging by running the below command:
+  ``` sh
+  export DEBUG=$DEBUG,waterline-orientdb:*
+  ```
 
-3. **Provide a means to reproduce the problem** &mdash; Please provide as much details as possible, e.g. waterline-orientdb logs, and of course the steps to reproduce the problem. Ideally, submit an automated test such as those in the [test folder](https://github.com/appscot/waterline-orientdb/tree/master/test/integration-orientdb/tests).
+3. **Use the Issues search** &mdash; check if the issue has already been reported. If it has been, please comment on the existing issue.
 
+4. **Provide a means to reproduce the problem** &mdash; Please provide as much details as possible, e.g. `waterline-orientdb` logs, and of course the steps to reproduce the problem. Ideally, submit an automated test such as those in the [test folder](https://github.com/appscot/waterline-orientdb/tree/master/test/integration-orientdb/tests).
 
 ### Report a bug
 
-Fill in a bug by creating a [new github issue](https://github.com/appscot/waterline-orientdb/issues/new).
+Fill in a bug by creating a [new github issue](https://github.com/appscot/waterline-orientdb/issues/new) and provide as much information as possible.
 
 ### Feature requests
 
