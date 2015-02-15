@@ -44,7 +44,7 @@
     "oriento": "~1.1.0",
     "q": "^1.0.1",
     "waterline-cursor": "~0.0.5",
-    "waterline-sequel-orientdb": "~0.0.23"
+    "waterline-sequel-orientdb": "~0.0.24"
   },
   "devDependencies": {
     "codeclimate-test-reporter": "~0.0.4",
