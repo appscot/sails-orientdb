@@ -227,4 +227,33 @@ describe('utils helper class', function () {
       done();
     });
   });
+  
+  describe('getAttributeAsObject:', function () {
+    it('should return attributes from schema', function (done) {
+      
+      var schema = { 
+        property1: "string",
+        property2: {
+          columnName: 'property2_col',
+          type: "integer"
+        },
+      };
+      
+      var result = utils.getAttributeAsObject(null, null);
+      assert(!result);
+      
+      result = utils.getAttributeAsObject(schema, 'property1');
+      assert.equal(result.type, "string");
+      
+      result = utils.getAttributeAsObject(schema, 'property2');
+      assert.equal(result.type, "integer");
+      assert.equal(result.columnName, "property2_col");
+      
+      result = utils.getAttributeAsObject(schema, 'property2_col');
+      assert.equal(result.type, "integer");
+      assert.equal(result.columnName, "property2_col");
+      
+      done();
+    });
+  });
 });
