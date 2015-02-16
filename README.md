@@ -22,7 +22,7 @@ Waterline-orientdb passes all integration tests from  [waterline-adapter-tests](
 * Many-to-many associations currently use a junction table instead of an edge and this will change at some point ([#29](https://github.com/appscot/waterline-orientdb/issues/29)).
 
 
-#### Table of Contents
+## Table of Contents
 1. [Installation](#installation)
 2. [Waterline Configuration](#waterline-configuration)
 3. [Overview](#overview)
