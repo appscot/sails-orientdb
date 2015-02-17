@@ -11,7 +11,7 @@ module.exports = Waterline.Collection.extend({
   schema: false,
 
   attributes: {
-    //'*': '', // little hack to get all fields because no schema¬ 
+    '*': '', // little hack to get all fields because no schema¬ 
     profiles: {
       collection: 'profile40',
       through: 'profileconnection',
