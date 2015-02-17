@@ -35,7 +35,12 @@ var fixtures = {
   
   FriendFixture: require('./fixtures/hasManyThrough.friend.fixture'),
   FollowsFixture: require('./fixtures/hasManyThrough.follows.fixture'),
-  OwnsFixture: require('./fixtures/hasManyThrough.owns.fixture')
+  OwnsFixture: require('./fixtures/hasManyThrough.owns.fixture'),
+  
+  // bug fixtures below
+  Profile40Fixture: require('./fixtures/bugs/40.profile.fixture'),
+  SubprofileFixture: require('./fixtures/bugs/40.subprofile.fixture'),
+  ProfileconnectionFixture: require('./fixtures/bugs/40.profileconnection.fixture')
 };
 
 
