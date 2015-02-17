@@ -5,18 +5,21 @@
 var Waterline = require('waterline');
 
 module.exports = Waterline.Collection.extend({
-
-  identity: 'subprofile',
-  connection: 'associations',
+  
+  identity: 'profile40',
+  connection: 'bugs',
   schema: false,
 
   attributes: {
+
     '*': '', // little hack to get all fields because no schema¬ 
     profiles: {
-      collection: 'profile40',
+      collection: 'Subprofile',
       through: 'profileconnection',
-      via: 'subprofile',
+      via: 'profile',
+      dominant: true
     }
+
   }
 
 });

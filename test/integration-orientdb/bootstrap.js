@@ -35,12 +35,7 @@ var fixtures = {
   
   FriendFixture: require('./fixtures/hasManyThrough.friend.fixture'),
   FollowsFixture: require('./fixtures/hasManyThrough.follows.fixture'),
-  OwnsFixture: require('./fixtures/hasManyThrough.owns.fixture'),
-  
-  // bug fixtures below
-  Profile40Fixture: require('./fixtures/bugs/40.profile.fixture'),
-  SubprofileFixture: require('./fixtures/bugs/40.subprofile.fixture'),
-  ProfileconnectionFixture: require('./fixtures/bugs/40.profileconnection.fixture')
+  OwnsFixture: require('./fixtures/hasManyThrough.owns.fixture')
 };
 
 
@@ -95,16 +90,7 @@ after(function(done) {
 
   async.each(Object.keys(ontology.collections), dropCollection, function(err) {
     if(err) return done(err);
-    
-    ontology.collections[Object.keys(ontology.collections)[0]].getServer(function(server){
-      server.drop({
-        name: config.database,
-        storage: config.options.storage
-      })
-      .then(function(err){
-        waterline.teardown(done);
-      });
-    });
+    waterline.teardown(done);
   });
 
 });

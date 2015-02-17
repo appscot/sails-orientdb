@@ -11,10 +11,10 @@ describe('Bug #40 Returning object instead of id', function() {
   var profileRecord, subprofileRecord;
 
   before(function(done) {
-    Associations.Profile40.create({ alias: 'juanito', birthday: "1-01-1980" }, function(err, profile) {
+    Bugs.Profile40.create({ alias: 'juanito', birthday: "1-01-1980" }, function(err, profile) {
       if(err) { return done(err); }
       profileRecord = profile;
-      Associations.Subprofile.create({ name: 'juan' }, function(err, subprofile) {
+      Bugs.Subprofile.create({ name: 'juan' }, function(err, subprofile) {
         if(err) { return done(err); }
         subprofileRecord = subprofile;
         
@@ -28,8 +28,8 @@ describe('Bug #40 Returning object instead of id', function() {
   });
   
   after(function(done){
-    Associations.Profile40.destroy(profileRecord.id);
-    Associations.Subprofile.destroy(profileRecord.id);
+    Bugs.Profile40.destroy(profileRecord.id);
+    Bugs.Subprofile.destroy(profileRecord.id);
     done();
   });
 
@@ -40,7 +40,7 @@ describe('Bug #40 Returning object instead of id', function() {
   describe('find a profile', function() {
     
     it('should return a profile with a subprofile', function(done) {
-      Associations.Profile40.find()
+      Bugs.Profile40.find()
         .populate('profiles')
         .then(function(profiles){
           assert.equal(profiles.length, 1);

@@ -20,8 +20,9 @@ test-integration-orientdb:
 	@echo "Running waterline-orientdb integration tests..."
 	@NODE_ENV=test ./node_modules/.bin/mocha \
 		--reporter $(REPORTER) \
-		--timeout 15000 --globals Associations \
-		test/integration-orientdb/*.js test/integration-orientdb/tests/**/*.js
+		--timeout 15000 --globals Associations,Bugs \
+		test/integration-orientdb/*.js test/integration-orientdb/tests/**/*.js \
+		test/integration-orientdb/bugs/*.js test/integration-orientdb/bugs/**/*.js
 
 test-unit:
 	@echo "\n\nRunning waterline-orientdb unit tests..."
