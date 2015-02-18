@@ -35,12 +35,7 @@ var fixtures = {
   
   FriendFixture: require('./fixtures/hasManyThrough.friend.fixture'),
   FollowsFixture: require('./fixtures/hasManyThrough.follows.fixture'),
-  OwnsFixture: require('./fixtures/hasManyThrough.owns.fixture'),
-  
-  // bug fixtures below
-  Profile40Fixture: require('./fixtures/bugs/40.profile.fixture'),
-  SubprofileFixture: require('./fixtures/bugs/40.subprofile.fixture'),
-  ProfileconnectionFixture: require('./fixtures/bugs/40.profileconnection.fixture')
+  OwnsFixture: require('./fixtures/hasManyThrough.owns.fixture')
 };
 
 
@@ -86,15 +81,19 @@ after(function(done) {
 
   function dropCollection(item, next) {
     if(!Adapter.hasOwnProperty('drop')) return next();
-
-    ontology.collections[item].drop(function(err) {
-      if(err) return next(err);
+    
+    // TODO: this is causing OrientDB.ConnectionError [2]: write EPIPE
+    // ontology.collections[item].drop(function(err) {
+      // if(err) return next(err);
       next();
-    });
+    // });
   }
 
   async.each(Object.keys(ontology.collections), dropCollection, function(err) {
-    if(err) return done(err);
+    if(err) {
+      console.log('ERROR:', err);
+      done(err);
+    }
     
     ontology.collections[Object.keys(ontology.collections)[0]].getServer(function(server){
       server.drop({
@@ -103,7 +102,8 @@ after(function(done) {
       })
       .then(function(err){
         waterline.teardown(done);
-      });
+      })
+      .catch(done);
     });
   });
 

@@ -1,13 +1,7 @@
-/**
- * Dependencies
- */
 
-var Waterline = require('waterline');
-
-module.exports = Waterline.Collection.extend({
+module.exports = {
 
   identity: 'subprofile',
-  connection: 'associations',
   schema: false,
 
   attributes: {
@@ -19,4 +13,4 @@ module.exports = Waterline.Collection.extend({
     }
   }
 
-});
+};
