@@ -69,6 +69,21 @@ describe('utils helper class', function() {
       done();
     });
     
+    it('should extend classes from anonymous function', function(done) {
+      var Extended = utils.extend(Shape, function () {
+        Shape.apply(this, arguments);
+        this.z = arguments[0];
+      });
+      assert.equal(Extended.shapeProperty, 'shape');
+      
+      var circle = new Extended(1, 2);
+      assert(circle instanceof Extended);
+      assert(circle instanceof Shape);
+      assert.equal(circle.y, 2);
+      assert.equal(circle.z, 1);
+      done();
+    });
+    
 
     it('should extend classes from function', function(done) {
       function Circle() {
