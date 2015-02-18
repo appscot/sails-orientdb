@@ -11,52 +11,67 @@ config.database = 'waterline-test-orientdb';
 config.options = config.options || {};
 config.options.storage = "memory";
 
-var fixtures = {
-  Profile40Fixture: require('./40-object_instead_id/40.profile.fixture'),
-  SubprofileFixture: require('./40-object_instead_id/40.subprofile.fixture'),
-  ProfileconnectionFixture: require('./40-object_instead_id/40.profileconnection.fixture')
-};
-
+var instancesMap = {};
 
 /////////////////////////////////////////////////////
 // TEST SETUP
 ////////////////////////////////////////////////////
 
-var waterline, ontology;
-
-before(function(done) {
+global.CREATE_TEST_WATERLINE = function(context, dbName, fixtures, cb){
+  cb = cb || _.noop;
   
-  //globals
-  global.Bugs = {};
-
+  var waterline, ontology;
+  
+  var localConfig = _.cloneDeep(config);
+  localConfig.database = dbName;
+  
+  // context variable
+  context.collections = {};
+  
   waterline = new Waterline();
-
+  
   Object.keys(fixtures).forEach(function(key) {
-    waterline.loadCollection(fixtures[key]);
+    fixtures[key].connection = dbName;
+    waterline.loadCollection(Waterline.Collection.extend(fixtures[key]));
   });
-
+  
   var Connections = {
-    'test': config
+    'test': localConfig
   };
   Connections.test.adapter = 'wl_tests';
   
-  var connections = { bugs: _.clone(Connections.test) };
-
+  var connections = {};
+  connections[dbName] = _.clone(Connections.test);
+  
   waterline.initialize({ adapters: { wl_tests: Adapter }, connections: connections }, function(err, _ontology) {
-    if(err) return done(err);
-
+    if(err) return cb(err);
+  
     ontology = _ontology;
-
+  
     Object.keys(_ontology.collections).forEach(function(key) {
       var globalName = key.charAt(0).toUpperCase() + key.slice(1);
-      global.Bugs[globalName] = _ontology.collections[key];
+      context.collections[globalName] = _ontology.collections[key];
     });
-
-    done();
+    
+    instancesMap[dbName] = {
+      waterline: waterline,
+      ontology: ontology,
+      config: localConfig
+    };
+    
+    cb();
   });
-});
+};
 
-after(function(done) {
+
+global.DELETE_TEST_WATERLINE = function(dbName, cb){
+  cb = cb || _.noop;
+  
+  if(!instancesMap[dbName]) { return cb(new Error('Waterline instance not found for ' + dbName + '! Did you use the correct db name?')); };
+  
+  var ontology = instancesMap[dbName].ontology;
+  var waterline = instancesMap[dbName].waterline;
+  var localConfig = instancesMap[dbName].config;
 
   function dropCollection(item, next) {
     if(!Adapter.hasOwnProperty('drop')) return next();
@@ -68,17 +83,18 @@ after(function(done) {
   }
 
   async.each(Object.keys(ontology.collections), dropCollection, function(err) {
-    if(err) return done(err);
+    if(err) return cb(err);
     
     ontology.collections[Object.keys(ontology.collections)[0]].getServer(function(server){
       server.drop({
-        name: config.database,
-        storage: config.options.storage
+        name: localConfig.database,
+        storage: localConfig.options.storage
       })
-      .then(function(err){
-        waterline.teardown(done);
-      });
+      .then(function(){
+        waterline.teardown(cb);
+      })
+      .catch(cb);
     });
   });
 
-});
+};
