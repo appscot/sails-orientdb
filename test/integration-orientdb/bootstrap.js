@@ -81,15 +81,19 @@ after(function(done) {
 
   function dropCollection(item, next) {
     if(!Adapter.hasOwnProperty('drop')) return next();
-
-    ontology.collections[item].drop(function(err) {
-      if(err) return next(err);
+    
+    // TODO: this is causing OrientDB.ConnectionError [2]: write EPIPE
+    // ontology.collections[item].drop(function(err) {
+      // if(err) return next(err);
       next();
-    });
+    // });
   }
 
   async.each(Object.keys(ontology.collections), dropCollection, function(err) {
-    if(err) return done(err);
+    if(err) {
+      console.log('ERROR:', err);
+      done(err);
+    }
     
     ontology.collections[Object.keys(ontology.collections)[0]].getServer(function(server){
       server.drop({
@@ -98,7 +102,8 @@ after(function(done) {
       })
       .then(function(err){
         waterline.teardown(done);
-      });
+      })
+      .catch(done);
     });
   });
 
