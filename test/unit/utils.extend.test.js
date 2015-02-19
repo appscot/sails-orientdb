@@ -18,6 +18,9 @@ describe('utils helper class', function() {
     Shape.willBeOverriden = 'shape';
     Shape.prototype.protoShape = 'shape';
     Shape.prototype.protoOverride = 'shape';
+    Shape.prototype.overrideMethod = function(){
+      return 'shape';
+    };
     
     done();
   });
@@ -93,6 +96,9 @@ describe('utils helper class', function() {
       Circle.willBeOverriden = 'circle';
       Circle.prototype.foo = function(){ return 'foo'; };
       Circle.prototype.protoOverride = 'circle';
+      Circle.prototype.overrideMethod = function(){
+        return this.$super.prototype.overrideMethod.call(this) + ' is Circle';
+      };
       
       var Extended = utils.extend(Shape, Circle);
       assert.equal(Extended.shapeProperty, 'shape');
@@ -106,6 +112,7 @@ describe('utils helper class', function() {
       assert.equal(circle.z, 1);
       assert.equal(circle.foo(), 'foo');
       assert.equal(circle.protoOverride, 'circle');
+      assert.equal(circle.overrideMethod(), 'shape is Circle');
       
       done();
     });
