@@ -29,9 +29,9 @@ collections.comment_parent.definition = collections.comment_parent.attributes;
 collections.comment_recipe.waterline = { schema: {} };
 collections.comment_recipe.definition = collections.comment_recipe.attributes;
 var newCollections = {
-  authored_comment: new Edge(collections.authored_comment, connectionMock),
-  comment_parent: new Edge(collections.comment_parent, connectionMock),
-  comment_recipe: new Edge(collections.comment_recipe, connectionMock),
+  authored_comment: new Edge(collections.authored_comment, connectionMock, null, collections),
+  comment_parent: new Edge(collections.comment_parent, connectionMock, null, collections),
+  comment_recipe: new Edge(collections.comment_recipe, connectionMock, null, collections),
 };
 connectionMock.newCollections = newCollections;
     
