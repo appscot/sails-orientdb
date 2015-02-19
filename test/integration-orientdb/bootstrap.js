@@ -35,7 +35,9 @@ var fixtures = {
   
   FriendFixture: require('./fixtures/hasManyThrough.friend.fixture'),
   FollowsFixture: require('./fixtures/hasManyThrough.follows.fixture'),
-  OwnsFixture: require('./fixtures/hasManyThrough.owns.fixture')
+  OwnsFixture: require('./fixtures/hasManyThrough.owns.fixture'),
+  
+  IndexesFixture: require('./fixtures/indexes.fixture')
 };
 
 
