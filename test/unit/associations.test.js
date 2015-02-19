@@ -3,6 +3,7 @@
  */
 var assert = require('assert'),
     util = require('util'),
+    Edge = require('../../lib/collection').Edge,
     Associations = require('../../lib/associations'),
     _ = require('lodash');
     
@@ -14,12 +15,27 @@ var collections = {
   comment_parent: require('./fixtures/commentParent.model'),
   comment_recipe: require('./fixtures/commentRecipe.model')
 };
+
+var connectionMock = { 
+  config: { options: {fetchPlanLevel: 1} },
+  collections: collections,
+  collectionsByIdentity: collections
+};
+
+collections.authored_comment.waterline = { schema: {} };
+collections.authored_comment.definition = collections.authored_comment.attributes;
+collections.comment_parent.waterline = { schema: {} };
+collections.comment_parent.definition = collections.comment_parent.attributes;
+collections.comment_recipe.waterline = { schema: {} };
+collections.comment_recipe.definition = collections.comment_recipe.attributes;
+var newCollections = {
+  authored_comment: new Edge(collections.authored_comment, connectionMock),
+  comment_parent: new Edge(collections.comment_parent, connectionMock),
+  comment_recipe: new Edge(collections.comment_recipe, connectionMock),
+};
+connectionMock.newCollections = newCollections;
     
-var associations = new Associations({ 
-      config: { options: {fetchPlanLevel: 1} },
-      collections: collections,
-      collectionsByIdentity: collections
-      });
+var associations = new Associations(connectionMock);
     
 describe('associations class', function () {
   
