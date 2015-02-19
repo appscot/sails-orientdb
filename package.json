@@ -1,6 +1,6 @@
 {
   "name": "waterline-orientdb",
-  "version": "0.10.31",
+  "version": "0.10.32",
   "description": "OrientDB adapter for Waterline / Sails.js ORM",
   "main": "./lib/adapter.js",
   "scripts": {
