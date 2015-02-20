@@ -38,23 +38,6 @@ describe('Define related Operations', function() {
           .error(done);
       });
     });
-    
-    it('should properly create not mandatory properties', function(done) {
-      Associations.Indexes.getDB(function(db) {
-        return db.class.get('indexesTable')
-          .then(function(klass) {
-            return klass.property.get('propRequired');
-          })
-          .then(function(property) {
-            console.log('--- property', property);
-            assert.equal(property.name, 'propRequired');
-            assert.equal(property.mandatory, true);
-            
-            done();
-          })
-          .error(done);
-      });
-    });
 
   });
 }); 

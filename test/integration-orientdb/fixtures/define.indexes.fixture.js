@@ -21,9 +21,9 @@ module.exports = Waterline.Collection.extend({
       type : 'string',
       index : true
     },
-    propRequired : {
-      type : 'string',
-      required : true
+    
+    props: {
+      model: 'properties'
     }
   }
 
