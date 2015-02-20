@@ -17,8 +17,7 @@ var collections = {
 };
 
 var connectionMock = { 
-  config: { options: {fetchPlanLevel: 1} },
-  collectionsByIdentity: collections
+  config: { options: {fetchPlanLevel: 1} }
 };
 
 var newCollections = {};
@@ -31,6 +30,7 @@ newCollections.authored_comment = new Collection.Edge(collections.authored_comme
 newCollections.comment_parent = new Collection.Edge(collections.comment_parent, connectionMock, null, collections);
 newCollections.comment_recipe = new Collection.Edge(collections.comment_recipe, connectionMock, null, collections);
 connectionMock.collections = newCollections;
+connectionMock.collectionsByIdentity = newCollections;
 
     
 var associations = new Associations(connectionMock);
