@@ -18,7 +18,6 @@ var collections = {
 
 var connectionMock = { 
   config: { options: {fetchPlanLevel: 1} },
-  collections: collections,
   collectionsByIdentity: collections
 };
 
@@ -31,7 +30,7 @@ Object.keys(collections).forEach(function(key){
 newCollections.authored_comment = new Collection.Edge(collections.authored_comment, connectionMock, null, collections);
 newCollections.comment_parent = new Collection.Edge(collections.comment_parent, connectionMock, null, collections);
 newCollections.comment_recipe = new Collection.Edge(collections.comment_recipe, connectionMock, null, collections);
-connectionMock.newCollections = newCollections;
+connectionMock.collections = newCollections;
 
     
 var associations = new Associations(connectionMock);
