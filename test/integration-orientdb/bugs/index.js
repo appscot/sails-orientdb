@@ -83,7 +83,10 @@ global.DELETE_TEST_WATERLINE = function(dbName, cb){
   }
 
   async.each(Object.keys(ontology.collections), dropCollection, function(err) {
-    if(err) return cb(err);
+    if(err) {
+      console.log('ERROR dropping collections:', err);
+      return cb(err);
+    };
     
     ontology.collections[Object.keys(ontology.collections)[0]].getServer(function(server){
       server.drop({
