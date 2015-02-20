@@ -3,7 +3,7 @@
  */
 var assert = require('assert'),
     util = require('util'),
-    Edge = require('../../lib/collection').Edge,
+    Collection = require('../../lib/collection'),
     Associations = require('../../lib/associations'),
     _ = require('lodash');
     
@@ -22,18 +22,17 @@ var connectionMock = {
   collectionsByIdentity: collections
 };
 
-collections.authored_comment.waterline = { schema: {} };
-collections.authored_comment.definition = collections.authored_comment.attributes;
-collections.comment_parent.waterline = { schema: {} };
-collections.comment_parent.definition = collections.comment_parent.attributes;
-collections.comment_recipe.waterline = { schema: {} };
-collections.comment_recipe.definition = collections.comment_recipe.attributes;
-var newCollections = {
-  authored_comment: new Edge(collections.authored_comment, connectionMock, null, collections),
-  comment_parent: new Edge(collections.comment_parent, connectionMock, null, collections),
-  comment_recipe: new Edge(collections.comment_recipe, connectionMock, null, collections),
-};
+var newCollections = {};
+Object.keys(collections).forEach(function(key){
+  collections[key].waterline = { schema: {} };
+  collections[key].definition = collections[key].attributes;
+  newCollections[key] = new Collection(collections[key], connectionMock, null, collections);
+});
+newCollections.authored_comment = new Collection.Edge(collections.authored_comment, connectionMock, null, collections);
+newCollections.comment_parent = new Collection.Edge(collections.comment_parent, connectionMock, null, collections);
+newCollections.comment_recipe = new Collection.Edge(collections.comment_recipe, connectionMock, null, collections);
 connectionMock.newCollections = newCollections;
+
     
 var associations = new Associations(connectionMock);
     
