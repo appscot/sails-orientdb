@@ -22,7 +22,6 @@ var connectionMock = {
 
 var newCollections = {};
 Object.keys(collections).forEach(function(key){
-  collections[key].waterline = { schema: {} };
   collections[key].definition = collections[key].attributes;
   newCollections[key] = new Collection(collections[key], connectionMock, null, collections);
 });
