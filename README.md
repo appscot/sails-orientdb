@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.org/appscot/waterline-orientdb.svg?branch=master)](https://travis-ci.org/appscot/waterline-orientdb)
 [![Test Coverage](https://codeclimate.com/github/appscot/waterline-orientdb/badges/coverage.svg)](https://codeclimate.com/github/appscot/waterline-orientdb)
 [![dependencies](https://david-dm.org/appscot/waterline-orientdb.svg)](https://david-dm.org/appscot/waterline-orientdb)
-[![devDependencies](https://david-dm.org/appscot/waterline-orientdb/dev-status.svg)](https://david-dm.org/appscot/waterline-orientdb#info=devDependencies)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/appscot/waterline-orientdb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # waterline-orientdb
@@ -16,7 +15,7 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 #### Development Status
 * Waterline-orientdb aims to work with Waterline v0.10.x and OrientDB v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](./CONTRIBUTING.md)!
 
-* From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb fully supports `Semantic`, `Queryable` and `Associations` interfaces.
+* From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb fully supports `Semantic`, `Queryable`, `Associations` and `Migratable` interfaces.
 Waterline-orientdb passes all integration tests from  [waterline-adapter-tests](https://github.com/balderdashy/waterline-adapter-tests).
 
 * Many-to-many associations currently use a junction table instead of an edge and this will change at some point ([#29](https://github.com/appscot/waterline-orientdb/issues/29)).
@@ -83,27 +82,55 @@ To learn how to create associations with Waterline/Sails.js check the Waterline 
 For One-to-One Associations waterline-orientdb creates a LINK ([OrientDB Types](http://www.orientechnologies.com/docs/last/orientdb.wiki/Types.html)) to associate records.
 
 ###### One-to-Many Associations
-One-to-Many Associations are represented in OrientDB by a LINKSET.
+One-to-Many Associations are also represented by a LINK in OrienDB.
 
 ###### Many-to-Many Associations
-Many-to-Many Associations are handled by Waterline core, creating a join table holding foreign keys to the associated records. Waterline-orientdb does not change this behaviour for now but we will replace the join table by Edges in a future release ([#29](https://github.com/appscot/waterline-orientdb/issues/29)). Currently it's not deemed a priority.
+Many-to-Many Associations are handled by Waterline, creating a join table holding foreign keys to the associated records. Waterline-orientdb does not change this behaviour for now but we will replace the join table by Edges in a future release ([#29](https://github.com/appscot/waterline-orientdb/issues/29)). Currently it's not deemed a priority.
 
 ###### Many-to-Many Through Associations
-In Many-to-Many Through Association the join table is represented in OrientDB by Edges. Waterline-orientdb automatically creates the edges whenever an association is created. The Edge is named after the property tableName or identity in case tableName is missing.
+In a [Many-to-Many Through Association](https://github.com/balderdashy/waterline-docs/blob/master/associations.md#many-to-many-through-associations) ([more info](https://github.com/balderdashy/waterline/issues/705#issuecomment-60945411)) the join table is represented in OrientDB by Edges. Waterline-orientdb automatically creates the edges whenever an association is created. The Edge is named after the property tableName or identity in case tableName is missing.
 
 #### sails-orientdb differences
 
 ###### Edge creation
-The main difference between waterline-orientdb and [sails-orientdb](https://github.com/vjsrinath/sails-orientdb) is the way associations/edges are created. In `sails-orientdb` a special attribute named 'edge' is required while waterline-orientdb tries to adhere to waterline specficiation.
+The main difference between waterline-orientdb and [sails-orientdb](https://github.com/vjsrinath/sails-orientdb) is the way associations/edges are created. In `sails-orientdb` a special attribute named 'edge' is required while waterline-orientdb tries to adhere to waterline specification.
 
 ###### ID
-Waterline-orientdb mimics sails-mongo adapter behaviour and maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID.
+Waterline-orientdb mimics sails-mongo adapter behaviour and maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID. Because of this it's not necessary, or advised, to declare an `id` attribute on your model definitions.
 
 ## Usage
 
+#### Models
+
+`waterline-orientdb` uses the standard [waterline model definition](https://github.com/balderdashy/waterline-docs/blob/master/models.md) and extends it in order to accommodate OrientDB feature.
+
+###### orientdbClass
+
+It's possible to force the class of a model by adding the property `orientdbClass` to the definition. Generally this is not required as `waterline-orientdb` can determine which is the best class to use, so it should only be used in special cases. Possible values:
+* `""` or `"document"` - class will be the default OrientDB document class;
+* `"V"`- class will be Vertex;
+* `"E"`- class will be Edge.
+ 
+Example:
+```javascript
+{
+  identity : 'post',
+  orientdbClass : 'V'
+
+  attributes : {
+    name : 'string'
+  }
+}
+```
+
+Note, when using a document database (through `config.options.databaseType`), orientdbClass class will be ignored and all classes will be documents
+
+
+#### Methods
+
 This adapter adds the following methods:
 
-###### `createEdge(from, to, options, callback)`
+###### createEdge(from, to, options, callback)
 Creates edge between specified two model instances by ID in the form parameters `from` and `to`
   
 usage: 
@@ -114,7 +141,7 @@ usage:
   });
   ```
   
-###### `deleteEdges(from, to, options, callback)`
+###### deleteEdges(from, to, options, callback)
 Deletes edges between specified two model instances by ID in the form parameters `from` and `to`
   
 usage: 
@@ -125,7 +152,7 @@ usage:
   });
   ```
 
-###### `query(connection, collection, query, [options], cb)`
+###### query(query, [options], cb)
 Runs a SQL query against the database using Oriento's query method. Will attempt to convert @rid's into ids.
   
 usage: 
@@ -145,7 +172,7 @@ usage:
   });
   ```
 
-###### `getDB(connection, collection, cb)`
+###### getDB(cb)
 Returns a native Oriento object
   
 usage: 
@@ -156,7 +183,7 @@ usage:
   });
   ```
 
-###### `getServer(connection, collection, cb)`
+###### getServer(cb)
 Returns a native Oriento connection
   
 usage: 
@@ -166,7 +193,7 @@ usage:
   });
   ``` 
 
-###### `removeCircularReferences(connection, collection, object, cb)`
+###### removeCircularReferences(connection, collection, object, cb)
 Convenience method that replaces circular references with `id` when one is available, otherwise it replaces the object with string '[Circular]'
   
 usage: 
