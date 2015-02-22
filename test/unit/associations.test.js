@@ -16,8 +16,20 @@ var collections = {
   comment_recipe: require('./fixtures/commentRecipe.model')
 };
 
-var connectionMock = { 
-  config: { options: {fetchPlanLevel: 1} }
+var waterlineSchema = _.cloneDeep(collections);
+Object.keys(waterlineSchema).forEach(function(key){
+  var collection = waterlineSchema[key];
+  Object.keys(collection.attributes).forEach(function(id){
+    var attribute = collection.attributes[id];
+    if(attribute.through){
+      attribute.collection = attribute.through;
+    }
+  });
+});
+
+var connectionMock = {
+  config: { options: {fetchPlanLevel: 1} },
+  waterlineSchema: waterlineSchema
 };
 
 var newCollections = {};

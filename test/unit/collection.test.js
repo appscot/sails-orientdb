@@ -76,15 +76,6 @@ describe('collection class', function () {
       
       done();
     });
-    
-    it('constructor: should instantiate a document if table is junction table for a many-to-many association', function (done) {
-      var doc = new Collection(collections.junctionModel, graphConnectionMock, null, null);
-      assert(doc instanceof Collection.Document);
-      assert(!(doc instanceof Collection.Vertex));
-      assert(!(doc instanceof Collection.Edge));
-      
-      done();
-    });
 	   
   	it('constructor: should instantiate a vertex if orientdbClass is undefined or "V"', function (done) {
       var vertex = new Collection(collections.defaultModel, graphConnectionMock, null, null);
@@ -104,6 +95,12 @@ describe('collection class', function () {
       edge = new Collection(collections.junctionModelE, graphConnectionMock, null, null);
       assert(edge instanceof Collection.Edge);      
       
+      done();
+    });
+    
+    it('constructor: should instantiate an edge if table is junction table for a many-to-many association', function (done) {
+      var edge = new Collection(collections.junctionModel, graphConnectionMock, null, null);
+      assert(edge instanceof Collection.Edge);
       done();
     });
     
