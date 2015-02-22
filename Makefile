@@ -3,10 +3,8 @@ MOCHA_OPTS= --check-leaks --timeout 6000
 REPORTER = spec
 DB?=waterline-test-integration
 
-test: test-unit test-integration-all
-test-all: test-clean test-integration-documentdb
-
-test-clean: test-unit test-integration-all clean
+test: clean-all test-unit test-integration-all
+test-all: test clean test-integration-documentdb
 
 
 test-integration-all: test-integration-orientdb test-integration
@@ -52,7 +50,15 @@ coverage:
 
 clean:
 	@echo "\n\nDROPPING ALL COLLECTIONS from db: $(DB)"
+	@echo "NOTICE: If operation fails, please ensure you've set the correct credentials in oriento.opts file"
+	@echo "Note: you can choose which db to drop by appending 'DB=<db_name>', e.g. 'make clean DB=waterline-test-orientdb'\n"
+	./node_modules/.bin/oriento db drop $(DB) || true
+	
+clean-all:
+	@echo "\n\nDROPPING DATABASES: waterline-test-integration, waterline-test-orientdb"
 	@echo "NOTICE: If operation fails, please ensure you've set the correct credentials in oriento.opts file\n"
-	./node_modules/.bin/oriento db drop $(DB)
+	./node_modules/.bin/oriento db drop waterline-test-integration > /dev/null 2>&1 || true
+	./node_modules/.bin/oriento db drop waterline-test-orientdb > /dev/null 2>&1 || true
+	@echo "Done"
 
 .PHONY: coverage
