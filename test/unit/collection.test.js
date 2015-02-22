@@ -47,7 +47,7 @@ describe('collection class', function () {
 
   	it('constructor: should instantiate a document regardless of orientdbClass value', function (done) {
   	  _.values(collections).forEach(function(collection){
-  	    var doc = new Collection(collection, documentConnectionMock, null, null);
+  	    var doc = new Collection(collection, documentConnectionMock, null);
   	    assert(doc instanceof Collection.Document);
         assert(!(doc instanceof Collection.Vertex));
         assert(!(doc instanceof Collection.Edge));
@@ -61,15 +61,15 @@ describe('collection class', function () {
 	  var graphConnectionMock = { config: { options: { databaseType: 'graph' } } };
 	  
 	  it('constructor: should instantiate a document if orientdbClass is "" or "document"', function (done) {
-      var doc = new Collection(collections.documentModel1, graphConnectionMock, null, null);
+      var doc = new Collection(collections.documentModel1, graphConnectionMock, null);
       assert(doc instanceof Collection.Document);
       assert(!(doc instanceof Collection.Vertex));
       assert(!(doc instanceof Collection.Edge));
-      doc = new Collection(collections.documentModel2, graphConnectionMock, null, null);
+      doc = new Collection(collections.documentModel2, graphConnectionMock, null);
       assert(doc instanceof Collection.Document);
       assert(!(doc instanceof Collection.Vertex));
       assert(!(doc instanceof Collection.Edge));
-      doc = new Collection(collections.junctionModelThroughD, graphConnectionMock, null, null);
+      doc = new Collection(collections.junctionModelThroughD, graphConnectionMock, null);
       assert(doc instanceof Collection.Document);
       assert(!(doc instanceof Collection.Vertex));
       assert(!(doc instanceof Collection.Edge));
@@ -78,34 +78,34 @@ describe('collection class', function () {
     });
 	   
   	it('constructor: should instantiate a vertex if orientdbClass is undefined or "V"', function (done) {
-      var vertex = new Collection(collections.defaultModel, graphConnectionMock, null, null);
+      var vertex = new Collection(collections.defaultModel, graphConnectionMock, null);
       assert(vertex instanceof Collection.Document);
       assert(vertex instanceof Collection.Vertex);
-      vertex = new Collection(collections.vertexModel, graphConnectionMock, null, null);
+      vertex = new Collection(collections.vertexModel, graphConnectionMock, null);
       assert(vertex instanceof Collection.Vertex);
-      vertex = new Collection(collections.junctionModelThroughV, graphConnectionMock, null, null);
+      vertex = new Collection(collections.junctionModelThroughV, graphConnectionMock, null);
       assert(vertex instanceof Collection.Vertex);
       
       done();
     });
     
     it('constructor: should instantiate an edge if orientdbClass is "E"', function (done) {
-      var edge = new Collection(collections.edgeModel, graphConnectionMock, null, null);
+      var edge = new Collection(collections.edgeModel, graphConnectionMock, null);
       assert(edge instanceof Collection.Edge);
-      edge = new Collection(collections.junctionModelE, graphConnectionMock, null, null);
+      edge = new Collection(collections.junctionModelE, graphConnectionMock, null);
       assert(edge instanceof Collection.Edge);      
       
       done();
     });
     
     it('constructor: should instantiate an edge if table is junction table for a many-to-many association', function (done) {
-      var edge = new Collection(collections.junctionModel, graphConnectionMock, null, null);
+      var edge = new Collection(collections.junctionModel, graphConnectionMock, null);
       assert(edge instanceof Collection.Edge);
       done();
     });
     
     it('constructor: should instantiate an edge if table is junction table for a many-to-many through association', function (done) {
-      var edge = new Collection(collections.junctionModelThrough, graphConnectionMock, null, null);
+      var edge = new Collection(collections.junctionModelThrough, graphConnectionMock, null);
       assert(edge instanceof Collection.Edge);
       done();
     });

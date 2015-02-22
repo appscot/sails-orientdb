@@ -29,7 +29,8 @@ var fixtures = {
   //VenueFixture: require(fixturesPath + 'hasManyThrough.venue.fixture'),
   VenueFixture: require('./fixtures/hasManyThrough.venueHack.fixture'),
   TaxiFixture: require(fixturesPath + 'manyToMany.taxi.fixture'),
-  DriverFixture: require(fixturesPath + 'manyToMany.driver.fixture'),
+  //DriverFixture: require(fixturesPath + 'manyToMany.driver.fixture'),
+  DriverFixture: require('./fixtures/manyToMany.driverHack.fixture.js'),
   UserOneFixture: require(fixturesPath + 'oneToOne.fixture').user_resource,
   ProfileOneFixture: require(fixturesPath + 'oneToOne.fixture').profile,
   
@@ -89,7 +90,7 @@ after(function(done) {
     // ontology.collections[item].drop(function(err) {
       // if(err) return next(err);
       next();
-    // });
+// });
   }
 
   async.each(Object.keys(ontology.collections), dropCollection, function(err) {

@@ -35,11 +35,11 @@ var connectionMock = {
 var newCollections = {};
 Object.keys(collections).forEach(function(key){
   collections[key].definition = collections[key].attributes;
-  newCollections[key] = new Collection(collections[key], connectionMock, null, collections);
+  newCollections[key] = new Collection(collections[key], connectionMock, collections);
 });
-newCollections.authored_comment = new Collection.Edge(collections.authored_comment, connectionMock, null, collections);
-newCollections.comment_parent = new Collection.Edge(collections.comment_parent, connectionMock, null, collections);
-newCollections.comment_recipe = new Collection.Edge(collections.comment_recipe, connectionMock, null, collections);
+newCollections.authored_comment = new Collection.Edge(collections.authored_comment, connectionMock, collections);
+newCollections.comment_parent = new Collection.Edge(collections.comment_parent, connectionMock, collections);
+newCollections.comment_recipe = new Collection.Edge(collections.comment_recipe, connectionMock, collections);
 connectionMock.collections = newCollections;
 connectionMock.collectionsByIdentity = newCollections;
 
