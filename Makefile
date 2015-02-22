@@ -36,7 +36,7 @@ test-unit:
 		$(MOCHA_OPTS) \
 		test/unit/*.js test/unit/**/*.js
 		
-coverage:
+coverage: clean-all
 	@echo "\n\nRunning coverage report..."
 	rm -rf coverage
 	./node_modules/istanbul/lib/cli.js cover --report none --dir coverage/unit \
@@ -46,6 +46,7 @@ coverage:
 		./node_modules/.bin/_mocha test/integration-orientdb/*.js test/integration-orientdb/tests/**/*.js \
 		-- --timeout 15000 --globals Associations
 	./node_modules/istanbul/lib/cli.js cover --report none --dir coverage/integration test/integration/runner.js
+	./node_modules/istanbul/lib/cli.js cover --report none --dir coverage/integration-document test/integration/runner.js document
 	./node_modules/istanbul/lib/cli.js report
 
 clean:

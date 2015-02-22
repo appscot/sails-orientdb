@@ -19,10 +19,14 @@ var log = require('debug-logger')('waterline-orientdb:test');
 var TestRunner = require('waterline-adapter-tests');
 var Adapter = require('../../');
 
+var argvDatabaseType;
+if(process.argv.length > 2){
+  argvDatabaseType = process.argv[2];
+}
 
 var config = require('../test-connection.json');
 config.database = 'waterline-test-integration';  // We need different DB's due to https://github.com/orientechnologies/orientdb/issues/3301
-config.options.databaseType = process.env.DATABASE_TYPE || config.options.databaseType || Adapter.defaults.options.databaseType;
+config.options.databaseType = argvDatabaseType || process.env.DATABASE_TYPE || config.options.databaseType || Adapter.defaults.options.databaseType;
 
 // Grab targeted interfaces from this adapter's `package.json` file:
 var package = {};
@@ -39,9 +43,6 @@ catch (e) {
     util.inspect(e)
     );
 }
-
-
-
 
 
 log.info('Testing `' + package.name + '`, a Sails/Waterline adapter.');
