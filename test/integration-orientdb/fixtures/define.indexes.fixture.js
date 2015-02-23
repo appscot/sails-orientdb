@@ -24,6 +24,10 @@ module.exports = Waterline.Collection.extend({
     
     props: {
       model: 'properties'
+    },
+    
+    schemalessProps: {
+      model: 'schemaless_properties'
     }
   }
 

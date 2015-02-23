@@ -6,21 +6,17 @@ var Waterline = require('waterline');
 
 module.exports = Waterline.Collection.extend({
 
-  tableName : 'propertiesTable',
-  identity : 'properties',
+  tableName : 'schemalessPropertiesTable',
+  identity : 'schemaless_properties',
   connection : 'associations',
+  
+  schema: false,
 
   attributes : {
-    stringProp : {
-      type : 'string'
-    },
-    textProp : 'string',
-    jsonProp : 'json',
-    floatProp : 'float',
-    emailProp : 'email',
-    propRequired : {
-      type : 'string',
-      required : true
+    schemaProp : 'string',
+    customColumnProp : {
+      type: 'string',
+      columnName: 'customCol'
     },
     modelProp : {
       model : 'indexes'

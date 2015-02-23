@@ -45,7 +45,7 @@
     "q": "^1.0.1",
     "waterline-criteria": "~0.11.1",
     "waterline-cursor": "~0.0.5",
-    "waterline-sequel-orientdb": "~0.0.24"
+    "waterline-sequel-orientdb": "~0.0.25"
   },
   "devDependencies": {
     "codeclimate-test-reporter": "~0.0.4",

@@ -39,7 +39,8 @@ var fixtures = {
   OwnsFixture: require('./fixtures/hasManyThrough.owns.fixture'),
   
   IndexesFixture: require('./fixtures/define.indexes.fixture'),
-  PropertiesFixture: require('./fixtures/define.properties.fixture')
+  PropertiesFixture: require('./fixtures/define.properties.fixture'),
+  SchemalessPropertiesFixture: require('./fixtures/define.schemalessProperties.fixture'),
 };
 
 

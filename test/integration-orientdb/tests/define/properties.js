@@ -13,13 +13,9 @@ describe('Define related Operations', function() {
     var klass;
     
     before(function(done) {
-      Associations.Properties.getDB(function(db) {
-        db.class.get('propertiesTable')
-          .then(function(myClass) {
-            klass = myClass;
-            done();
-          })
-          .catch(done);
+      Associations.Properties.native(function(nativeClass) {
+        klass = nativeClass;
+        done();
       });
     });
 
@@ -84,6 +80,17 @@ describe('Define related Operations', function() {
         })
         .error(done);
     });
+    
+    it('should properly create String property from email', function(done) {
+      klass.property.get('emailProp')
+        .then(function(property) {
+          assert.equal(Oriento.types[property.type], 'String');
+          done();
+        })
+        .error(done);
+    });
+    
+    
     
     // Not sure this can happen seen it's only required a Links exists on the associated table
     // it('should properly create LinkSet property from collection', function(done) {
