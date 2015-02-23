@@ -69,7 +69,10 @@ before(function(done) {
   var connections = { associations: _.clone(Connections.test) };
 
   waterline.initialize({ adapters: { wl_tests: Adapter }, connections: connections }, function(err, _ontology) {
-    if(err) return done(err);
+    if(err) {
+      console.log('ERROR:', err);
+      done(err);
+    }
 
     ontology = _ontology;
 
