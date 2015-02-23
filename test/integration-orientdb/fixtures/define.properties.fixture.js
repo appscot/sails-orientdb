@@ -14,7 +14,7 @@ module.exports = Waterline.Collection.extend({
     stringProp : {
       type : 'string'
     },
-    textProp : 'string',
+    textProp : 'text',
     jsonProp : 'json',
     floatProp : 'float',
     emailProp : 'email',

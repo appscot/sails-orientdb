@@ -23,7 +23,17 @@ describe('Define related Operations', function() {
             schemaless: 'schemaless'
           }).exec(function(err, values){
             if(err) { return done(err); }
-            done();
+            
+            Associations.Properties.create({
+              stringProp: 'stringProp',
+              textProp: 'textProp',
+              propRequired: 'propRequired'
+            }).exec(function(err, props){
+              if(err) { return done(err); }
+
+              assert.equal(props.textProp, 'textProp');
+              done();
+          });
         });
       });
     });
@@ -63,7 +73,7 @@ describe('Define related Operations', function() {
         .error(done);
     });
     
-    it('should properly create Link property from email', function(done) {
+    it('should return schemaless properties', function(done) {
       Associations.Schemaless_properties.findOne({ schemaProp: 'schemaProp' }).exec(function(err, record){
         if(err) { return done(err); }
         
@@ -72,6 +82,30 @@ describe('Define related Operations', function() {
         assert.equal(record.schemaless, 'schemaless');
         done();
       });
+    });
+    
+    it('should not return schemaless properties with select query', function(done) {
+      Associations.Schemaless_properties.findOne({ select: ['customColumnProp'], where: { schemaProp: 'schemaProp' } })
+        .exec(function(err, record){
+          if(err) { return done(err); }
+          
+          assert.equal(record.schemaProp, undefined);
+          assert.equal(record.customColumnProp, 'customColumnProp');
+          assert.equal(record.schemaless, undefined);
+          done();
+        });
+    });
+    
+     it('schemaful regression test: should not return properties ommitted in projection', function(done) {
+      Associations.Properties.findOne({ select: ['stringProp'], where: { stringProp: 'stringProp' } })
+        .exec(function(err, record){
+          if(err) { return done(err); }
+          
+          assert.equal(record.stringProp, 'stringProp');
+          assert.equal(record.textProp, undefined);
+          assert.equal(record.propRequired, undefined);
+          done();
+        });
     });
     
    
