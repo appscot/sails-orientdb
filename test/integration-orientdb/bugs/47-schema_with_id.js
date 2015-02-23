@@ -4,7 +4,7 @@ var assert = require('assert'),
 
 var self = this;
 
-describe.only('Bug #47: Schema with id (blueprints like)', function() {
+describe('Bug #47: Schema with id (blueprints like)', function() {
   before(function (done) {
   
     var fixtures = {
