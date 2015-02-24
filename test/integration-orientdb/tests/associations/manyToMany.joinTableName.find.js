@@ -39,6 +39,13 @@ describe('Association Interface', function() {
         done();
       });
     });
+    
+    it('should return "E" (edge) as join table\'s super class', function(done) {
+      Associations.Driver_taxis__taxi_drivers.native(function(collection){
+        assert.equal(collection.superClass, 'E');
+        done();
+      });
+    });
 
     it('should return taxis when the populate criteria is added', function(done) {
       Associations.Driver.find({ name: 'manymany find' })
