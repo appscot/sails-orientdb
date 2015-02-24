@@ -16,8 +16,8 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 > Migrations
 >
 > We don't recommend using `migrate: 'alter'` as it has the nasty effect of deleting the data of all edges on a graphDB, leaving only data on the vertexes. 
-> Either use `'safe'` and migrate manually or use `'drop'` to completely reset the data on your database and create all the classes. In production
-> always use `'safe'`. We are currently pushing for a new kind of migration strategy named `'create'`, more about this on [waterline issue #846](https://github.com/balderdashy/waterline/issues/846).
+> Either use `'safe'` and migrate manually or use `'drop'` to completely reset the data and collections. In production
+> always use `'safe'`. We are currently pushing for a new kind of migration strategy named `'create'`, check [waterline issue #846](https://github.com/balderdashy/waterline/issues/846).
 
 
 Waterline-orientdb aims to work with Waterline v0.10.x and OrientDB v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](./CONTRIBUTING.md)!
@@ -51,6 +51,8 @@ npm install waterline-orientdb --save
 
 ### Using with Waterline v0.10.x
 
+#### Basic Example
+
 ```javascript
 var orientAdapter = require('waterline-orientdb');
 var config = {
@@ -76,6 +78,42 @@ var config = {
 }
 ```
 
+#### Connection advanced config example
+```javascript
+    myLocalOrient: {
+      adapter: 'orient',
+      host: 'localhost',
+      port: 2424,
+      user: 'root',
+      password: 'root',
+      database: 'waterline',
+      
+      // Additional options
+      options: {
+        // DB Options
+        //
+        // database type: graph | document
+        databaseType : 'graph',
+        //
+        // storage type: memory | plocal
+        storage : 'plocal',
+        
+        // Useful in REST APIs
+        //
+        // If `id` is URI encoded, decode it with `decodeURIComponent()` (useful when `id` comes from an URL)
+        decodeURIComponent : true,
+        //
+        // Replaces circular references with `id` after populate operations (useful when results will be JSONfied)
+        removeCircularReferences : false,
+        
+        // other
+        //
+        // Turn parameterized queries on
+        parameterized : true
+      }
+    }
+```
+The values stated above represent the default values. For an up to date comprehensive list check [adapter.js](https://github.com/appscot/waterline-orientdb/blob/master/lib/adapter.js#L87).
 
 ## Overview
 
