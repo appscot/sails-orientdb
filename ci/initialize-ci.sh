@@ -37,5 +37,10 @@ echo "--- Starting an instance of OrientDB ---"
 sh -c $ODB_LAUNCHER </dev/null &>/dev/null &
 
 # Wait a bit for OrientDB to finish the initialization phase.
-sleep 15
+
+if [[ $ODB_VERSION == *"1.7"* ]]; then
+  sleep 15
+else
+  sleep 30
+fi
 printf "\n=== The CI environment has been initialized ===\n"
