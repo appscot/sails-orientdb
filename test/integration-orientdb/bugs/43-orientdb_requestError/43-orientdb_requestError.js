@@ -161,7 +161,7 @@ describe('Bug #43: OrientDB.RequestError on update', function() {
       });
     });
     
-    it('should create 2 users who reference each other', function(done) {
+    xit('should create 2 users who reference each other', function(done) {
       self.collections.Dbuser.update({ username: 'user1', follows: [ { username: 'user2' } ] }, function(err, user) {
         if(err) { return done(err); }
         assert(user);
