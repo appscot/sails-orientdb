@@ -51,7 +51,7 @@ var fixtures = {
 var waterline, ontology;
 
 before(function(done) {
-  this.timeout(30000);  // to prevent travis from breaking the build
+  this.timeout(60000);  // to prevent travis from breaking the build
   
   //globals
   global.Associations = {};
