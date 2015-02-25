@@ -45,8 +45,17 @@ describe('Config tests)', function() {
     ////////////////////////////////////////////////////
       
       before(function (done) {
-        // db created, let's close the connection
+        // db created, let's close the connection so we can test logins
         self.waterline.teardown(done);
+      });
+      
+      after(function (done) {
+        // let's log off last user because it may not have privileges to drop the db later on
+        self.waterline.teardown(function(err){
+          if(err) { return done(err); }
+          // and now we logon with original config
+          CREATE_TEST_WATERLINE(self, config, fixtures, done);
+        });
       });
       
       /////////////////////////////////////////////////////
@@ -63,16 +72,18 @@ describe('Config tests)', function() {
         });
       });
       
-      it('should be the same as databaseUsername', function(done) {
+      it('should be the same as databaseUser', function(done) {
         self.waterline.teardown(function(err){
           if(err) { return done(err); }
           
-          config.options = {
+          var newConfig = _.cloneDeep(config);
+          
+          newConfig.options = {
             databaseUser : 'admin',
             databasePassword : 'admin',
           };
         
-          CREATE_TEST_WATERLINE(self, config, fixtures, function(err){
+          CREATE_TEST_WATERLINE(self, newConfig, fixtures, function(err){
             if(err) { return done(err); }
             self.collections.User.getDB(function(db){
               assert.equal(db.username, 'admin');
