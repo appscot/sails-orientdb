@@ -21,13 +21,30 @@ describe('Bug #43: OrientDB.RequestError on update', function() {
     // TEST SETUP
     ////////////////////////////////////////////////////
   
-    var postRecord;
+    var postRecord, imageParent;
   
     before(function(done) {
       self.collections.Post.create({ title: 'a post' }, function(err, post) {
         if(err) { return done(err); }
         postRecord = post;
-        done();        
+        
+        self.collections.Image.create({ name: 'parent', crops: [ { name: 'crop' } ] }, function(err, img) {
+          if(err) { return done(err); }
+          imageParent = img;
+          
+          self.collections.Post.findOne(postRecord.id, function(err, thePost){
+            assert(!err);
+            assert(thePost);
+            
+            thePost.image = img.id;
+            
+            self.collections.Post.update(postRecord.id, thePost, function(err, postUpdated){
+              if(err) { return done(err); }
+              done();             
+            });
+            
+          });   
+        });    
       });
     });
   
@@ -39,14 +56,57 @@ describe('Bug #43: OrientDB.RequestError on update', function() {
     it('should update a post', function(done) {
       self.collections.Post.findOne(postRecord.id)
         .then(function(post){
+          assert(post);
           
           post.title = 'new title';
           
-          self.collections.Post.update({ id: post.id }, post, done);
+          self.collections.Post.update(post.id, post, function(err, post2){
+            assert(!err, err);
+            assert.equal(post.title, 'new title');
+            done();
+          });
         })
-        .catch(done);
+        .error(done);
     });
-      
-
+    
+    it('control test: should have a crop associated', function(done) {
+      self.collections.Image.findOne(imageParent.id)
+        .populate('crops')
+        .exec(function(err, imgParent) {
+          if(err) { return done(err); }
+          assert.equal(imgParent.crops[0].name, 'crop');
+          done();
+      }); 
+    });
+    
+    it('control test: should have a crop associated', function(done) {
+      self.collections.Image.findOne(imageParent.id)
+        .exec(function(err, imgParent) {
+          if(err) { return done(err); }
+          
+          imgParent.isCrop = false;
+          self.collections.Image.update(imageParent.id, imgParent, function(err, res){
+            if(err) { return done(err); }
+            assert.equal(imgParent.isCrop, false);
+            done();
+          });
+      }); 
+    });
+    
+    it('control test: should have a crop associated', function(done) {
+      self.collections.Image.findOne(imageParent.id)
+        .exec(function(err, imgParent) {
+          if(err) { return done(err); }
+          
+          imgParent.isCrop = false;
+          self.collections.Image.update(imageParent.id, imgParent, function(err, res){
+            if(err) { return done(err); }
+            assert.equal(imgParent.isCrop, false);
+            done();
+          });
+      }); 
+    });
+    
+    
   });
 });

@@ -3,10 +3,12 @@ module.exports = {
   identity: 'image',
 
   attributes: {
+    name: {
+      type: 'string'
+    },
     file: {
         type: 'json',
-        isFile: true,
-        required: true
+        isFile: true
     },
     footer: {
         type: 'string'
