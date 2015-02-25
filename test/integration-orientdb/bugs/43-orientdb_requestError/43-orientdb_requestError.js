@@ -129,10 +129,7 @@ describe('Bug #43: OrientDB.RequestError on update', function() {
           self.collections.Dbuser.findOne(userParent.id, function(err, dbUser){
             if(err) { return done(err); }
             dbUser.follows.add(user2.id);
-            dbUser.save(function(err){
-              //ignore the error for now
-              done();
-            });
+            dbUser.save(done);
           })
           
         });
@@ -157,7 +154,7 @@ describe('Bug #43: OrientDB.RequestError on update', function() {
     
     it('should update user', function(done) {
       userParent.token = 'iasbdasgdpsabçefbe';
-      self.collections.Dbuser.create(userParent.id, userParent, function(err, user) {
+      self.collections.Dbuser.update(userParent.id, userParent, function(err, user) {
         if(err) { return done(err); }
         assert(user);
         done();
