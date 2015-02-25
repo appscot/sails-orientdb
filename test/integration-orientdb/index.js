@@ -31,10 +31,11 @@ global.CREATE_TEST_WATERLINE = function(context, testConfig, fixtures, cb){
     }
   }
   
+  waterline = new Waterline();
+  
   // context variable
   context.collections = {};
-  
-  waterline = new Waterline();
+  context.waterline = waterline;
   
   Object.keys(fixtures).forEach(function(key) {
     fixtures[key].connection = localConfig.database;
@@ -65,7 +66,7 @@ global.CREATE_TEST_WATERLINE = function(context, testConfig, fixtures, cb){
       config: localConfig
     };
     
-    cb();
+    cb(null, context.collections);
   });
 };
 
