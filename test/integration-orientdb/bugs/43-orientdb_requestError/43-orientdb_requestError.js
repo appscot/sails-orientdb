@@ -8,7 +8,8 @@ describe('Bug #43: OrientDB.RequestError on update', function() {
   before(function (done) {
     var fixtures = {
       ImageFixture: require('./image.fixture'),
-      SubprofileFixture: require('./post.fixture')
+      SubprofileFixture: require('./post.fixture'),
+      UserFixture: require('./user.fixture')
     };
     CREATE_TEST_WATERLINE(self, 'test_bug_43', fixtures, done);
   });
@@ -16,7 +17,7 @@ describe('Bug #43: OrientDB.RequestError on update', function() {
     DELETE_TEST_WATERLINE('test_bug_43', done);
   });
 
-  describe('update a created post', function() {
+  describe('rodrigorn: update a created post', function() {
     /////////////////////////////////////////////////////
     // TEST SETUP
     ////////////////////////////////////////////////////
@@ -42,7 +43,6 @@ describe('Bug #43: OrientDB.RequestError on update', function() {
               if(err) { return done(err); }
               done();             
             });
-            
           });   
         });    
       });
@@ -107,6 +107,71 @@ describe('Bug #43: OrientDB.RequestError on update', function() {
       }); 
     });
     
+  });
+  
+  
+  describe('stackoverflow issue: update a created user', function() {
+    /////////////////////////////////////////////////////
+    // TEST SETUP
+    ////////////////////////////////////////////////////
+  
+    var userParent, userChild;
+  
+    before(function(done) {
+      self.collections.Dbuser.create({ username: 'parent' }, function(err, user) {
+        if(err) { return done(err); }
+        userParent = user;
+        
+        self.collections.Dbuser.create({ username: 'child' }, function(err, user2) {
+          if(err) { return done(err); }
+          userChild = user2;
+          
+          self.collections.Dbuser.findOne(userParent.id, function(err, dbUser){
+            if(err) { return done(err); }
+            dbUser.follows.add(user2.id);
+            dbUser.save(function(err){
+              //ignore the error for now
+              done();
+            });
+          })
+          
+        });
+      });
+    });
+  
+  
+    /////////////////////////////////////////////////////
+    // TEST METHODS
+    ////////////////////////////////////////////////////
+    
+    it('control test: should have created child user', function(done) {
+      self.collections.Dbuser.findOne({ username: 'child' })
+        .populate('followed')
+        .exec(function(err, user) {
+          assert(!err, err);
+          assert.equal(user.username, 'child');
+          assert.equal(user.followed[0].username, 'parent');
+          done();
+      }); 
+    });
+    
+    it('should update user', function(done) {
+      userParent.token = 'iasbdasgdpsabçefbe';
+      self.collections.Dbuser.create(userParent.id, userParent, function(err, user) {
+        if(err) { return done(err); }
+        assert(user);
+        done();
+      });
+    });
+    
+    it('should create 2 users who reference each other', function(done) {
+      self.collections.Dbuser.update({ username: 'user1', follows: [ { username: 'user2' } ] }, function(err, user) {
+        if(err) { return done(err); }
+        assert(user);
+        done();
+      });
+    });
     
   });
+  
 });
