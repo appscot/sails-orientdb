@@ -3,6 +3,7 @@
  */
 var assert = require('assert'),
     util = require('util'),
+    Collection = require('../../lib/collection'),
     Associations = require('../../lib/associations'),
     _ = require('lodash');
     
@@ -14,12 +15,36 @@ var collections = {
   comment_parent: require('./fixtures/commentParent.model'),
   comment_recipe: require('./fixtures/commentRecipe.model')
 };
+
+var waterlineSchema = _.cloneDeep(collections);
+Object.keys(waterlineSchema).forEach(function(key){
+  var collection = waterlineSchema[key];
+  Object.keys(collection.attributes).forEach(function(id){
+    var attribute = collection.attributes[id];
+    if(attribute.through){
+      attribute.collection = attribute.through;
+    }
+  });
+});
+
+var connectionMock = {
+  config: { options: {fetchPlanLevel: 1} },
+  waterlineSchema: waterlineSchema
+};
+
+var newCollections = {};
+Object.keys(collections).forEach(function(key){
+  collections[key].definition = collections[key].attributes;
+  newCollections[key] = new Collection(collections[key], connectionMock, collections);
+});
+newCollections.authored_comment = new Collection.Edge(collections.authored_comment, connectionMock, collections);
+newCollections.comment_parent = new Collection.Edge(collections.comment_parent, connectionMock, collections);
+newCollections.comment_recipe = new Collection.Edge(collections.comment_recipe, connectionMock, collections);
+connectionMock.collections = newCollections;
+connectionMock.collectionsByIdentity = newCollections;
+
     
-var associations = new Associations({ 
-      config: { options: {fetchPlanLevel: 1} },
-      collections: collections,
-      collectionsByIdentity: collections
-      });
+var associations = new Associations(connectionMock);
     
 describe('associations class', function () {
   

@@ -66,4 +66,21 @@ describe('Adapter Custom Methods', function() {
       });
     });
   });
+  
+  
+  describe('native', function() {
+    describe('get native oriento collection', function() {
+      
+      /////////////////////////////////////////////////////
+      // TEST METHODS
+      ////////////////////////////////////////////////////
+      
+      it('should return the collection\'s class name', function(done) {
+        Associations.Friend.native(function(collection){
+          assert(collection.name, 'friendTable');
+          done();
+        });
+      });
+    });
+  });
 });

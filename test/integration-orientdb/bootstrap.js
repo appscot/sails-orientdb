@@ -29,13 +29,18 @@ var fixtures = {
   //VenueFixture: require(fixturesPath + 'hasManyThrough.venue.fixture'),
   VenueFixture: require('./fixtures/hasManyThrough.venueHack.fixture'),
   TaxiFixture: require(fixturesPath + 'manyToMany.taxi.fixture'),
-  DriverFixture: require(fixturesPath + 'manyToMany.driver.fixture'),
+  //DriverFixture: require(fixturesPath + 'manyToMany.driver.fixture'),
+  DriverFixture: require('./fixtures/manyToMany.driverHack.fixture.js'),
   UserOneFixture: require(fixturesPath + 'oneToOne.fixture').user_resource,
   ProfileOneFixture: require(fixturesPath + 'oneToOne.fixture').profile,
   
   FriendFixture: require('./fixtures/hasManyThrough.friend.fixture'),
   FollowsFixture: require('./fixtures/hasManyThrough.follows.fixture'),
-  OwnsFixture: require('./fixtures/hasManyThrough.owns.fixture')
+  OwnsFixture: require('./fixtures/hasManyThrough.owns.fixture'),
+  
+  IndexesFixture: require('./fixtures/define.indexes.fixture'),
+  PropertiesFixture: require('./fixtures/define.properties.fixture'),
+  SchemalessPropertiesFixture: require('./fixtures/define.schemalessProperties.fixture'),
 };
 
 
@@ -46,6 +51,7 @@ var fixtures = {
 var waterline, ontology;
 
 before(function(done) {
+  this.timeout(60000);  // to prevent travis from breaking the build
   
   //globals
   global.Associations = {};
@@ -64,7 +70,10 @@ before(function(done) {
   var connections = { associations: _.clone(Connections.test) };
 
   waterline.initialize({ adapters: { wl_tests: Adapter }, connections: connections }, function(err, _ontology) {
-    if(err) return done(err);
+    if(err) {
+      console.log('ERROR:', err);
+      done(err);
+    }
 
     ontology = _ontology;
 
@@ -86,7 +95,7 @@ after(function(done) {
     // ontology.collections[item].drop(function(err) {
       // if(err) return next(err);
       next();
-    // });
+// });
   }
 
   async.each(Object.keys(ontology.collections), dropCollection, function(err) {

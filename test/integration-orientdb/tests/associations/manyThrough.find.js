@@ -87,7 +87,7 @@ describe('Association Interface', function() {
           .populate('teams')
           .populate('sponsor')
           .then(function(stadium){
-            assert(typeof stadium.id === 'string');
+            assert.equal(typeof stadium.id, 'string');
             assert(stadium.teams.length === 1);
             assert(stadium.owners.length === 0);
             assert(!stadium.out_venueTable);
