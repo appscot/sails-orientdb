@@ -44,10 +44,11 @@ describe('Bug #47: Schema with id (blueprints like)', function() {
   });
 
   describe('create user', function() {
-  
+    
     /////////////////////////////////////////////////////
-    // TEST METHODS
+    // TEST SETUP
     ////////////////////////////////////////////////////
+
     var userRecord, passportRecord, passportNullIdRecord;
     
     before(function (done) {
@@ -69,6 +70,10 @@ describe('Bug #47: Schema with id (blueprints like)', function() {
       });
     });
     
+    
+    /////////////////////////////////////////////////////
+    // TEST METHODS
+    ////////////////////////////////////////////////////
     
     it('should be robust against an insertion with id set', function(done) {
       // we probably should throw an error...

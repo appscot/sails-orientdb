@@ -2,18 +2,18 @@
  * Test dependencies
  */
 var assert = require('assert'),
-    Document = require('../../lib/document'),
+    Record = require('../../lib/record'),
     RID = require('oriento').RID,
     _ = require('lodash'),
     util = require('util');
 
 
-describe('document helper class', function () {
+describe('record helper class', function () {
   
-  var doc;
+  var record;
   
   before(function(done){
-    doc = new Document();
+    record = new Record();
     done();
   });
 
@@ -22,7 +22,7 @@ describe('document helper class', function () {
 		  name: 'no id collection'
 		};
 		var testCollection1 = _.clone(collection1);
-		doc.normalizeId(testCollection1);
+		record.normalizeId(testCollection1);
 		assert(_.isEqual(testCollection1, collection1));
 		
 		
@@ -30,7 +30,7 @@ describe('document helper class', function () {
       name: 'id collection',
       id: '#1:0'
     };
-    doc.normalizeId(testCollection2);
+    record.normalizeId(testCollection2);
     assert(_.isUndefined(testCollection2.id));
     assert(testCollection2['@rid'] instanceof RID);
     assert.equal(testCollection2['@rid'].cluster, 1);
@@ -41,7 +41,7 @@ describe('document helper class', function () {
       name: 'id collection',
       '@rid': new RID('#2:0')
     };
-    doc.normalizeId(testCollection3);
+    record.normalizeId(testCollection3);
     assert(_.isUndefined(testCollection3.id));
     assert(_.isEqual(testCollection3['@rid'], new RID('#2:0')));
     
@@ -50,7 +50,7 @@ describe('document helper class', function () {
       id: '#1:0',
       '@rid': new RID('#2:0')
     };
-    doc.normalizeId(testCollection4);
+    record.normalizeId(testCollection4);
     assert(_.isUndefined(testCollection4.id));
     assert(_.isEqual(testCollection4['@rid'], new RID('#1:0')));
 		

@@ -4,9 +4,9 @@
 var Waterline = require('waterline');
 var _ = require('lodash');
 var async = require('async');
-var Adapter = require('../../../');
+var Adapter = require('../../');
 
-var config = require('../../test-connection.json');
+var config = require('../test-connection.json');
 config.database = 'waterline-test-orientdb';
 config.options = config.options || {};
 config.options.storage = "memory";
@@ -17,21 +17,28 @@ var instancesMap = {};
 // TEST SETUP
 ////////////////////////////////////////////////////
 
-global.CREATE_TEST_WATERLINE = function(context, dbName, fixtures, cb){
+global.CREATE_TEST_WATERLINE = function(context, testConfig, fixtures, cb){
   cb = cb || _.noop;
   
   var waterline, ontology;
   
   var localConfig = _.cloneDeep(config);
-  localConfig.database = dbName;
-  
-  // context variable
-  context.collections = {};
+  if(testConfig){
+    if(_.isString(testConfig)){
+      localConfig.database = testConfig;
+    } else if(_.isObject(testConfig)){
+      _.merge(localConfig, testConfig);
+    }
+  }
   
   waterline = new Waterline();
   
+  // context variable
+  context.collections = {};
+  context.waterline = waterline;
+  
   Object.keys(fixtures).forEach(function(key) {
-    fixtures[key].connection = dbName;
+    fixtures[key].connection = localConfig.database;
     waterline.loadCollection(Waterline.Collection.extend(fixtures[key]));
   });
   
@@ -41,7 +48,7 @@ global.CREATE_TEST_WATERLINE = function(context, dbName, fixtures, cb){
   Connections.test.adapter = 'wl_tests';
   
   var connections = {};
-  connections[dbName] = _.clone(Connections.test);
+  connections[localConfig.database] = _.clone(Connections.test);
   
   waterline.initialize({ adapters: { wl_tests: Adapter }, connections: connections }, function(err, _ontology) {
     if(err) return cb(err);
@@ -53,19 +60,21 @@ global.CREATE_TEST_WATERLINE = function(context, dbName, fixtures, cb){
       context.collections[globalName] = _ontology.collections[key];
     });
     
-    instancesMap[dbName] = {
+    instancesMap[localConfig.database] = {
       waterline: waterline,
       ontology: ontology,
       config: localConfig
     };
     
-    cb();
+    cb(null, context.collections);
   });
 };
 
 
-global.DELETE_TEST_WATERLINE = function(dbName, cb){
+global.DELETE_TEST_WATERLINE = function(testConfig, cb){
   cb = cb || _.noop;
+  
+  var dbName = _.isString(testConfig) ? testConfig : testConfig.database;
   
   if(!instancesMap[dbName]) { return cb(new Error('Waterline instance not found for ' + dbName + '! Did you use the correct db name?')); };
   
@@ -83,7 +92,10 @@ global.DELETE_TEST_WATERLINE = function(dbName, cb){
   }
 
   async.each(Object.keys(ontology.collections), dropCollection, function(err) {
-    if(err) return cb(err);
+    if(err) {
+      console.log('ERROR dropping collections:', err);
+      return cb(err);
+    };
     
     ontology.collections[Object.keys(ontology.collections)[0]].getServer(function(server){
       server.drop({

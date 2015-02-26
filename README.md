@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.org/appscot/waterline-orientdb.svg?branch=master)](https://travis-ci.org/appscot/waterline-orientdb)
 [![Test Coverage](https://codeclimate.com/github/appscot/waterline-orientdb/badges/coverage.svg)](https://codeclimate.com/github/appscot/waterline-orientdb)
 [![dependencies](https://david-dm.org/appscot/waterline-orientdb.svg)](https://david-dm.org/appscot/waterline-orientdb)
-[![devDependencies](https://david-dm.org/appscot/waterline-orientdb/dev-status.svg)](https://david-dm.org/appscot/waterline-orientdb#info=devDependencies)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/appscot/waterline-orientdb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # waterline-orientdb
@@ -12,14 +11,20 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 > **Warning**
 >
 > `waterline-orientdb` maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID.
+>
+>
+> Migrations
+>
+> We don't recommend using `migrate: 'alter'` as it has the nasty effect of deleting the data of all edges on a graphDB, leaving only data on the vertexes. 
+> Either use `'safe'` and migrate manually or use `'drop'` to completely reset the data and collections. In production
+> always use `'safe'`. We are currently pushing for a new kind of migration strategy named `'create'`, check [waterline issue #846](https://github.com/balderdashy/waterline/issues/846).
 
-#### Development Status
-* Waterline-orientdb aims to work with Waterline v0.10.x and OrientDB v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](./CONTRIBUTING.md)!
 
-* From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb fully supports `Semantic`, `Queryable` and `Associations` interfaces.
-Waterline-orientdb passes all integration tests from  [waterline-adapter-tests](https://github.com/balderdashy/waterline-adapter-tests).
+Waterline-orientdb aims to work with Waterline v0.10.x and OrientDB v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](./CONTRIBUTING.md)!
 
-* Many-to-many associations currently use a junction table instead of an edge and this will change at some point ([#29](https://github.com/appscot/waterline-orientdb/issues/29)).
+From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb supports `Semantic`, `Queryable`, `Associations` and `Migratable` interfaces.
+
+Waterline-orientb connects to OrientDB using [Oriento](codemix/oriento) (OrientDB's official driver).
 
 
 ## Table of Contents
@@ -27,9 +32,10 @@ Waterline-orientdb passes all integration tests from  [waterline-adapter-tests](
 2. [Waterline Configuration](#waterline-configuration)
 3. [Overview](#overview)
 4. [Usage](#usage)
-5. [Waterline](#waterline)
+5. [Testing](#testing)
 6. [Contributions](#contributions)
-7. [License](#license)
+7. [About Waterline](#about-waterline)
+8. [License](#license)
 
 
 ## Installation
@@ -43,7 +49,9 @@ npm install waterline-orientdb --save
 
 ## Waterline Configuration
 
-#### Using with Waterline v0.10.x
+### Using with Waterline v0.10.x
+
+#### Basic Example
 
 ```javascript
 var orientAdapter = require('waterline-orientdb');
@@ -70,62 +78,149 @@ var config = {
 }
 ```
 
+#### Connection advanced config example
+```javascript
+    myLocalOrient: {
+      adapter: 'orient',
+      host: 'localhost',
+      port: 2424,
+      user: 'root',
+      password: 'root',
+      database: 'waterline',
+      
+      // Additional options
+      options: {
+      
+        // DB Options
+        //
+        // database type: graph | document
+        databaseType : 'graph',
+        //
+        // storage type: memory | plocal
+        storage : 'plocal',
+        
+        // Useful in REST APIs
+        //
+        // If `id` is URI encoded, decode it with `decodeURIComponent()` (useful when `id` comes from an URL)
+        decodeURIComponent : true,
+        //
+        // Replaces circular references with `id` after populate operations (useful when results will be JSONfied)
+        removeCircularReferences : false,
+        
+        // other
+        //
+        // Turn parameterized queries on
+        parameterized : true
+      }
+    }
+```
+The values stated above represent the default values. For an up to date comprehensive list check [adapter.js](https://github.com/appscot/waterline-orientdb/blob/master/lib/adapter.js#L87).
 
 ## Overview
 
-#### Models
-Waterline-orientdb will represent most models in OrientDB as Vertices. The exception being Many-to-Many through join tables which are represented by Edges.
+### Models
+In a graph db Waterline-orientdb will represent most models in OrientDB as vertexes, the exception being Many-to-Many join tables which are represented by Edges. If using a document db, all models will be represented by documents.
 
-#### Associations
-To learn how to create associations with Waterline/Sails.js check the Waterline Docs [Associations Page](https://github.com/balderdashy/waterline-docs/blob/master/associations.md). Below we go through how waterline-orientdb approaches each kind of associations.
+### Associations
+To learn how to create associations with Waterline/Sails.js check the Waterline Docs [Associations Page](https://github.com/balderdashy/waterline-docs/blob/master/associations.md). Below we go through how waterline-orientdb approaches each kind of association.
 
-###### One-to-One Associations
+#### One-to-One Associations
 For One-to-One Associations waterline-orientdb creates a LINK ([OrientDB Types](http://www.orientechnologies.com/docs/last/orientdb.wiki/Types.html)) to associate records.
 
-###### One-to-Many Associations
-One-to-Many Associations are represented in OrientDB by a LINKSET.
+#### One-to-Many Associations
+One-to-Many Associations are also represented by LINKs in OrientDB.
 
-###### Many-to-Many Associations
-Many-to-Many Associations are handled by Waterline core, creating a join table holding foreign keys to the associated records. Waterline-orientdb does not change this behaviour for now but we will replace the join table by Edges in a future release ([#29](https://github.com/appscot/waterline-orientdb/issues/29)). Currently it's not deemed a priority.
+#### Many-to-Many Associations
+In many-to-many associations waterline-orientdb will connect vertexes using edges, hence edges act as join tables. Usually Waterline will create rather long names for join tables (e.g. driver_taxis__taxi_drivers) which are little meaningful from the perspective of a graphDB. Waterline-orientdb allows you to change the name of the edge by adding a property `joinTableNames` to the dominant collection. Example:
+```javascript
+{
+  identity: 'driver',
+  joinTableNames: {
+    taxis: 'drives'
+  },
+  
+  attributes: {
+    name: 'string',
+    taxis: {
+      collection: 'taxi',
+      via: 'drivers',
+      dominant: true
+    }
+  }
+}
+```
+In this example the join table name **driver_taxis__taxi_drivers** get converted to **drives**. Complete example of the fixture can be found [here](https://github.com/appscot/waterline-orientdb/tree/master/test/integration-orientdb/fixtures/manyToMany.driverHack.fixture.js).
 
-###### Many-to-Many Through Associations
-In Many-to-Many Through Association the join table is represented in OrientDB by Edges. Waterline-orientdb automatically creates the edges whenever an association is created. The Edge is named after the property tableName or identity in case tableName is missing.
+#### Many-to-Many Through Associations
+In a [Many-to-Many Through Association](https://github.com/balderdashy/waterline-docs/blob/master/associations.md#many-to-many-through-associations) ([more info](https://github.com/balderdashy/waterline/issues/705#issuecomment-60945411)) the join table is represented in OrientDB by Edges. Waterline-orientdb automatically creates the edges whenever an association is created. The Edge is named after the property tableName (or identity in case tableName is missing).
 
-#### sails-orientdb differences
+#### Populate queries (joins)
+Waterline-orientdb implements its own custom join function so when the user runs `.populate(some_collection)` it will send a single `SELECT` query with a [fetchplan](http://www.orientechnologies.com/docs/last/orientdb.wiki/Fetching-Strategies.html) to OrientDB. This way join operations remain fast and performant by leveraging OrientDB's graphDB features.
 
-###### Edge creation
-The main difference between waterline-orientdb and [sails-orientdb](https://github.com/vjsrinath/sails-orientdb) is the way associations/edges are created. In `sails-orientdb` a special attribute named 'edge' is required while waterline-orientdb tries to adhere to waterline specficiation.
+### sails-orientdb differences
 
-###### ID
-Waterline-orientdb mimics sails-mongo adapter behaviour and maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID.
+#### Edge creation
+The main difference between waterline-orientdb and [sails-orientdb](https://github.com/vjsrinath/sails-orientdb) is the way associations/edges are created. In `sails-orientdb` a special attribute named 'edge' is required while waterline-orientdb tries to adhere to waterline specification.
+
+#### ID
+Waterline-orientdb mimics sails-mongo adapter behaviour and maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID. Because of this it's not necessary to declare an `id` attribute on your model definitions.
 
 ## Usage
 
+### Models
+
+`waterline-orientdb` uses the standard [waterline model definition](https://github.com/balderdashy/waterline-docs/blob/master/models.md) and extends it in order to accommodate OrientDB features.
+
+#### orientdbClass
+
+It's possible to force the class of a model by adding the property `orientdbClass` to the definition. Generally this is not required as `waterline-orientdb` can determine which is the best class to use, so it should only be used in special cases. Possible values:
+* `undefined` - the default and recommended option. The appropriate class will be determined for the model;
+* `""` or `"document"` - class will be the default OrientDB document class;
+* `"V"` - class will be Vertex;
+* `"E"` - class will be Edge.
+
+Example:
+```javascript
+{
+  identity : 'post',
+  orientdbClass : 'V'
+
+  attributes : {
+    name : 'string'
+  }
+}
+```
+
+Note, when using a document database (through `config.options.databaseType`), `orientdbClass` class will be ignored and all classes will be documents.
+
+
+### Methods
+
 This adapter adds the following methods:
 
-###### `createEdge(from, to, options, callback)`
+#### .createEdge (from, to, options, callback)
 Creates edge between specified two model instances by ID in the form parameters `from` and `to`
   
 usage: 
   ```javascript
   //Assume a model named "Post"
   Post.createEdge('#12:1', '#13:1', { '@class':'Comments' }, function(err, result){
-  
+    console.log('Edges deleted', result);
   });
   ```
   
-###### `deleteEdges(from, to, options, callback)`
+#### .deleteEdges (from, to, options, callback)
 Deletes edges between specified two model instances by ID in the form parameters `from` and `to`
   
 usage: 
   ```javascript
   //Assume a model named "Post"
   Post.deleteEdges('#12:1', '#13:1', null, function(err, result){
-  
+    console.log('Edge created', result);
   });
   ```
 
-###### `query(connection, collection, query, [options], cb)`
+#### .query (query, [options], cb)
 Runs a SQL query against the database using Oriento's query method. Will attempt to convert @rid's into ids.
   
 usage: 
@@ -145,39 +240,62 @@ usage:
   });
   ```
 
-###### `getDB(connection, collection, cb)`
-Returns a native Oriento object
+#### .native (cb)
+Returns a native Oriento class
+  
+usage: 
+  ```javascript
+  //Assume a model named "Post"
+  Post.native(function(myClass){
+  	myClass.property.list()
+      .then(function (properties) {
+        console.log('The class has the following properties:', properties);
+      }
+  });
+  ```
+
+#### .getDB (cb)
+Returns a native Oriento database object
   
 usage: 
   ```javascript
   //Assume a model named "Post"
   Post.getDB(function(db){
-  	// db.query(...
+    db.select('foo() as testresult').from('OUser').limit(1).one()
+      .then(function(res) {
+        // res contains the result of foo
+        console.log(res);
+      });
   });
   ```
 
-###### `getServer(connection, collection, cb)`
+#### .getServer (cb)
 Returns a native Oriento connection
   
 usage: 
   ```javascript
   Post.getServer(function(server){
-  	// server.list()
+    server.list()
+      .then(function (dbs) {
+        console.log('There are ' + dbs.length + ' databases on the server.');
+      });
   });
   ``` 
 
-###### `removeCircularReferences(connection, collection, object, cb)`
+#### .removeCircularReferences (object, cb)
 Convenience method that replaces circular references with `id` when one is available, otherwise it replaces the object with string '[Circular]'
   
 usage: 
   ```javascript
   //Assume a model named "Post"
   Post.removeCircularReferences(posts, function(result){
-  	// JSON.stringify(result);  // it's safe to stringify result
+  	console.log(JSON.stringify(result));  // it's safe to stringify result
   });
   ```
 
-#### Example Model definitions
+### Example Model definitions
+
+For a comprehensive set of examples take a look at [waterline-adapter-tests fixtures](https://github.com/balderdashy/waterline-adapter-tests/tree/master/interfaces/associations/support/fixtures), all of those are working examples and frequently tested. Below is an example of a Many-to-many through association.
 
 ```javascript
 /**
@@ -277,18 +395,27 @@ An edge named **venueTable** will be created from Team to Stadium model instance
 See [`FAQ.md`](./FAQ.md).
 
 
-## Waterline
+## Testing
+Test are written with mocha. Integration tests are handled by the [waterline-adapter-tests](https://github.com/balderdashy/waterline-adapter-tests) project, which tests adapter methods against the latest Waterline API.
 
-[Waterline](https://github.com/balderdashy/waterline) is a new kind of storage and retrieval engine.
-
-It provides a uniform API for accessing stuff from different kinds of databases, protocols, and 3rd party APIs. That means you write the same code to get users, whether they live in OrientDB, MySQL, LDAP, MongoDB, or Facebook.
+To run tests:
+```shell
+npm test
+```
 
 
 ## Contributions
 
 We are always looking for the quality contributions! Please check the [CONTRIBUTING.md](./CONTRIBUTING.md) for the contribution guidelines.
 
-Thanks so much to Srinath Janakiraman ([vjsrinath](http://github.com/vjsrinath)) who built the original `sails-orient` adapter.
+Thanks so much to Srinath Janakiraman ([vjsrinath](http://github.com/vjsrinath)) who built the `sails-orientdb` adapter, from which `waterline-orientdb` was forked.
+
+
+## About Waterline
+
+[Waterline](https://github.com/balderdashy/waterline) is a new kind of storage and retrieval engine.
+
+It provides a uniform API for accessing stuff from different kinds of databases, protocols, and 3rd party APIs. That means you write the same code to get users, whether they live in OrientDB, MySQL, LDAP, MongoDB, or Facebook.
 
 
 ## License
