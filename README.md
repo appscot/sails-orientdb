@@ -90,6 +90,7 @@ var config = {
       
       // Additional options
       options: {
+      
         // DB Options
         //
         // database type: graph | document
@@ -162,7 +163,7 @@ Waterline-orientdb implements its own custom join function so when the user runs
 The main difference between waterline-orientdb and [sails-orientdb](https://github.com/vjsrinath/sails-orientdb) is the way associations/edges are created. In `sails-orientdb` a special attribute named 'edge' is required while waterline-orientdb tries to adhere to waterline specification.
 
 #### ID
-Waterline-orientdb mimics sails-mongo adapter behaviour and maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID. Because of this it's not necessary, or advised, to declare an `id` attribute on your model definitions.
+Waterline-orientdb mimics sails-mongo adapter behaviour and maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID. Because of this it's not necessary to declare an `id` attribute on your model definitions.
 
 ## Usage
 
@@ -175,9 +176,9 @@ Waterline-orientdb mimics sails-mongo adapter behaviour and maps the logical `id
 It's possible to force the class of a model by adding the property `orientdbClass` to the definition. Generally this is not required as `waterline-orientdb` can determine which is the best class to use, so it should only be used in special cases. Possible values:
 * `undefined` - the default and recommended option. The appropriate class will be determined for the model;
 * `""` or `"document"` - class will be the default OrientDB document class;
-* `"V"`- class will be Vertex;
-* `"E"`- class will be Edge.
- 
+* `"V"` - class will be Vertex;
+* `"E"` - class will be Edge.
+
 Example:
 ```javascript
 {

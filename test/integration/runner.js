@@ -79,7 +79,7 @@ new TestRunner({
     // Mocha options
     // reference: https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically
     mocha: {
-      timeout: 12000,
+      timeout: 15000,
       reporter: 'spec',
       //grep: 'should return model instances'
     },
