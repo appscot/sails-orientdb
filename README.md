@@ -246,12 +246,11 @@ Returns a native Oriento class
 usage: 
   ```javascript
   //Assume a model named "Post"
-  Post.native(function(myClass){
-  	myClass.property.list()
-      .then(function (properties) {
-        console.log('The class has the following properties:', properties);
-      }
-  });
+  Post.native()
+  	.property.list()
+    .then(function (properties) {
+      console.log('The class has the following properties:', properties);
+    });
   ```
 
 #### .getDB (cb)
@@ -260,13 +259,11 @@ Returns a native Oriento database object
 usage: 
   ```javascript
   //Assume a model named "Post"
-  Post.getDB(function(db){
-    db.select('foo() as testresult').from('OUser').limit(1).one()
-      .then(function(res) {
-        // res contains the result of foo
-        console.log(res);
-      });
-  });
+  Post.getDB()
+    .class.list()
+    .then(function (classes) {
+      console.log('There are ' + classes.length + ' classes in the db:', classes);
+    });
   ```
 
 #### .getServer (cb)
@@ -274,12 +271,11 @@ Returns a native Oriento connection
   
 usage: 
   ```javascript
-  Post.getServer(function(server){
-    server.list()
-      .then(function (dbs) {
-        console.log('There are ' + dbs.length + ' databases on the server.');
-      });
-  });
+  Post.getServer()
+    .list()
+    .then(function (dbs) {
+      console.log('There are ' + dbs.length + ' databases on the server.');
+    });
   ``` 
   
 #### .runFunction (functionName [, ...])
@@ -290,7 +286,7 @@ usage:
   Post.runFunction('foo', 'arg1').from('OUser').limit(1).one()
     .then(function(res) {
       console.log(res.foo);  // res.foo contains the result of the function
-  });
+  	});
   ``` 
 
 #### .removeCircularReferences (object, cb)
@@ -299,9 +295,8 @@ Convenience method that replaces circular references with `id` when one is avail
 usage: 
   ```javascript
   //Assume a model named "Post"
-  Post.removeCircularReferences(posts, function(result){
-  	console.log(JSON.stringify(result));  // it's safe to stringify result
-  });
+  var result = Post.removeCircularReferences(posts);
+  console.log(JSON.stringify(result));  // it's safe to stringify result
   ```
 
 ### Documentation

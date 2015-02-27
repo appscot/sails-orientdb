@@ -14,11 +14,10 @@ describe('Adapter Custom Methods', function() {
       collection1.circ = collection1;
       assert.throws(function() { JSON.stringify(collection1); });
       
-      Associations.Friend.removeCircularReferences(collection1, function(result){
-        assert.equal(result.circ, '#13:1');
-        assert.doesNotThrow(function() { JSON.stringify(result); });
-        done();
-      });
+      var result = Associations.Friend.removeCircularReferences(collection1);
+      assert.equal(result.circ, '#13:1');
+      assert.doesNotThrow(function() { JSON.stringify(result); });
+      done();
     });
     
   });
