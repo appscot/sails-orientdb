@@ -196,7 +196,7 @@ Note, when using a document database (through `config.options.databaseType`), `o
 
 ### Methods
 
-This adapter adds the following methods:
+This adapter extends waterline with the following methods:
 
 #### .createEdge (from, to, options, callback)
 Creates edge between specified two model instances by ID in the form parameters `from` and `to`
@@ -293,10 +293,18 @@ usage:
   });
   ```
 
-### Example Model definitions
+### Documentation
+Above we've described how `waterine-orientdb` approaches and adds to the waterline core experience. For a comprehensive reference on how to use waterline please check [waterline-docs](https://github.com/balderdashy/waterline-docs#waterline-v010-documentation).
 
-For a comprehensive set of examples take a look at [waterline-adapter-tests fixtures](https://github.com/balderdashy/waterline-adapter-tests/tree/master/interfaces/associations/support/fixtures), all of those are working examples and frequently tested. Below is an example of a Many-to-many through association.
+### Examples
 
+For a vast set of examples on how to set up models take a look at [waterline-adapter-tests fixtures](https://github.com/balderdashy/waterline-adapter-tests/tree/master/interfaces/associations/support/fixtures), all of those are working examples and frequently tested. 
+
+The only case poorly covered is how to set up a Many-to-many *through* association as it is [not yet officially supported](https://github.com/balderdashy/waterline/issues/705). Below is an example of a Many-to-many through association that works in OrientDB.
+
+#### Many-to-many through example
+
+##### Venue model which will join (via edge) teams to stadiums
 ```javascript
 /**
  * Venue Model
@@ -336,7 +344,7 @@ module.exports = Waterline.Collection.extend({
 });
 ```
 
-#### Team Model to be associated with Stadium model
+##### Team Model to be associated with Stadium model
 ```javascript
 /**
  * Team.js
@@ -362,7 +370,7 @@ module.exports = Waterline.Collection.extend({
 });
 ```
 
-#### Stadium Model to be associated with Team model
+##### Stadium Model to be associated with Team model
 ```javascript
 /**
  * Stadium.js
