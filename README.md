@@ -281,6 +281,17 @@ usage:
       });
   });
   ``` 
+  
+#### .runFunction (functionName [, ...])
+Returns a prepared Oriento statement with query and params to run an OrientDB function.
+  
+usage: 
+  ```javascript
+  Post.runFunction('foo', 'arg1').from('OUser').limit(1).one()
+    .then(function(res) {
+      console.log(res.foo);  // res.foo contains the result of the function
+  });
+  ``` 
 
 #### .removeCircularReferences (object, cb)
 Convenience method that replaces circular references with `id` when one is available, otherwise it replaces the object with string '[Circular]'
