@@ -220,7 +220,7 @@ usage:
   });
   ```
 
-#### .query (query, [options], cb)
+#### .query (query [, options], cb)
 Runs a SQL query against the database using Oriento's query method. Will attempt to convert @rid's into ids.
   
 usage: 
@@ -240,7 +240,7 @@ usage:
   });
   ```
 
-#### .native (cb)
+#### .native ()
 Returns a native Oriento class
   
 usage: 
@@ -253,7 +253,7 @@ usage:
     });
   ```
 
-#### .getDB (cb)
+#### .getDB ()
 Returns a native Oriento database object
   
 usage: 
@@ -266,7 +266,7 @@ usage:
     });
   ```
 
-#### .getServer (cb)
+#### .getServer ()
 Returns a native Oriento connection
   
 usage: 
@@ -289,8 +289,8 @@ usage:
   	});
   ``` 
 
-#### .removeCircularReferences (object, cb)
-Convenience method that replaces circular references with `id` when one is available, otherwise it replaces the object with string '[Circular]'
+#### .removeCircularReferences (object)
+Convenience method that replaces circular references with `id` when one is available, otherwise it replaces the object with string '[Circular]'.
   
 usage: 
   ```javascript
