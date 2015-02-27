@@ -32,14 +32,13 @@ describe('Adapter Custom Methods', function() {
       ////////////////////////////////////////////////////
       
       it('should return user', function(done) {
-        Associations.Friend.getDB(function(db){
-          db.select().from('friendTable').where({name: 'friend getDB'}).one()
-            .then(function(retrievedUser){
-              assert.equal(retrievedUser['@rid'].toString(), user.id);
-              done();
-            })
-            .catch(done);          
-        });
+        Associations.Friend.getDB()
+          .select().from('friendTable').where({name: 'friend getDB'}).one()
+          .then(function(retrievedUser){
+            assert.equal(retrievedUser['@rid'].toString(), user.id);
+            done();
+          })
+          .catch(done);          
       });
       
     });
@@ -55,14 +54,13 @@ describe('Adapter Custom Methods', function() {
       ////////////////////////////////////////////////////
       
       it('should return more than 0 dbs', function(done) {
-        Associations.Friend.getServer(function(server){
-          server.list()
-            .then(function (dbs) {
-              assert(dbs.length >= 1);
-              done();
-            })
-            .catch(done);
-        });
+        Associations.Friend.getServer()
+          .list()
+          .then(function (dbs) {
+            assert(dbs.length >= 1);
+            done();
+          })
+          .catch(done);
       });
     });
   });
@@ -76,10 +74,9 @@ describe('Adapter Custom Methods', function() {
       ////////////////////////////////////////////////////
       
       it('should return the collection\'s class name', function(done) {
-        Associations.Friend.native(function(collection){
-          assert(collection.name, 'friendTable');
-          done();
-        });
+        var collection = Associations.Friend.native();
+        assert(collection.name, 'friendTable');
+        done();
       });
     });
   });
