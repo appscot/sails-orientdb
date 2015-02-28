@@ -6,7 +6,7 @@
 
 # waterline-orientdb
 
-Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/waterline) is a Node.js ORM used by Sails.js.
+Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/waterline) is an adapter-based ORM for Node.js with support for mysql, mongo, postgres, redis, orientdb and more.
 
 > **Warning**
 >
@@ -429,7 +429,9 @@ Thanks so much to Srinath Janakiraman ([vjsrinath](http://github.com/vjsrinath))
 
 [Waterline](https://github.com/balderdashy/waterline) is a new kind of storage and retrieval engine.
 
-It provides a uniform API for accessing stuff from different kinds of databases, protocols, and 3rd party APIs. That means you write the same code to get users, whether they live in OrientDB, MySQL, LDAP, MongoDB, or Facebook.
+It provides a uniform API for accessing stuff from different kinds of databases, protocols, and 3rd party APIs. That means you write the same code to get and store things like users, whether they live in OrientDB, Redis, mySQL, LDAP, MongoDB, or Postgres.
+
+Waterline strives to inherit the best parts of ORMs like ActiveRecord, Hibernate, and Mongoose, but with a fresh perspective and emphasis on modularity, testability, and consistency across adapters.
 
 
 ## License
