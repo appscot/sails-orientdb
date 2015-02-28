@@ -30,7 +30,7 @@ Waterline-orientb connects to OrientDB using [Oriento](codemix/oriento) (OrientD
 
 ## Table of Contents
 1. [Installation](#installation)
-2. [Examples](#example)
+2. [Examples](#examples)
 3. [Overview](#overview)
 4. [Usage](#usage)
 5. [Testing](#testing)
@@ -51,9 +51,9 @@ npm install waterline-orientdb --save
 ## Examples
 
 Waterline-orientdb can be used with SailsJS, for more information on how to use Waterline in your Sails App view the [Sails Docs](http://sailsjs.org/#!/documentation/concepts/ORM).
-An example configuration is provided [here](./example/sails-config).
+An example configuration for SailsJS is provided [here](./example/sails-config).
 
-For examples of how to use Waterline/waterline-orientdb with frameworks such as Express look in the [Example](./example/express) folder.
+For examples on how to use Waterline/waterline-orientdb with frameworks such as Express look in the [example](./example/express) folder.
 
 ### Waterline v0.10.x configuration
 
