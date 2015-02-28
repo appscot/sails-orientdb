@@ -20,7 +20,8 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 > always use `'safe'`. We are currently pushing for a new kind of migration strategy named `'create'`, check [waterline issue #846](https://github.com/balderdashy/waterline/issues/846).
 
 
-Waterline-orientdb aims to work with Waterline v0.10.x and OrientDB v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](./CONTRIBUTING.md)!
+Waterline-orientdb aims to work with Waterline v0.10.x and OrientDB v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](
+ONTRIBUTING.md)!
 
 From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb supports `Semantic`, `Queryable`, `Associations` and `Migratable` interfaces.
 
@@ -29,7 +30,7 @@ Waterline-orientb connects to OrientDB using [Oriento](codemix/oriento) (OrientD
 
 ## Table of Contents
 1. [Installation](#installation)
-2. [Waterline Configuration](#waterline-configuration)
+2. [Examples](#example)
 3. [Overview](#overview)
 4. [Usage](#usage)
 5. [Testing](#testing)
@@ -47,9 +48,14 @@ npm install waterline-orientdb --save
 ```
 
 
-## Waterline Configuration
+## Examples
 
-### Using with Waterline v0.10.x
+Waterline-orientdb can be used with SailsJS, for more information on how to use Waterline in your Sails App view the [Sails Docs](http://sailsjs.org/#!/documentation/concepts/ORM).
+An example configuration is provided [here](./example/sails-config).
+
+For examples of how to use Waterline/waterline-orientdb with frameworks such as Express look in the [Example](./example/express) folder.
+
+### Waterline v0.10.x configuration
 
 #### Basic Example
 
