@@ -13,26 +13,26 @@ config.options.storage = "memory";
 
 
 // Require Fixtures
-var fixturesPath = '../../node_modules/waterline-adapter-tests/interfaces/associations/support/fixtures/';
+var originalFixturesPath = '../../node_modules/waterline-adapter-tests/interfaces/associations/support/fixtures/';
 
 var fixtures = {
-  PaymentBelongsFixture: require(fixturesPath + 'belongsTo.child.fixture'),
-  CustomerBelongsFixture: require(fixturesPath + 'belongsTo.parent.fixture'),
-  PaymentHasManyFixture: require(fixturesPath + 'hasMany.child.fixture'),
-  CustomerHasManyFixture: require(fixturesPath + 'hasMany.parent.fixture'),
-  ApartmentHasManyFixture: require(fixturesPath + 'hasMany.customPK.fixture'),
-  PaymentManyFixture: require(fixturesPath + 'multipleAssociations.fixture').payment,
-  CustomerManyFixture: require(fixturesPath + 'multipleAssociations.fixture').customer,
-  // StadiumFixture: require(fixturesPath + 'hasManyThrough.stadium.fixture'),
+  PaymentBelongsFixture: require(originalFixturesPath + 'belongsTo.child.fixture'),
+  CustomerBelongsFixture: require(originalFixturesPath + 'belongsTo.parent.fixture'),
+  PaymentHasManyFixture: require(originalFixturesPath + 'hasMany.child.fixture'),
+  CustomerHasManyFixture: require(originalFixturesPath + 'hasMany.parent.fixture'),
+  ApartmentHasManyFixture: require(originalFixturesPath + 'hasMany.customPK.fixture'),
+  PaymentManyFixture: require(originalFixturesPath + 'multipleAssociations.fixture').payment,
+  CustomerManyFixture: require(originalFixturesPath + 'multipleAssociations.fixture').customer,
+  // StadiumFixture: require(originalFixturesPath + 'hasManyThrough.stadium.fixture'),
   StadiumFixture: require('./fixtures/hasManyThrough.stadium.fixture'),
-  TeamFixture: require(fixturesPath + 'hasManyThrough.team.fixture'),
-  //VenueFixture: require(fixturesPath + 'hasManyThrough.venue.fixture'),
+  TeamFixture: require(originalFixturesPath + 'hasManyThrough.team.fixture'),
+  //VenueFixture: require(originalFixturesPath + 'hasManyThrough.venue.fixture'),
   VenueFixture: require('./fixtures/hasManyThrough.venueHack.fixture'),
-  TaxiFixture: require(fixturesPath + 'manyToMany.taxi.fixture'),
-  //DriverFixture: require(fixturesPath + 'manyToMany.driver.fixture'),
+  TaxiFixture: require(originalFixturesPath + 'manyToMany.taxi.fixture'),
+  //DriverFixture: require(originalFixturesPath + 'manyToMany.driver.fixture'),
   DriverFixture: require('./fixtures/manyToMany.driverHack.fixture.js'),
-  UserOneFixture: require(fixturesPath + 'oneToOne.fixture').user_resource,
-  ProfileOneFixture: require(fixturesPath + 'oneToOne.fixture').profile,
+  UserOneFixture: require(originalFixturesPath + 'oneToOne.fixture').user_resource,
+  ProfileOneFixture: require(originalFixturesPath + 'oneToOne.fixture').profile,
   
   FriendFixture: require('./fixtures/hasManyThrough.friend.fixture'),
   FollowsFixture: require('./fixtures/hasManyThrough.follows.fixture'),
@@ -59,7 +59,12 @@ before(function(done) {
   waterline = new Waterline();
 
   Object.keys(fixtures).forEach(function(key) {
-    waterline.loadCollection(fixtures[key]);
+    var fixture = fixtures[key];
+    if(typeof fixture !== 'function'){
+      // fixture definition has not been extended to collection yet
+      fixture = Waterline.Collection.extend(fixture);
+    }
+    waterline.loadCollection(fixture);
   });
 
   var Connections = {
