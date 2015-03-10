@@ -1,10 +1,5 @@
-/**
- * Dependencies
- */
 
-var Waterline = require('waterline');
-
-module.exports = Waterline.Collection.extend({
+module.exports = {
 
   tableName : 'schemalessPropertiesTable',
   identity : 'schemaless_properties',
@@ -27,4 +22,4 @@ module.exports = Waterline.Collection.extend({
     }
   }
 
-});
+};

@@ -5,7 +5,7 @@ var self = this,
     fixtures,
     config;
 
-describe('Config tests)', function() {
+describe('Config tests', function() {
   before(function (done) {
   
     fixtures = {
