@@ -1,10 +1,5 @@
-/**
- * Dependencies
- */
 
-var Waterline = require('waterline');
-
-module.exports = Waterline.Collection.extend({
+module.exports = {
 
   tableName: 'friendTable',
   identity: 'friend',
@@ -31,4 +26,4 @@ module.exports = Waterline.Collection.extend({
     }
   }
 
-});
+};

@@ -6,7 +6,7 @@
 
 # waterline-orientdb
 
-Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/waterline) is a Node.js ORM used by Sails.js.
+Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/waterline) is an adapter-based ORM for Node.js with support for mysql, mongo, postgres, redis, orientdb and more.
 
 > **Warning**
 >
@@ -20,7 +20,8 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 > always use `'safe'`. We are currently pushing for a new kind of migration strategy named `'create'`, check [waterline issue #846](https://github.com/balderdashy/waterline/issues/846).
 
 
-Waterline-orientdb aims to work with Waterline v0.10.x and OrientDB v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](./CONTRIBUTING.md)!
+Waterline-orientdb aims to work with Waterline v0.10.x and OrientDB v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](
+ONTRIBUTING.md)!
 
 From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb supports `Semantic`, `Queryable`, `Associations` and `Migratable` interfaces.
 
@@ -29,7 +30,7 @@ Waterline-orientb connects to OrientDB using [Oriento](codemix/oriento) (OrientD
 
 ## Table of Contents
 1. [Installation](#installation)
-2. [Waterline Configuration](#waterline-configuration)
+2. [Examples](#examples)
 3. [Overview](#overview)
 4. [Usage](#usage)
 5. [Testing](#testing)
@@ -47,9 +48,14 @@ npm install waterline-orientdb --save
 ```
 
 
-## Waterline Configuration
+## Examples
 
-### Using with Waterline v0.10.x
+Waterline-orientdb can be used with SailsJS, for more information on how to use Waterline in your Sails App view the [Sails Docs](http://sailsjs.org/#!/documentation/concepts/ORM).
+An example configuration for SailsJS is provided [here](./example/sails-config).
+
+For examples on how to use Waterline/waterline-orientdb with frameworks such as Express look in the [example](./example/express) folder.
+
+### Waterline v0.10.x configuration
 
 #### Basic Example
 
@@ -196,7 +202,7 @@ Note, when using a document database (through `config.options.databaseType`), `o
 
 ### Methods
 
-This adapter adds the following methods:
+This adapter extends waterline with the following methods:
 
 #### .createEdge (from, to, options, callback)
 Creates edge between specified two model instances by ID in the form parameters `from` and `to`
@@ -220,7 +226,7 @@ usage:
   });
   ```
 
-#### .query (query, [options], cb)
+#### .query (query [, options], cb)
 Runs a SQL query against the database using Oriento's query method. Will attempt to convert @rid's into ids.
   
 usage: 
@@ -240,63 +246,77 @@ usage:
   });
   ```
 
-#### .native (cb)
+#### .native ()
 Returns a native Oriento class
   
 usage: 
   ```javascript
   //Assume a model named "Post"
-  Post.native(function(myClass){
-  	myClass.property.list()
-      .then(function (properties) {
-        console.log('The class has the following properties:', properties);
-      }
-  });
+  Post.native()
+  	.property.list()
+    .then(function (properties) {
+      console.log('The class has the following properties:', properties);
+    });
   ```
 
-#### .getDB (cb)
+#### .getDB ()
 Returns a native Oriento database object
   
 usage: 
   ```javascript
   //Assume a model named "Post"
-  Post.getDB(function(db){
-    db.select('foo() as testresult').from('OUser').limit(1).one()
-      .then(function(res) {
-        // res contains the result of foo
-        console.log(res);
-      });
-  });
+  Post.getDB()
+    .class.list()
+    .then(function (classes) {
+      console.log('There are ' + classes.length + ' classes in the db:', classes);
+    });
   ```
 
-#### .getServer (cb)
+#### .getServer ()
 Returns a native Oriento connection
   
 usage: 
   ```javascript
-  Post.getServer(function(server){
-    server.list()
-      .then(function (dbs) {
-        console.log('There are ' + dbs.length + ' databases on the server.');
-      });
-  });
+  Post.getServer()
+    .list()
+    .then(function (dbs) {
+      console.log('There are ' + dbs.length + ' databases on the server.');
+    });
+  ``` 
+  
+#### .runFunction (functionName [, ...])
+Returns a prepared Oriento statement with query and params to run an OrientDB function.
+  
+usage: 
+  ```javascript
+  Post.runFunction('foo', 'arg1').from('OUser').limit(1).one()
+    .then(function(res) {
+      console.log(res.foo);  // res.foo contains the result of the function
+  	});
   ``` 
 
-#### .removeCircularReferences (object, cb)
-Convenience method that replaces circular references with `id` when one is available, otherwise it replaces the object with string '[Circular]'
+#### .removeCircularReferences (object)
+Convenience method that replaces circular references with `id` when one is available, otherwise it replaces the object with string '[Circular]'.
   
 usage: 
   ```javascript
   //Assume a model named "Post"
-  Post.removeCircularReferences(posts, function(result){
-  	console.log(JSON.stringify(result));  // it's safe to stringify result
-  });
+  var result = Post.removeCircularReferences(posts);
+  console.log(JSON.stringify(result));  // it's safe to stringify result
   ```
 
-### Example Model definitions
+### Documentation
+Above we've described how `waterine-orientdb` approaches and adds to the waterline core experience. For a comprehensive reference on how to use waterline please check [waterline-docs](https://github.com/balderdashy/waterline-docs#waterline-v010-documentation).
 
-For a comprehensive set of examples take a look at [waterline-adapter-tests fixtures](https://github.com/balderdashy/waterline-adapter-tests/tree/master/interfaces/associations/support/fixtures), all of those are working examples and frequently tested. Below is an example of a Many-to-many through association.
+### Examples
 
+For a vast set of examples on how to set up models take a look at [waterline-adapter-tests fixtures](https://github.com/balderdashy/waterline-adapter-tests/tree/master/interfaces/associations/support/fixtures), all of those are working examples and frequently tested. 
+
+The only case poorly covered is how to set up a Many-to-many *through* association as it is [not yet officially supported](https://github.com/balderdashy/waterline/issues/705). Below is an example of a Many-to-many through association that works in OrientDB.
+
+#### Many-to-many through example
+
+##### Venue model which will join (via edge) teams to stadiums
 ```javascript
 /**
  * Venue Model
@@ -336,7 +356,7 @@ module.exports = Waterline.Collection.extend({
 });
 ```
 
-#### Team Model to be associated with Stadium model
+##### Team Model to be associated with Stadium model
 ```javascript
 /**
  * Team.js
@@ -362,7 +382,7 @@ module.exports = Waterline.Collection.extend({
 });
 ```
 
-#### Stadium Model to be associated with Team model
+##### Stadium Model to be associated with Team model
 ```javascript
 /**
  * Stadium.js
@@ -415,7 +435,9 @@ Thanks so much to Srinath Janakiraman ([vjsrinath](http://github.com/vjsrinath))
 
 [Waterline](https://github.com/balderdashy/waterline) is a new kind of storage and retrieval engine.
 
-It provides a uniform API for accessing stuff from different kinds of databases, protocols, and 3rd party APIs. That means you write the same code to get users, whether they live in OrientDB, MySQL, LDAP, MongoDB, or Facebook.
+It provides a uniform API for accessing stuff from different kinds of databases, protocols, and 3rd party APIs. That means you write the same code to get and store things like users, whether they live in OrientDB, Redis, mySQL, LDAP, MongoDB, or Postgres.
+
+Waterline strives to inherit the best parts of ORMs like ActiveRecord, Hibernate, and Mongoose, but with a fresh perspective and emphasis on modularity, testability, and consistency across adapters.
 
 
 ## License
