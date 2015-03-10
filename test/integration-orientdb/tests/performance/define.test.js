@@ -6,7 +6,7 @@ var self = this;
 var localFixturesPath = '../../fixtures/';
 
 var fixtures = {
-  TeamFixture: require(localFixturesPath + 'hasManyThrough.team.fixture.js'),
+  TeamFixture: require('./fixtures/hasManyThrough.team.fixture.js'),
   StadiumFixture: require(localFixturesPath + 'hasManyThrough.stadium.fixture'),
   VenueFixture: require(localFixturesPath + 'hasManyThrough.venueHack.fixture'),
   FriendFixture: require(localFixturesPath + 'hasManyThrough.friend.fixture'),
@@ -18,11 +18,17 @@ var fixtures = {
 };
 
 describe('Performance', function() {
-  after(function (done) {
-    DELETE_TEST_WATERLINE('test_performance_define', done);
-  });
-
+  
   describe('define', function() {
+  
+    /////////////////////////////////////////////////////
+    // TEST SETUP
+    ////////////////////////////////////////////////////
+    
+    after(function (done) {
+      DELETE_TEST_WATERLINE('test_performance_define', done);
+    });
+    
   
     /////////////////////////////////////////////////////
     // TEST METHODS
