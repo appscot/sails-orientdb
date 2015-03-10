@@ -40,7 +40,7 @@ describe('Define related Operations', function() {
       });
     });
 
-    it('should properly create Link property from collection', function(done) {
+    it('should properly create Link property in one-to-many association', function(done) {
       Associations.Indexes.native(function(klass) {
         klass.property.get('props')
           .then(function(property) {
