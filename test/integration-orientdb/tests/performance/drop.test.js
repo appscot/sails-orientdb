@@ -1,4 +1,5 @@
-var assert = require('assert');
+var assert = require('assert'),
+    _ = require('lodash');
 
 var self = this;
     
@@ -46,50 +47,114 @@ var fixtures = {
   }
 };
 
+var baseConfig = {
+  database : 'test_performance_drop',
+  options : {
+    unsafeDrop : false
+  }
+}
+
 describe('Performance', function() {
   
-  // after(function (done) {
-    // DELETE_TEST_WATERLINE('test_performance_drop', done);
-  // });
+  function elapsedTime (startPoint){
+    var diff = process.hrtime(startPoint);
+    return (diff[0] * 1e9 + diff[1]) / 1e6; // divide by a million to get nano to milli
+  }
+  
+  function initializeDB(context, config, cb) {
+    CREATE_TEST_WATERLINE(context, config, _.cloneDeep(fixtures), function(err){
+      if(err) { return cb(err); }
+      
+      context.collections.User.create({ username: 'user1' }, function(err, user) {
+        if(err) { return cb(err); }
+        
+        context.collections.Passport.create({ user: user.id, password: 'abcd5678' }, function(err, passport) {
+          if(err) { return cb(err); }
+          cb();
+        });
+        
+      });
+    });
+  }
 
   describe('drop', function() {
     
-    /////////////////////////////////////////////////////
-    // TEST SETUP
-    ////////////////////////////////////////////////////
+    var safeDuration, unsafeDuration;
     
-    var driverRecord;
-  
-    before(function (done) {
-      CREATE_TEST_WATERLINE(self, 'test_performance_drop', fixtures, function(err){
-        if(err) { return done(err); }
-        
-        self.collections.User.create({ username: 'user1' }, function(err, user) {
-          if(err) { return done(err); }
-          
-          self.collections.Passport.create({ user: user.id, password: 'abcd5678' }, function(err, passport) {
-            if(err) { return done(err); }
-            done();
-          
-          });
+    describe('safely', function() {
+    
+      /////////////////////////////////////////////////////
+      // TEST SETUP
+      ////////////////////////////////////////////////////
+      
+      before(function (done) {
+        initializeDB(self, baseConfig, done);
+      });
+      
+    
+      /////////////////////////////////////////////////////
+      // TEST METHODS
+      ////////////////////////////////////////////////////
+      
+      it('should drop all fixtures in timely manner', function(done) {
+        this.timeout(2000);
+        var start = process.hrtime();
+        DELETE_TEST_WATERLINE(baseConfig, function(err){
+          if(err) { done(err); }
+          safeDuration = elapsedTime(start);
+          console.log('performance_drop:', safeDuration, 'ms');
+          done();
         });
       });
     });
     
-  
-    /////////////////////////////////////////////////////
-    // TEST METHODS
-    ////////////////////////////////////////////////////
+    describe('unsafely', function() {
     
-    it('should drop all fixtures in timely manner', function(done) {
-      this.timeout(2000);
-      console.time('performance_drop');
-      DELETE_TEST_WATERLINE('test_performance_drop', function(err){
-        if(err) { done(err); }
-        console.timeEnd('performance_drop');
+      /////////////////////////////////////////////////////
+      // TEST SETUP
+      ////////////////////////////////////////////////////
+      
+      var unsafeConfig = {
+        database : 'test_performance_drop_unsafe',
+        options : {
+          unsafeDrop : true
+        }
+      }
+      
+      var unsafeContex = {};
+      
+      before(function (done) {
+        initializeDB(unsafeContex, unsafeConfig, function(err){
+          if (err) {
+            console.log(err); 
+            done(err);
+          }
+          done();
+        });
+      });
+      
+    
+      /////////////////////////////////////////////////////
+      // TEST METHODS
+      ////////////////////////////////////////////////////
+      
+      it('should drop all fixtures in timely manner', function(done) {
+        this.timeout(2000);
+        var start = process.hrtime();
+        DELETE_TEST_WATERLINE(unsafeConfig, function(err){
+          if(err) { done(err); }
+          unsafeDuration = elapsedTime(start);
+          console.log('performance_drop_unsafe:', unsafeDuration, 'ms');
+          done();
+        });
+      });
+      
+      it('unsafe should be faster than safe', function(done) {
+        assert(unsafeDuration < safeDuration);
         done();
       });
+    
     });
-
+    
   });
 });
