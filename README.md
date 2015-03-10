@@ -97,7 +97,7 @@ var config = {
       // Additional options
       options: {
       
-        // DB Options
+        // DB/Oriento Options
         //
         // database type: graph | document
         databaseType : 'graph',
@@ -112,6 +112,12 @@ var config = {
         //
         // Replaces circular references with `id` after populate operations (useful when results will be JSONfied)
         removeCircularReferences : false,
+        
+        // migrations
+        //
+        // Drop tables without deleting edges/vertexes hence not ensuring graph consistency
+        // Will speed up drop operations. Only works with migration: 'alter' or 'drop'
+        unsafeDrop : false,
         
         // other
         //
