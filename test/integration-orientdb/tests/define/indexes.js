@@ -1,5 +1,6 @@
 var assert = require('assert'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    Oriento = require('oriento');
 
 describe('Define related Operations', function() {
 
@@ -38,6 +39,19 @@ describe('Define related Operations', function() {
           .error(done);
       });
     });
+
+    it('should properly create Link property in one-to-many association', function(done) {
+      Associations.Indexes.native(function(klass) {
+        klass.property.get('props')
+          .then(function(property) {
+            assert.equal(Oriento.types[property.type], 'Link');
+            assert.equal(property.linkedClass, 'propertiesTable');
+            done();
+          })
+          .error(done);
+      });
+    });
+    
 
   });
 }); 
