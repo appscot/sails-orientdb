@@ -17,7 +17,7 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 >
 > We don't recommend using `migrate: 'alter'` as it has the nasty effect of deleting the data of all edges on a graphDB, leaving only data on the vertexes. 
 > Either use `'safe'` and migrate manually or use `'drop'` to completely reset the data and collections. In production
-> always use `'safe'`. We are currently pushing for a new kind of migration strategy named `'create'`, check [waterline issue #846](https://github.com/balderdashy/waterline/issues/846).
+> always use `'safe'`. We are currently pushing for a new migration strategy named `'create'`, check [waterline issue #846](https://github.com/balderdashy/waterline/issues/846). While this is not accepted/merged by waterline you can use the config option `createCollectionsAtStartup` which acts in similar fashion.
 
 
 Waterline-orientdb aims to work with Waterline v0.10.x and OrientDB v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](
@@ -114,6 +114,10 @@ var config = {
         removeCircularReferences : false,
         
         // migrations
+        //
+        // Waterline-orientdb will create missing collections/properties at startup in a "safish" manner
+        // Only works with `migration: safe` as it would be redundant otherwise
+        createCollectionsAtStartup : false,
         //
         // Drop tables without deleting edges/vertexes hence not ensuring graph consistency
         // Will speed up drop operations. Only works with migration: 'alter' or 'drop'
