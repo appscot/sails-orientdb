@@ -11,7 +11,7 @@ describe('Association Interface', function() {
 
     var driverRecord;
 
-    before(function(done) {  
+    before(function(done) { 
       Associations.Driver.create({ name: 'manymany find'}, function(err, driver) {
         if(err) return done(err);
 
