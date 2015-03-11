@@ -34,9 +34,10 @@ Waterline-orientdb connects to OrientDB using [Oriento](codemix/oriento) (Orient
 3. [Overview](#overview)
 4. [Usage](#usage)
 5. [Testing](#testing)
-6. [Contributions](#contributions)
-7. [About Waterline](#about-waterline)
-8. [License](#license)
+6. [Issues / Suggestions](#issues-suggestions)
+7. [Contributions](#contributions)
+8. [About Waterline](#about-waterline)
+9. [License](#license)
 
 
 ## Installation
@@ -428,6 +429,9 @@ To run tests:
 ```shell
 npm test
 ```
+
+## Issues / Suggestions
+We are always trying to improve `waterline-orientdb` either by fixing issues or adding new features. If you experienced an issue or have a suggestion feel free to [raise a new issue](https://github.com/appscot/waterline-orientdb/issues/new), preferably by following the [guidelines](./CONTRIBUTING.md#how-to-report-bugs).
 
 
 ## Contributions
