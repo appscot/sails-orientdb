@@ -25,7 +25,7 @@ ONTRIBUTING.md)!
 
 From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb supports `Semantic`, `Queryable`, `Associations` and `Migratable` interfaces.
 
-Waterline-orientb connects to OrientDB using [Oriento](codemix/oriento) (OrientDB's official driver).
+Waterline-orientdb connects to OrientDB using [Oriento](codemix/oriento) (OrientDB's official driver).
 
 
 ## Table of Contents
