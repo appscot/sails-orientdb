@@ -34,7 +34,7 @@ Waterline-orientdb connects to OrientDB using [Oriento](codemix/oriento) (Orient
 3. [Overview](#overview)
 4. [Usage](#usage)
 5. [Testing](#testing)
-6. [Issues / Suggestions](#issues-suggestions)
+6. [Issues / Suggestions](#issues--suggestions)
 7. [Contributions](#contributions)
 8. [About Waterline](#about-waterline)
 9. [License](#license)
