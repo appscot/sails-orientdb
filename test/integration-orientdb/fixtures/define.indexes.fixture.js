@@ -16,6 +16,11 @@ module.exports = {
       type : 'string',
       index : true
     },
+    indexFulltext : {
+      columnName : 'indexFulltext',
+      type : 'string',
+      index : 'fulltext'
+    },
     
     props: {
       model: 'properties'

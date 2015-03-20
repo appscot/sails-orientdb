@@ -39,6 +39,19 @@ describe('Define related Operations', function() {
           .error(done);
       });
     });
+    
+    it('should properly create fulltext index', function(done) {
+      Associations.Indexes.getDB(function(db) {
+        db.index.get('indexesTable.indexFulltext')
+          .then(function(index) {
+            assert.equal(index.name, 'indexesTable.indexFulltext');
+            assert.equal(index.type, 'FULLTEXT');            
+            
+            done();
+          })
+          .error(done);
+      });
+    });
 
     it('should properly create Link property in one-to-many association', function(done) {
       Associations.Indexes.native(function(klass) {
