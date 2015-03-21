@@ -34,7 +34,7 @@ Waterline-orientdb connects to OrientDB using [Oriento](https://github.com/codem
 3. [Overview](#overview)
 4. [Usage](#usage)
 5. [Testing](#testing)
-6. [Issues / Suggestions](#issues--suggestions)
+6. [Issues or Suggestions](#issues-or-suggestions)
 7. [Contributions](#contributions)
 8. [About Waterline](#about-waterline)
 9. [License](#license)
@@ -169,14 +169,6 @@ In a [Many-to-Many Through Association](https://github.com/balderdashy/waterline
 
 #### Populate queries (joins)
 Waterline-orientdb implements its own custom join function so when the user runs `.populate(some_collection)` it will send a single `SELECT` query with a [fetchplan](http://www.orientechnologies.com/docs/last/orientdb.wiki/Fetching-Strategies.html) to OrientDB. This way join operations remain fast and performant by leveraging OrientDB's graphDB features.
-
-### sails-orientdb differences
-
-#### Edge creation
-The main difference between waterline-orientdb and [sails-orientdb](https://github.com/vjsrinath/sails-orientdb) is the way associations/edges are created. In `sails-orientdb` a special attribute named 'edge' is required while waterline-orientdb tries to adhere to waterline specification.
-
-#### ID
-Waterline-orientdb mimics sails-mongo adapter behaviour and maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID. Because of this it's not necessary to declare an `id` attribute on your model definitions.
 
 ## Usage
 
@@ -430,7 +422,7 @@ To run tests:
 npm test
 ```
 
-## Issues / Suggestions
+## Issues or Suggestions
 We are always trying to improve `waterline-orientdb` either by fixing issues or adding new features. If you experienced an issue or have a suggestion feel free to [raise a new issue](https://github.com/appscot/waterline-orientdb/issues/new), preferably by following the [guidelines](./CONTRIBUTING.md#how-to-report-bugs).
 
 
