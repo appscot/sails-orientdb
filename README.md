@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/appscot/waterline-orientdb.svg?branch=master)](https://travis-ci.org/appscot/waterline-orientdb)
 [![Test Coverage](https://codeclimate.com/github/appscot/waterline-orientdb/badges/coverage.svg)](https://codeclimate.com/github/appscot/waterline-orientdb)
 [![dependencies](https://david-dm.org/appscot/waterline-orientdb.svg)](https://david-dm.org/appscot/waterline-orientdb)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/appscot/waterline-orientdb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/appscot/waterline-orientdb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # waterline-orientdb
 
