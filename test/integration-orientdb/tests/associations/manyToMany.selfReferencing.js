@@ -1,5 +1,4 @@
-var assert = require('assert'),
-    _ = require('lodash');
+var assert = require('assert');
 
 var self = this,
     fixtures;
@@ -11,8 +10,6 @@ describe('Association Interface', function() {
     /////////////////////////////////////////////////////
     // TEST SETUP
     ////////////////////////////////////////////////////
-
-    var driverRecord;
 
     before(function (done) {
     
@@ -39,13 +36,7 @@ describe('Association Interface', function() {
         }
       };
   
-      CREATE_TEST_WATERLINE(self, 'test_mn_slreferencing', fixtures, function(err){
-        if(err) {
-          console.log(err);
-          return done(err);
-        }
-        done();
-      });
+      CREATE_TEST_WATERLINE(self, 'test_mn_slreferencing', fixtures, done);
     });
     after(function (done) {
       DELETE_TEST_WATERLINE('test_mn_slreferencing', done);
