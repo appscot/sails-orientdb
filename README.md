@@ -23,7 +23,7 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 Waterline-orientdb aims to work with Waterline v0.10.x and [OrientDB](http://www.orientechnologies.com/orientdb/) v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](
 ONTRIBUTING.md)!
 
-From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb supports `Semantic`, `Queryable`, `Associations` and `Migratable` interfaces.
+From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb supports `Semantic`, `Queryable`, `Associations` and `Migratable` interfaces. Waterline-orientdb complies with waterline API and it's used in the same way as any other waterline/sails adapter.
 
 Waterline-orientdb connects to OrientDB using [Oriento](https://github.com/codemix/oriento) (OrientDB's official driver).
 
