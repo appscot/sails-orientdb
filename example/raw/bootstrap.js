@@ -30,7 +30,7 @@ var Waterline = require('waterline'),
 
 module.exports = function bootstrap( options, cb ) {
 
-  var adapters = options.adapters || { 'default': orientAdapter, 'waterline-orientdb': orientAdapter };
+  var adapters = options.adapters || { 'default': orientAdapter, 'sails-orientdb': orientAdapter };
   var connections = options.connections || {};
   var collections = options.collections || {};
 

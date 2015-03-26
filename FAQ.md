@@ -6,10 +6,10 @@
 The latest stable version in npm is always a safe bet.
 
 ```sh
-npm install waterline-orientdb --save
+npm install sails-orientdb --save
 ```
 
-[![NPM](https://nodei.co/npm/waterline-orientdb.png?downloads=true&stars=true)](https://nodei.co/npm/waterline-orientdb/)
+[![NPM](https://nodei.co/npm/sails-orientdb.png?downloads=true&stars=true)](https://nodei.co/npm/sails-orientdb/)
 
 
 

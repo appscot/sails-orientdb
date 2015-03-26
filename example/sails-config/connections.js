@@ -26,12 +26,12 @@ module.exports.connections = {
   * OrientDB is a NoSQL Document and Graph DBMS.                             *
   * http://en.wikipedia.org/wiki/OrientDB                                    *
   *                                                                          *
-  * Run: npm waterline-orientdb                                              *
+  * Run: npm sails-orientdb                                                  *
   *                                                                          *
   ***************************************************************************/
  
   someOrientdbServer: {
-    adapter: 'waterline-orientdb',
+    adapter: 'sails-orientdb',
     host: 'localhost',
     port: 2424,
     user: 'YOUR_ORIENTDB_USER',

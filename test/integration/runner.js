@@ -15,7 +15,7 @@
 
 var util = require('util');
 var mocha = require('mocha');
-var log = require('debug-logger')('waterline-orientdb:test');
+var log = require('debug-logger')('sails-orientdb:test');
 var TestRunner = require('waterline-adapter-tests');
 var Adapter = require('../../');
 

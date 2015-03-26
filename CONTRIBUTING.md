@@ -1,4 +1,4 @@
-# Contributing to waterline-orientdb
+# Contributing to sails-orientdb
 
 1. [Getting Involved](#getting-involved)
 2. [Discussion](#discussion)
@@ -7,41 +7,41 @@
 
 ## Getting Involved
 
-There are a number of ways to get involved with the development of waterline-orientdb. Even if you've never contributed code to an Open Source project before, we're always looking for help identifying bugs, cleaning up code, writing documentation and testing.
+There are a number of ways to get involved with the development of sails-orientdb. Even if you've never contributed code to an Open Source project before, we're always looking for help identifying bugs, cleaning up code, writing documentation and testing.
 
-The goal of this guide is to provide the best way to contribute to waterline-orientdb.
+The goal of this guide is to provide the best way to contribute to sails-orientdb.
 
 ## Discussion
 
 ### Gitter.im
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/appscot/waterline-orientdb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/appscot/sails-orientdb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-We frequently tracks posts on [Gitter](https://gitter.im/appscot/waterline-orientdb). If you have longer posts or questions please feel free to post them there. If you think you've found a bug please [file it in the bug tracker](#how-to-report-bugs).
+We frequently tracks posts on [Gitter](https://gitter.im/appscot/sails-orientdb). If you have longer posts or questions please feel free to post them there. If you think you've found a bug please [file it in the bug tracker](#how-to-report-bugs).
 
 
 ## How to Report Bugs
 
-### Try the latest version of waterline-orientdb
+### Try the latest version of sails-orientdb
 
-Bugs in old versions of waterline-orientdb may have already been fixed. In order to avoid reporting known issues, make sure you are always testing against the latest build/source. Please follow these guidelines before reporting a bug:
+Bugs in old versions of sails-orientdb may have already been fixed. In order to avoid reporting known issues, make sure you are always testing against the latest build/source. Please follow these guidelines before reporting a bug:
 
 1. **Update to the latest version** &mdash; Check if you can reproduce the issue with the latest version from the `master` branch. You can install from `master` by running:
   ``` sh
-  npm install appscot/waterline-orientdb
+  npm install appscot/sails-orientdb
   ```
 
-2. **Enable logging** &mdash; `waterline-orientdb` uses [debug-logger](https://github.com/appscot/debug-logger) (a wrapper around [visionmedia/debug](https://github.com/visionmedia/debug)) and so you can enable logging by running the below command:
+2. **Enable logging** &mdash; `sails-orientdb` uses [debug-logger](https://github.com/appscot/debug-logger) (a wrapper around [visionmedia/debug](https://github.com/visionmedia/debug)) and so you can enable logging by running the below command:
   ``` sh
-  export DEBUG=$DEBUG,waterline-orientdb:*
+  export DEBUG=$DEBUG,sails-orientdb:*
   ```
 
 3. **Use the Issues search** &mdash; check if the issue has already been reported. If it has been, please comment on the existing issue.
 
-4. **Provide a means to reproduce the problem** &mdash; Please provide as much details as possible, e.g. `waterline-orientdb` logs, and of course the steps to reproduce the problem. Ideally, submit an automated test such as [47-schema_with_id.js](https://github.com/appscot/waterline-orientdb/blob/master/test/integration-orientdb/bugs/47-schema_with_id.js).
+4. **Provide a means to reproduce the problem** &mdash; Please provide as much details as possible, e.g. `sails-orientdb` logs, and of course the steps to reproduce the problem. Ideally, submit an automated test such as [47-schema_with_id.js](https://github.com/appscot/sails-orientdb/blob/master/test/integration-orientdb/bugs/47-schema_with_id.js).
 
 ### Report a bug
 
-Fill in a bug by creating a [new github issue](https://github.com/appscot/waterline-orientdb/issues/new) and provide as much information as possible.
+Fill in a bug by creating a [new github issue](https://github.com/appscot/sails-orientdb/issues/new) and provide as much information as possible.
 
 ### Feature requests
 
