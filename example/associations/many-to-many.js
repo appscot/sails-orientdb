@@ -1,5 +1,5 @@
 /**
- * Based on http://stackoverflow.com/questions/28985075/waterline-orientdb-bi-directional-edge
+ * Based on http://stackoverflow.com/questions/28985075/sails-orientdb-bi-directional-edge
  * Associations docs at https://github.com/balderdashy/waterline-docs/blob/master/associations.md
  * More info at https://github.com/balderdashy/waterline
  */
@@ -9,15 +9,15 @@
 // mkdir manyToMany
 // cd manyToMany
 // npm install waterline
-// npm install waterline-orientdb
-// node node_modules/waterline-orientdb/example/associations/many-to-many.js  
+// npm install sails-orientdb
+// node node_modules/sails-orientdb/example/associations/many-to-many.js  
 //////////////////////////////////////////////////////////////////////////////
 
 var setupWaterline = require('../raw/bootstrap');
 
 var connections = {
   associations : {
-    adapter: 'waterline-orientdb',
+    adapter: 'sails-orientdb',
     host: 'localhost',
     port: 2424,
     user: 'root',

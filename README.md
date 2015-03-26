@@ -1,16 +1,16 @@
-[![npm version](https://badge.fury.io/js/waterline-orientdb.svg)](http://badge.fury.io/js/waterline-orientdb)
-[![Build Status](https://travis-ci.org/appscot/waterline-orientdb.svg?branch=master)](https://travis-ci.org/appscot/waterline-orientdb)
-[![Test Coverage](https://codeclimate.com/github/appscot/waterline-orientdb/badges/coverage.svg)](https://codeclimate.com/github/appscot/waterline-orientdb)
-[![dependencies](https://david-dm.org/appscot/waterline-orientdb.svg)](https://david-dm.org/appscot/waterline-orientdb)
-[![Gitter](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/appscot/waterline-orientdb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![npm version](https://badge.fury.io/js/sails-orientdb.svg)](http://badge.fury.io/js/sails-orientdb)
+[![Build Status](https://travis-ci.org/appscot/sails-orientdb.svg?branch=master)](https://travis-ci.org/appscot/sails-orientdb)
+[![Test Coverage](https://codeclimate.com/github/appscot/sails-orientdb/badges/coverage.svg)](https://codeclimate.com/github/appscot/sails-orientdb)
+[![dependencies](https://david-dm.org/appscot/sails-orientdb.svg)](https://david-dm.org/appscot/sails-orientdb)
+[![Gitter](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/appscot/sails-orientdb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-# waterline-orientdb
+# sails-orientdb
 
 Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/waterline) is an adapter-based ORM for Node.js with support for mysql, mongo, postgres, redis, orientdb and more.
 
 > **Warning**
 >
-> `waterline-orientdb` maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID.
+> `sails-orientdb` maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID.
 >
 >
 > Migrations
@@ -20,11 +20,11 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 > always use `'safe'`. We are currently pushing for a new kind of migration strategy named `'create'`, check [waterline issue #846](https://github.com/balderdashy/waterline/issues/846).
 
 
-Waterline-orientdb aims to work with Waterline v0.10.x and [OrientDB](http://www.orientechnologies.com/orientdb/) v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](./CONTRIBUTING.md)!
+Sails-orientdb aims to work with Waterline v0.10.x and [OrientDB](http://www.orientechnologies.com/orientdb/) v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](./CONTRIBUTING.md)!
 
-From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) waterline-orientdb supports `Semantic`, `Queryable`, `Associations` and `Migratable` interfaces. Waterline-orientdb complies with waterline API and it's used in the same way as other waterline/sails adapters.
+From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) sails-orientdb supports `Semantic`, `Queryable`, `Associations` and `Migratable` interfaces. Sails-orientdb complies with waterline API and it's used in the same way as other waterline/sails adapters.
 
-Waterline-orientdb connects to OrientDB using [Oriento](https://github.com/codemix/oriento) (OrientDB's official driver).
+Sails-orientdb connects to OrientDB using [Oriento](https://github.com/codemix/oriento) (OrientDB's official driver).
 
 
 ## Table of Contents
@@ -34,9 +34,10 @@ Waterline-orientdb connects to OrientDB using [Oriento](https://github.com/codem
 4. [Usage](#usage)
 5. [Testing](#testing)
 6. [Issues or Suggestions](#issues-or-suggestions)
-7. [Contributions](#contributions)
-8. [About Waterline](#about-waterline)
-9. [License](#license)
+7. [History](#history)
+8. [Authors](#authors)
+9. [About Waterline](#about-waterline)
+10. [License](#license)
 
 
 ## Installation
@@ -44,23 +45,23 @@ Waterline-orientdb connects to OrientDB using [Oriento](https://github.com/codem
 Install from NPM.
 
 ```bash
-npm install waterline-orientdb --save
+npm install sails-orientdb --save
 ```
 
 
 ## Configuration
 
-Waterline-orientdb can be used with SailsJS, for more information on how to use Waterline in your Sails App view the [Sails Docs](http://sailsjs.org/#!/documentation/concepts/ORM).
+Sails-orientdb can be used with SailsJS, for more information on how to use Waterline in your Sails App view the [Sails Docs](http://sailsjs.org/#!/documentation/concepts/ORM).
 An example configuration for SailsJS is provided [here](./example/sails-config).
 
-For examples on how to use Waterline/waterline-orientdb with frameworks such as Express look in the [example](./example/express) folder.
+For examples on how to use Waterline/sails-orientdb with frameworks such as Express look in the [example](./example/express) folder.
 
 ### Waterline v0.10.x configuration
 
 #### Basic Example
 
 ```javascript
-var orientAdapter = require('waterline-orientdb');
+var orientAdapter = require('sails-orientdb');
 var config = {
   adapters: {
     'default': orientAdapter,
@@ -79,7 +80,7 @@ var config = {
   },
   
   defaults: {
-    // The first time you run waterline-orientdb `migrate` needs to be set to 'drop' or 'alter' in order to create the DB schema
+    // The first time you run sails-orientdb `migrate` needs to be set to 'drop' or 'alter' in order to create the DB schema
     // More about this on: http://sailsjs.org/#!/documentation/concepts/ORM/model-settings.html
     migrate: 'safe'
   }
@@ -128,27 +129,27 @@ var config = {
       }
     }
 ```
-The values stated above represent the default values. For an up to date comprehensive list check [adapter.js](https://github.com/appscot/waterline-orientdb/blob/master/lib/adapter.js#L87).
+The values stated above represent the default values. For an up to date comprehensive list check [adapter.js](https://github.com/appscot/sails-orientdb/blob/master/lib/adapter.js#L87).
 
 ## Overview
 
 ### Models
-In a graph db Waterline-orientdb will represent most models in OrientDB as vertexes, the exception being Many-to-Many join tables which are represented by Edges. If using a document db, all models will be represented by documents.
+In a graph db Sails-orientdb will represent most models in OrientDB as vertexes, the exception being Many-to-Many join tables which are represented by Edges. If using a document db, all models will be represented by documents.
 
 ### Associations
-To learn how to create associations with Waterline/Sails.js check the Waterline Docs [Associations Page](https://github.com/balderdashy/waterline-docs/blob/master/associations.md). Below we go through how waterline-orientdb represent each kind of association in an OrientDB database.
+To learn how to create associations with Waterline/Sails.js check the Waterline Docs [Associations Page](https://github.com/balderdashy/waterline-docs/blob/master/associations.md). Below we go through how sails-orientdb represent each kind of association in an OrientDB database.
 
 #### One-to-One Associations
-For One-to-One Associations waterline-orientdb creates a LINK ([OrientDB Types](http://www.orientechnologies.com/docs/last/orientdb.wiki/Types.html)) to associate records.
+For One-to-One Associations sails-orientdb creates a LINK ([OrientDB Types](http://www.orientechnologies.com/docs/last/orientdb.wiki/Types.html)) to associate records.
 
 #### One-to-Many Associations
 One-to-Many Associations are also represented by LINKs in OrientDB.
 
 #### Many-to-Many Associations
-In many-to-many associations waterline-orientdb will connect vertexes using edges, hence edges act as join tables.
+In many-to-many associations sails-orientdb will connect vertexes using edges, hence edges act as join tables.
 
 ##### Custom edge names (optional)
-Usually Waterline will create rather long names for join tables (e.g. driver_taxis__taxi_drivers) which are little meaningful from the perspective of a graphDB. Waterline-orientdb allows you to change the name of the edge by adding a property `joinTableNames` to the dominant collection. Example:
+Usually Waterline will create rather long names for join tables (e.g. driver_taxis__taxi_drivers) which are little meaningful from the perspective of a graphDB. Sails-orientdb allows you to change the name of the edge by adding a property `joinTableNames` to the dominant collection. Example:
 ```javascript
 {
   identity: 'driver',
@@ -166,13 +167,13 @@ Usually Waterline will create rather long names for join tables (e.g. driver_tax
   }
 }
 ```
-In this example the join table name **driver_taxis__taxi_drivers** gets converted to **drives**. Complete example of the fixture can be found [here](https://github.com/appscot/waterline-orientdb/tree/master/test/integration-orientdb/fixtures/manyToMany.driverHack.fixture.js).
+In this example the join table name **driver_taxis__taxi_drivers** gets converted to **drives**. Complete example of the fixture can be found [here](https://github.com/appscot/sails-orientdb/tree/master/test/integration-orientdb/fixtures/manyToMany.driverHack.fixture.js).
 
 #### Many-to-Many Through Associations
-In a [Many-to-Many Through Association](https://github.com/balderdashy/waterline-docs/blob/master/associations.md#many-to-many-through-associations) ([more info](https://github.com/balderdashy/waterline/issues/705#issuecomment-60945411)) the join table is represented in OrientDB by Edges. Waterline-orientdb automatically creates the edges whenever an association is created. The Edge is named after the property tableName (or identity in case tableName is missing).
+In a [Many-to-Many Through Association](https://github.com/balderdashy/waterline-docs/blob/master/associations.md#many-to-many-through-associations) ([more info](https://github.com/balderdashy/waterline/issues/705#issuecomment-60945411)) the join table is represented in OrientDB by Edges. Sails-orientdb automatically creates the edges whenever an association is created. The Edge is named after the property tableName (or identity in case tableName is missing).
 
 #### Populate queries (joins)
-Waterline-orientdb implements its own custom join function so when the user runs `.populate(some_collection)` it will send a single `SELECT` query with a [fetchplan](http://www.orientechnologies.com/docs/last/orientdb.wiki/Fetching-Strategies.html) to OrientDB. This way join operations remain fast and performant by leveraging OrientDB's graphDB features.
+Sails-orientdb implements its own custom join function so when the user runs `.populate(some_collection)` it will send a single `SELECT` query with a [fetchplan](http://www.orientechnologies.com/docs/last/orientdb.wiki/Fetching-Strategies.html) to OrientDB. This way join operations remain fast and performant by leveraging OrientDB's graphDB features.
 
 ## Usage
 
@@ -180,11 +181,11 @@ Waterline-orientdb implements its own custom join function so when the user runs
 For a comprehensive reference on how to use waterline please check [waterline-docs](https://github.com/balderdashy/waterline-docs#waterline-v010-documentation). Below we describe how `waterine-orientdb` approaches and adds to the waterline core experience.
 
 ### Models
-`waterline-orientdb` uses the standard [waterline model definition](https://github.com/balderdashy/waterline-docs/blob/master/models.md) and extends it in order to accommodate OrientDB features.
+`sails-orientdb` uses the standard [waterline model definition](https://github.com/balderdashy/waterline-docs/blob/master/models.md) and extends it in order to accommodate OrientDB features.
 
 #### orientdbClass
 
-It's possible to force the class of a model by adding the property `orientdbClass` to the definition. Generally this is not required as `waterline-orientdb` can determine which is the best class to use, so it should only be used in special cases. Possible values:
+It's possible to force the class of a model by adding the property `orientdbClass` to the definition. Generally this is not required as `sails-orientdb` can determine which is the best class to use, so it should only be used in special cases. Possible values:
 * `undefined` - the default and recommended option. The appropriate class will be determined for the model;
 * `""` or `"document"` - class will be the default OrientDB document class;
 * `"V"` - class will be Vertex;
@@ -431,14 +432,28 @@ npm test
 ```
 
 ## Issues or Suggestions
-We are always trying to improve `waterline-orientdb` either by fixing issues or adding new features. If you experienced an issue or have a suggestion feel free to [raise a new issue](https://github.com/appscot/waterline-orientdb/issues/new), preferably by following the [guidelines](./CONTRIBUTING.md#how-to-report-bugs).
+We are always trying to improve `sails-orientdb` either by fixing issues or adding new features. If you experienced an issue or have a suggestion feel free to [raise a new issue](https://github.com/appscot/sails-orientdb/issues/new), preferably by following the [guidelines](./CONTRIBUTING.md#how-to-report-bugs).
 
-
-## Contributions
+### Contributions
 
 We are always looking for the quality contributions! Please check the [CONTRIBUTING.md](./CONTRIBUTING.md) for the contribution guidelines.
 
-Thanks so much to Srinath Janakiraman ([vjsrinath](http://github.com/vjsrinath)) who built the `sails-orientdb` adapter, from which `waterline-orientdb` was originally forked.
+
+## History
+
+In July 2014, [Srinath Janakiraman](http://github.com/vjsrinath) created the original [sails-orientdb](https://github.com/vjsrinath/sails-orientdb) adapter.
+
+Almost simultaneously, [Gaurav Dhiman](https://github.com/gauravdhiman) created [sails-orientdb-binary](https://github.com/gauravdhiman/sails-orientdb-binary) with support for both binary and REST protocol.
+
+In October 2014, [Dário Marcelino](https://github.com/dmarcelino) forked `sails-orientdb` and created [waterline-orientdb](https://github.com/appscot/waterline-orientdb) with improved support when used with waterline standalone and made the adapter pass all [API integration tests](https://github.com/balderdashy/waterline-adapter-tests).
+
+In March 2015, Srinath, Gaurav and Dário combined their efforts into maintaining a single adapter with the original name: [sails-orientdb](https://github.com/appscot/sails-orientdb).
+
+
+## Authors
+ * Srinath Janakiraman ([vjsrinath](http://github.com/vjsrinath))
+ * Gaurav Dhiman ([gauravdhiman](https://github.com/gauravdhiman))
+ * Dário Marcelino ([dmarcelino](https://github.com/dmarcelino))
 
 
 ## About Waterline
