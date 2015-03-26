@@ -9,16 +9,10 @@ after_script:
   - npm run coverage && cat ./coverage/lcov.info | ./node_modules/.bin/codeclimate
 env:
   global:
-    - DEBUG="waterline-orientdb:*,-waterline-orientdb:*:debug"
+    - DEBUG="sails-orientdb:*,-sails-orientdb:*:debug"
   matrix:
     - ORIENTDB_VERSION=1.7.10
     - ORIENTDB_VERSION=2.0.2
-deploy:
-  provider: npm
-  email: npm@appscot.com
-  api_key: ijbUZx+cKKPD3FADy1wBzEs0OkoRDKMu8Wdra/Zrs4Ir+YkUsh7xPoyPh7C37uKuwtCbC1g+W5Mq1ZNlcIkI9lAylL/9H/2G2SPIs2PMp5OW1rbuAWmbyCapVGBT4OuWh8tRvhxBPUOkT3Z9tkUBaU6ULZezsmPnf14mS3pTJMI=
-  on:
-    tags: true
 addons:
   code_climate:
     repo_token: da62631f47073c66af8ef169090acb1f49a9aa332f3a449ef04cbf6b58c0c446
