@@ -15,4 +15,4 @@ env:
     - ORIENTDB_VERSION=2.0.2
 addons:
   code_climate:
-    repo_token: da62631f47073c66af8ef169090acb1f49a9aa332f3a449ef04cbf6b58c0c446
+    repo_token: 9048159e3344dd9ba3afbc6044c1648f472de839baf7cc9eb73089b71439052b
