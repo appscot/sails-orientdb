@@ -208,7 +208,7 @@ Note, when using a document database (through `config.options.databaseType`), `o
 
 ### Methods
 
-This adapter extends waterline with the following methods:
+This adapter supports all waterline standard [query methods](https://github.com/balderdashy/waterline-docs/blob/master/query-methods.md) and extends it with the following methods:
 
 #### .query (query [, options], cb)
 Runs a SQL query against the database using Oriento's query method. Will attempt to convert @rid's into ids.
