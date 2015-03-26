@@ -34,9 +34,10 @@ Sails-orientdb connects to OrientDB using [Oriento](https://github.com/codemix/o
 4. [Usage](#usage)
 5. [Testing](#testing)
 6. [Issues or Suggestions](#issues-or-suggestions)
-7. [Contributions](#contributions)
-8. [About Waterline](#about-waterline)
-9. [License](#license)
+7. [History](#history)
+8. [Authors](#authors)
+9. [About Waterline](#about-waterline)
+10. [License](#license)
 
 
 ## Installation
@@ -433,12 +434,26 @@ npm test
 ## Issues or Suggestions
 We are always trying to improve `sails-orientdb` either by fixing issues or adding new features. If you experienced an issue or have a suggestion feel free to [raise a new issue](https://github.com/appscot/sails-orientdb/issues/new), preferably by following the [guidelines](./CONTRIBUTING.md#how-to-report-bugs).
 
-
-## Contributions
+### Contributions
 
 We are always looking for the quality contributions! Please check the [CONTRIBUTING.md](./CONTRIBUTING.md) for the contribution guidelines.
 
-Thanks so much to Srinath Janakiraman ([vjsrinath](http://github.com/vjsrinath)) who built the `sails-orientdb` adapter, from which `sails-orientdb` was originally forked.
+
+## History
+
+In July 2014, [Srinath Janakiraman](http://github.com/vjsrinath) created the original [sails-orientdb](https://github.com/vjsrinath/sails-orientdb) adapter.
+
+Almost simultaneously, [Gaurav Dhiman](https://github.com/gauravdhiman) created [sails-orientdb-binary](https://github.com/gauravdhiman/sails-orientdb-binary) with support for both binary and REST protocol.
+
+In October 2014, [Dário Marcelino](https://github.com/dmarcelino) forked `sails-orientdb` and created [waterline-orientdb](https://github.com/appscot/waterline-orientdb) with improved support when used with waterline standalone and made the adapter pass all [API integration tests](https://github.com/balderdashy/waterline-adapter-tests).
+
+In March 2015, Srinath, Gaurav and Dário combined their efforts into maintaining a single adapter with the original name: [sails-orientdb](https://github.com/appscot/sails-orientdb).
+
+
+## Authors
+ * Srinath Janakiraman ([vjsrinath](http://github.com/vjsrinath))
+ * Gaurav Dhiman ([gauravdhiman](https://github.com/gauravdhiman))
+ * Dário Marcelino ([dmarcelino](https://github.com/dmarcelino))
 
 
 ## About Waterline
