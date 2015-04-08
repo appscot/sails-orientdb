@@ -84,9 +84,9 @@ new TestRunner({
       //grep: 'should return model instances'
     },
     
-    // Invert Grep
-    // Experimental, not supported by waterline-adapter-tests (yet)
-    mochaInvert: false,
+    mochaChainableMethods: {
+      //invert: true
+    },
     
     // Return code -1 if any test failed
     failOnError: true
