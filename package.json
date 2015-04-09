@@ -63,7 +63,8 @@
       "semantic",
       "queryable",
       "associations",
-      "migratable"
+      "migratable",
+      "sql"
     ],
     "waterlineVersion": "~0.10.18"
   }
