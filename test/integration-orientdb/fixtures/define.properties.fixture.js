@@ -11,6 +11,7 @@ module.exports = {
     },
     textProp : 'text',
     jsonProp : 'json',
+    arrayProp : 'array',
     floatProp : 'float',
     emailProp : 'email',
     propRequired : {
