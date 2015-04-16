@@ -13,11 +13,10 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 > `sails-orientdb` maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID.
 >
 >
-> Migrations
+> [Migrations](http://sailsjs.org/#!/documentation/concepts/ORM/model-settings.html?q=migrate)
 >
 > We don't recommend using `migrate: 'alter'` as it has the nasty effect of deleting the data of all edges on a graphDB, leaving only data on the vertexes. 
-> Either use `'safe'` and migrate manually or use `'drop'` to completely reset the data and collections. In production
-> always use `'safe'`. We are currently pushing for a new kind of migration strategy named `'create'`, check [waterline issue #846](https://github.com/balderdashy/waterline/issues/846).
+> Either use `'safe'` and migrate manually, or use `'drop'` to completely reset the data and collections or use [`'create'`](https://github.com/balderdashy/waterline/issues/846) to only create new collections/attributes.
 
 
 Sails-orientdb aims to work with Waterline v0.10.x and [OrientDB](http://www.orientechnologies.com/orientdb/) v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](./CONTRIBUTING.md)!
@@ -178,10 +177,40 @@ Sails-orientdb implements its own custom join function so when the user runs `.p
 ## Usage
 
 ### Documentation
-For a comprehensive reference on how to use waterline please check [waterline-docs](https://github.com/balderdashy/waterline-docs#waterline-v010-documentation). Below we describe how `waterine-orientdb` approaches and adds to the waterline core experience.
+For a comprehensive reference on how to use `sails-orientdb`/waterline check the [Waterline Documentation](https://github.com/balderdashy/waterline-docs#waterline-v010-documentation). Below we describe how `sails-orientdb` approaches and adds to the waterline core experience.
 
 ### Models
 `sails-orientdb` uses the standard [waterline model definition](https://github.com/balderdashy/waterline-docs/blob/master/models.md) and extends it in order to accommodate OrientDB features.
+
+#### Indexes
+To add an index to an attribute the keyword `index` is used as per the waterline default [model definition](https://github.com/balderdashy/waterline-docs/blob/master/models.md#index):
+```javascript
+attributes: {
+  email: {
+    type: 'string',
+    index: true  // will default to SB-Tree NOTUNIQUE
+  }
+}
+```
+
+However OrientDB supports [other indexes](http://orientdb.com/docs/last/Indexes.html#index-types) and it's possible to use them by specifying the name of the index type as a string in the `index` key. Example:
+```javascript
+attributes: {
+  email: {
+    type: 'string',
+    index: 'fulltext_hash_index'
+  }
+}
+```
+List of supported index types:
+* unique
+* notunique
+* fulltext
+* dictionary
+* unique_hash_index
+* notunique_hash_index
+* fulltext_hash_index
+* dictionary_hash_index
 
 #### orientdbClass
 
