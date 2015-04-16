@@ -1,6 +1,6 @@
 {
-  "name": "waterline-orientdb",
-  "version": "0.10.40",
+  "name": "sails-orientdb",
+  "version": "0.10.50",
   "description": "OrientDB adapter for Waterline / Sails.js ORM",
   "main": "./lib/adapter.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:appscot/waterline-orientdb.git"
+    "url": "git@github.com:appscot/sails-orientdb.git"
   },
   "keywords": [
     "orientdb",
@@ -32,18 +32,22 @@
     {
       "name": "Srinath Janakiraman",
       "email": "vjsrinath@live.com"
+    },
+    {
+      "name": "Gaurav Dhiman",
+      "email": "gauravd.chd@gmail.com"
     }
   ],
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
     "async": "~0.9.0",
-    "debug-logger": "^0.3.1",
+    "debug-logger": "^0.4.0",
     "lodash": "^3.3.0",
     "oriento": "~1.1.0",
     "waterline-criteria": "~0.11.1",
     "waterline-cursor": "~0.0.5",
-    "waterline-sequel-orientdb": "~0.0.26"
+    "waterline-sequel-orientdb": "~0.0.27"
   },
   "devDependencies": {
     "codeclimate-test-reporter": "~0.0.4",
@@ -59,7 +63,8 @@
       "semantic",
       "queryable",
       "associations",
-      "migratable"
+      "migratable",
+      "sql"
     ],
     "waterlineVersion": "~0.10.18"
   }

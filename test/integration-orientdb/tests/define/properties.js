@@ -71,6 +71,15 @@ describe('Define related Operations', function() {
         .error(done);
     });
     
+    it('should properly create EmbeddedList property from array', function(done) {
+      klass.property.get('arrayProp')
+        .then(function(property) {
+          assert.equal(Oriento.types[property.type], 'EmbeddedList');
+          done();
+        })
+        .error(done);
+    });
+    
     it('should properly create Link property from model', function(done) {
       klass.property.get('modelProp')
         .then(function(property) {

@@ -16,6 +16,32 @@ module.exports = {
       type : 'string',
       index : true
     },
+    indexFulltext : {
+      columnName : 'indexFulltext',
+      type : 'string',
+      index : 'fulltext'
+    },
+    indexDictionary : {
+      type : 'string',
+      index : 'dictionary'
+    },
+    
+    indexUniqueHash : {
+      type : 'string',
+      index : 'unique_hash_index'
+    },
+    indexNotUniqueHash : {
+      type : 'string',
+      index : 'notunique_hash_index'
+    },
+    indexFulltextHash : {
+      type : 'string',
+      index : 'fulltext_hash_index'
+    },
+    indexDictionaryHash : {
+      type : 'string',
+      index : 'dictionary_hash_index'
+    },
     
     props: {
       model: 'properties'

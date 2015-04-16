@@ -51,6 +51,15 @@ describe('Association Interface', function() {
           .catch(done);
       });
       
+      it('count joins: should return the number of through associations', function(done) {
+        Associations.Owns.count()
+          .then(function(count){
+            assert.equal(count, 1);
+            done();
+          })
+          .catch(done);
+      });
+      
       it('findOne: should not have team or friend records, nor edges', function(done) {
         Associations.Stadium.findOne(stadiumRecord.id)
           .then(function(stadium){

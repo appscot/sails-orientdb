@@ -5,7 +5,7 @@
 //////////////////////////////////////////////////////////////////
 // Install dependencies:
 // npm install waterline
-// npm install waterline-orientdb
+// npm install sails-orientdb
 // npm install express
 // npm install body-parser
 // npm install method-override
@@ -30,7 +30,7 @@ var orm = new Waterline();
 //////////////////////////////////////////////////////////////////
 
 // Require any waterline compatible adapters here
-var orientAdapter = require('waterline-orientdb');
+var orientAdapter = require('sails-orientdb');
 
 
 // Build A Config Object
