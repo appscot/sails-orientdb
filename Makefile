@@ -4,7 +4,7 @@ REPORTER = spec
 DB?=waterline-test-integration
 
 test: clean-all test-unit test-integration-all
-test-all: test clean test-integration-documentdb
+test-all: test test-integration-schemaless clean test-integration-documentdb
 
 
 test-integration-all: test-integration-orientdb test-integration
@@ -18,7 +18,12 @@ test-integration: test-integration-generic
 	@NODE_ENV=test node test/integration/runner.js
 	
 test-integration-documentdb: test-integration-generic
+	@echo DATABASE_TYPE=document
 	@NODE_ENV=test DATABASE_TYPE=document node test/integration/runner.js
+	
+test-integration-schemaless: test-integration-generic
+	@echo SCHEMA=0
+	@NODE_ENV=test SCHEMA=0 node test/integration/runner.js
 
 test-integration-orientdb:
 	@echo "\n\nNOTICE: If tests fail, please ensure you've set the correct credentials in test/test-connection.json\n"
