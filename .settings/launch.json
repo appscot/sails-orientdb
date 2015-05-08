@@ -1,0 +1,60 @@
+{
+	"version": "0.1.0",
+	// List of configurations. Add new configurations or edit existing ones.  
+	// ONLY "node" and "mono" are supported, change "type" to switch.
+	"configurations": [
+		{
+			// Name of configuration; appears in the launch configuration drop down menu.
+			"name": "Integration tests",
+			// Type of configuration. Possible values: "node", "mono".
+			"type": "node",
+			// Workspace relative or absolute path to the program.
+			"program": "test/integration/runner.js",
+			// Automatically stop program after launch.
+			"stopOnEntry": true,
+			// Command line arguments passed to the program.
+			"args": [],
+			// Workspace relative or absolute path to the working directory of the program being debugged. Default is the current workspace.
+			"cwd": ".",
+			// Workspace relative or absolute path to the runtime executable to be used. Default is the runtime executable on the PATH.
+			"runtimeExecutable": null,
+			// Environment variables passed to the program.
+			"env": { }
+		},
+		{
+			"name": "Unit tests",
+			"type": "node",
+			"program": ".settings/mocha.js",
+			"isTestCommand": true,
+			"stopOnEntry": true,
+			"args": ["test/unit/*.js", "test/unit/**/*.js"],
+			"cwd": ".",
+			"runtimeExecutable": null,
+			"env": { }
+		}, 
+		{
+			"name": "OrientDB Integration tests",
+			"type": "node",
+			"program": ".settings/mocha.js",
+			"isTestCommand": true,
+			"stopOnEntry": true,
+			"args": [
+				"test/integration-orientdb/*.js", 
+				"test/integration-orientdb/tests/**/*.js",
+				"test/integration-orientdb/bugs/*.js",
+				"test/integration-orientdb/bugs/**/*.js"
+			],
+			"cwd": ".",
+			"runtimeExecutable": null,
+			"env": { }
+		},
+		{
+			"name": "Attach",
+			"type": "node",
+			// TCP/IP address. Default is "localhost".
+			"address": "localhost",
+			// Port to attach to.
+			"port": 5858
+		}
+	]
+}
