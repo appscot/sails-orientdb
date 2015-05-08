@@ -3,7 +3,8 @@ var assert = require('assert'),
 
 var self = this,
     fixtures,
-    config;
+    config,
+    configConn = require('../../../test-connection.json');
 
 describe('Config tests', function() {
   before(function (done) {
@@ -25,8 +26,8 @@ describe('Config tests', function() {
     };
     
     config = {
-      user : 'root',
-      password : 'root',
+      user : configConn.user,
+      password : configConn.password,
       database : 'test_config_db'
     };
 
@@ -61,12 +62,11 @@ describe('Config tests', function() {
       /////////////////////////////////////////////////////
       // TEST METHODS
       ////////////////////////////////////////////////////
-      
       it('should be the same as connection username', function(done) {
         CREATE_TEST_WATERLINE(self, config, fixtures, function(err){
           if(err) { return done(err); }
           self.collections.User.getDB(function(db){
-            assert.equal(db.username, 'root');
+            assert.equal(db.username, config.user);
             done();
           });
         });
@@ -92,7 +92,24 @@ describe('Config tests', function() {
           });
         });
       });
-      
+
+      it('should be able to connect with database credentials only', function(done) {
+        self.waterline.teardown(function (err) {
+          if (err) { return done(err); }
+          
+          var newConfig = _.cloneDeep(configConn);
+          newConfig.user = undefined;
+          newConfig.password = undefined;
+          newConfig.options.databaseUser = newConfig.databaseTestUser || 'admin';
+          newConfig.options.databasePassword = newConfig.databaseTestPassword || 'admin';
+          
+          CREATE_TEST_WATERLINE(self, newConfig, fixtures, function(err){
+            if (err) { return done(err); }
+            
+            done();
+          });
+        });
+      })      
     });
   });
 });
