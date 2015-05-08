@@ -27,7 +27,7 @@ describe('Config tests', function() {
     config = {
       user : 'root',
       password : 'root',
-      database : 'test_config_db'
+      database: 'test_config_options_db'
     };
 
     CREATE_TEST_WATERLINE(self, config, fixtures, done);
@@ -36,9 +36,9 @@ describe('Config tests', function() {
     DELETE_TEST_WATERLINE(config, done);
   });
 
-  describe('database', function() {
+  describe('options', function() {
   
-    describe('username', function() {
+    describe('pool', function() {
 
     /////////////////////////////////////////////////////
     // TEST SETUP
@@ -62,33 +62,30 @@ describe('Config tests', function() {
       // TEST METHODS
       ////////////////////////////////////////////////////
       
-      it('should be the same as connection username', function (done) {
+      it('should be undefined', function (done) {
         CREATE_TEST_WATERLINE(self, config, fixtures, function (err) {
           if (err) {  return done(err); }
-          self.collections.User.getDB(function (db) {
-            assert.equal(db.username, 'root');
-            done();
-          });
+          var server = self.collections.User.getServer();
+          assert.equal(server.transport.pool, undefined);
+          done();
         });
       });
       
-      it('should be the same as databaseUser', function (done) {
+      it('should have max equal 10', function (done) {
         self.waterline.teardown(function (err) {
           if (err) {  return done(err); }
 
           var newConfig = _.cloneDeep(config);
 
           newConfig.options = {
-            databaseUser: 'admin',
-            databasePassword: 'admin',
+            pool: { max: 10 }
           };
 
           CREATE_TEST_WATERLINE(self, newConfig, fixtures, function (err) {
             if (err) {  return done(err); }
-            self.collections.User.getDB(function (db) {
-              assert.equal(db.username, 'admin');
-              done();
-            });
+            var server = self.collections.User.getServer();
+            assert.equal(server.transport.pool.max, 10);
+            done();
           });
         });
       });
