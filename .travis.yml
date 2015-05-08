@@ -12,7 +12,7 @@ env:
     - DEBUG="sails-orientdb:*,-sails-orientdb:*:debug"
   matrix:
     - ORIENTDB_VERSION=1.7.10
-    - ORIENTDB_VERSION=2.0.2
+    - ORIENTDB_VERSION=2.0.8
     - ORIENTDB_VERSION=2.1-SNAPSHOT
 addons:
   code_climate:

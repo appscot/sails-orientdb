@@ -73,8 +73,10 @@ before(function(done) {
   Connections.test.adapter = 'wl_tests';
   
   var connections = { associations: _.clone(Connections.test) };
+  
+  var defaults = { migrate: 'alter' };
 
-  waterline.initialize({ adapters: { wl_tests: Adapter }, connections: connections }, function(err, _ontology) {
+  waterline.initialize({ adapters: { wl_tests: Adapter }, connections: connections, defaults: defaults }, function(err, _ontology) {
     if(err) {
       console.log('ERROR:', err);
       done(err);

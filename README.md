@@ -79,7 +79,7 @@ var config = {
   },
   
   defaults: {
-    // The first time you run sails-orientdb `migrate` needs to be set to 'drop' or 'alter' in order to create the DB schema
+    // The first time you run sails-orientdb `migrate` needs to be set to 'drop', 'alter' or 'create' in order to create the DB schema
     // More about this on: http://sailsjs.org/#!/documentation/concepts/ORM/model-settings.html
     migrate: 'safe'
   }
@@ -95,6 +95,7 @@ var config = {
       user: 'root',
       password: 'root',
       database: 'waterline',
+      schema : true,
       
       // Additional options
       options: {
