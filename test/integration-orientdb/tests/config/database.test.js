@@ -4,7 +4,7 @@ var assert = require('assert'),
 var self = this,
     fixtures,
     config,
-		configConn = require('../../../test-connection.json');
+    configConn = require('../../../test-connection.json');
 
 describe('Config tests', function() {
   before(function (done) {
@@ -64,8 +64,6 @@ describe('Config tests', function() {
       ////////////////////////////////////////////////////
       it('should be the same as connection username', function(done) {
         CREATE_TEST_WATERLINE(self, config, fixtures, function(err){
-      		process.stdout.write("Data: " + JSON.stringify(config));
-      
           if(err) { return done(err); }
           self.collections.User.getDB(function(db){
             assert.equal(db.username, config.user);
@@ -95,23 +93,23 @@ describe('Config tests', function() {
         });
       });
 
-			it('should be able to connect with database credentials only', function(done) {
-				self.waterline.teardown(function (err) {
-					if (err) { return done(err); }
-					
-					var newConfig = _.cloneDeep(configConn);
-					newConfig.user = undefined;
-					newConfig.password = undefined;
-					newConfig.options.databaseUser = newConfig.databaseTestUser;
-					newConfig.options.databasePassword = newConfig.databaseTestPassword;
-
+      it('should be able to connect with database credentials only', function(done) {
+        self.waterline.teardown(function (err) {
+          if (err) { return done(err); }
+          
+          var newConfig = _.cloneDeep(configConn);
+          newConfig.user = undefined;
+          newConfig.password = undefined;
+          newConfig.options.databaseUser = newConfig.databaseTestUser || 'admin';
+          newConfig.options.databasePassword = newConfig.databaseTestPassword || 'admin';
+          
           CREATE_TEST_WATERLINE(self, newConfig, fixtures, function(err){
             if (err) { return done(err); }
-						
-						done();
-					});
-				});
-			})      
+            
+            done();
+          });
+        });
+      })      
     });
   });
 });
