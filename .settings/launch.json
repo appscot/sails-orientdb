@@ -25,7 +25,6 @@
 			"name": "Unit tests",
 			"type": "node",
 			"program": ".settings/mocha.js",
-			"isTestCommand": true,
 			"stopOnEntry": true,
 			"args": ["test/unit/*.js", "test/unit/**/*.js"],
 			"cwd": ".",
@@ -36,7 +35,6 @@
 			"name": "OrientDB Integration tests",
 			"type": "node",
 			"program": ".settings/mocha.js",
-			"isTestCommand": true,
 			"stopOnEntry": true,
 			"args": [
 				"test/integration-orientdb/*.js", 
