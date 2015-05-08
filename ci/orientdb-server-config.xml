@@ -42,7 +42,7 @@
         <!-- USE SESSION TOKEN, TO TURN ON SET THE 'ENABLED' PARAMETER TO 'true' -->
         <handler class="com.orientechnologies.orient.server.token.OrientTokenHandler">
             <parameters>
-                <parameter name="enabled" value="true"/>
+                <parameter name="enabled" value="false"/>
                 <!-- PRIVATE KEY -->
                 <parameter name="oAuth2Key" value="aGVsbG8gd29ybGQgdGhpcyBpcyBteSBzZWNyZXQgc2VjcmV0"/>
                 <!-- SESSION LENGTH IN SECONDS, DEFAULT=1 HOUR -->
