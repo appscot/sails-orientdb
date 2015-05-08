@@ -21,7 +21,7 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 
 Sails-orientdb aims to work with Waterline v0.10.x and [OrientDB](http://www.orientechnologies.com/orientdb/) v1.7.10 and later. While it may work with earlier versions, they are not currently supported, [pull requests are welcome](./CONTRIBUTING.md)!
 
-From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) sails-orientdb supports `Semantic`, `Queryable`, `Associations` and `Migratable` interfaces. Sails-orientdb complies with waterline API and it's used in the same way as other waterline/sails adapters.
+From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) sails-orientdb supports `Semantic`, `Queryable`, `Associations`, `Migratable` and `SQL` interfaces. Sails-orientdb complies with waterline API and it's used in the same way as other waterline/sails adapters.
 
 Sails-orientdb connects to OrientDB using [Oriento](https://github.com/codemix/oriento) (OrientDB's official driver).
 
@@ -41,12 +41,15 @@ Sails-orientdb connects to OrientDB using [Oriento](https://github.com/codemix/o
 
 ## Installation
 
-Install from NPM.
-
+Install stable version from NPM:
 ```bash
 npm install sails-orientdb --save
 ```
 
+Install edge version from GitHub (mostly for testing):
+```bash
+npm install appscot/sails-orientdb
+```
 
 ## Configuration
 
@@ -484,6 +487,7 @@ In March 2015, Srinath, Gaurav and Dário combined their efforts into maintainin
  * Srinath Janakiraman ([vjsrinath](http://github.com/vjsrinath))
  * Gaurav Dhiman ([gauravdhiman](https://github.com/gauravdhiman))
  * Dário Marcelino ([dmarcelino](https://github.com/dmarcelino))
+ * and our generous [contributors](https://github.com/appscot/sails-orientdb/graphs/contributors) (thank you!)
 
 
 ## About Waterline
