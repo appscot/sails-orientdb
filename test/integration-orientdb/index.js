@@ -97,7 +97,7 @@ global.DELETE_TEST_WATERLINE = function(testConfig, cb){
       return cb(err);
     };
     
-    ontology.collections[Object.keys(ontology.collections)[0]].getServer(function(server){
+    Adapter.getServer(localConfig.database, undefined, function(server){
       server.drop({
         name: localConfig.database,
         storage: localConfig.options.storage
