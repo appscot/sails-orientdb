@@ -64,9 +64,14 @@ The tests are based on [mocha](http://visionmedia.github.io/mocha) and [commonjs
 
 Before running the tests, ensure you've configured your orientdb server to use the same credentials as in [test-connection.json](./test/test-connection.json).
 
-To run the tests:
+To run the standard tests:
 ```sh
 npm test
+```
+
+To run all tests (including document DB and schemaless mode):
+```sh
+make test-all
 ```
 
 To generate the code coverage report, run:
