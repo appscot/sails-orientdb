@@ -419,7 +419,7 @@ module.exports = Waterline.Collection.extend({
       via: 'team',
       dominant: true
     }
-
+  }
 });
 ```
 
