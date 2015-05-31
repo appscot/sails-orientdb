@@ -1,7 +1,7 @@
 var assert = require('assert'),
     _ = require('lodash');
 
-describe.only('Adapter Custom Methods', function() {
+describe('Adapter Custom Methods', function() {
 
   describe('query', function() {
     
