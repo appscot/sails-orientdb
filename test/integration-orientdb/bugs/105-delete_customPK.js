@@ -37,7 +37,7 @@ describe('Bug #105: delete fails when using custom PK', function () {
     ////////////////////////////////////////////////////
     
     before(function (done) {
-      self.collections.User.create({ sid: 'user1', name: 'john' }, done);
+      self.collections.User.create({ sid: 'user2', name: 'john' }, done);
     });
     
     
