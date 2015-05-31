@@ -48,7 +48,7 @@
     "oriento": "~1.1.0",
     "waterline-criteria": "~0.11.1",
     "waterline-cursor": "~0.0.5",
-    "waterline-sequel-orientdb": "~0.0.27"
+    "waterline-sequel-orientdb": "^0.1.0"
   },
   "devDependencies": {
     "codeclimate-test-reporter": "~0.0.4",
@@ -56,7 +56,7 @@
     "jshint": "~2.6.0",
     "mocha": "*",
     "waterline": "~0.10.18",
-    "waterline-adapter-tests": "~0.10.8"
+    "waterline-adapter-tests": "0.10.11"
   },
   "waterlineAdapter": {
     "type": "orientdb",
