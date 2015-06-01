@@ -51,6 +51,8 @@ describe('Adapter Custom Methods', function() {
         Associations.User_resource.deleteEdges(user.id, profile.id, { '@class': 'followsTable' }, function(err, count){
           if(err) return done(err);
           
+          assert.equal(count, 1);
+          
           Associations.User_resource.getDB(function(db){
             db
               .query('select expand(outE()) from ' + user.id)
@@ -66,9 +68,11 @@ describe('Adapter Custom Methods', function() {
       });
       
       
-      it('should delete an edge between a user and profile', function(done) {
-        Associations.User_resource.deleteEdges(user.id, profile.id, null, function(err, count){
-          if(err) return done(err);
+      it('should delete an edge between a user and profile using a promise', function(done) {
+        Associations.User_resource.deleteEdges(user.id, profile.id, null)
+        .then(function(count){
+          
+          assert.equal(count, 1);
           
           Associations.User_resource.getDB(function(db){
             db
@@ -80,7 +84,8 @@ describe('Adapter Custom Methods', function() {
               })
               .catch(done);
           });
-        });
+        })
+        .catch(done);
       });
       
     });
