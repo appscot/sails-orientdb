@@ -346,6 +346,23 @@ usage:
   ```
 > Note: when using many-to-many or many-to-many through associations edges will automatically be deleted when using the conventional waterline methods. This method is for manual edge manipulation only and it's not required for maintaining associations.
 
+#### .increment (criteria, field[, amount][, cb])
+Increments the given field by amount (defaults to `1`). This can be used to generate sequencial numbers, more about this in [OrientDB docs](http://orientdb.com/docs/last/Sequences-and-auto-increment.html).
+
+usage: 
+  ```javascript
+  // Given a model Counter with attributes `name` and `value`
+  Counter.increment({ name: 'counter1' }, 'value', function (err, counter) {
+    console.log('counter1 has increased by 1 to:', counter.value);
+  });
+  
+  // To decrement use negative numbers
+  Counter.increment({ name: 'counter1' }, 'value', -2)
+  .then(function (counter) {
+    console.log('counter1 haas decreased by 2 to:', counter.value);
+  });
+  ```
+
 #### .removeCircularReferences (object)
 Convenience method that replaces circular references with `id` when one is available, otherwise it replaces the object with string '[Circular]'.
   
