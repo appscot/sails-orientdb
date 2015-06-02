@@ -4,7 +4,7 @@ var assert = require('assert'),
 
 describe('Adapter Custom Methods', function () {
 
-  describe.only('increment', function () {
+  describe('increment', function () {
     
     /////////////////////////////////////////////////////
     // TEST SETUP
