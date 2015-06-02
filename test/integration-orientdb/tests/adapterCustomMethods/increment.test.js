@@ -1,9 +1,10 @@
 var assert = require('assert'),
-  _ = require('lodash');
+  _ = require('lodash'),
+  async = require('async');
 
 describe('Adapter Custom Methods', function () {
 
-  describe('increment', function () {
+  describe.only('increment', function () {
     
     /////////////////////////////////////////////////////
     // TEST SETUP
@@ -53,6 +54,25 @@ describe('Adapter Custom Methods', function () {
           assert.strictEqual(counter.value, lastCount);
           done();
         }).catch(done);
+      });
+      
+      it('should increment multiple times without returning duplicates', function (done) {
+        var opsNumber = 50;
+        async.map(Array.apply(0, Array(opsNumber)), function (val, next){
+          Associations.Counter.increment({ name: 'counter1' }, 'value')
+          .then(function (counter) {
+            next(null, counter.value);
+          }).catch(next);
+        }, 
+        function complete(err, results){
+          assert.equal(err, null);
+          
+          var uniqueCounts = _.unique(results);
+          assert.strictEqual(uniqueCounts.length, opsNumber);
+          done();
+        });
+        
+        
       });
 
     });
