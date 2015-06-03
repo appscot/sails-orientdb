@@ -157,4 +157,19 @@ describe('associations class', function () {
     done();
   });
   
+  it('expandResults: should not confuse ids with rids', function(done){
+    var resultset = [
+        { id: '#5:0', name: 'Maria', picture: { id: 1 }, likes: 1 }
+      ];
+    
+    var expandedResultset = [
+        { id: '#5:0', name: 'Maria', picture: { id: 1 }, likes: 1 }
+      ];
+    
+    var transformed = associations.expandResults(resultset);
+    assert.deepEqual(transformed, expandedResultset);
+    
+    done();
+  });
+  
 });
