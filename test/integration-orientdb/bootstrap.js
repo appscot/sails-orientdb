@@ -41,6 +41,7 @@ var fixtures = {
   IndexesFixture: require('./fixtures/define.indexes.fixture'),
   PropertiesFixture: require('./fixtures/define.properties.fixture'),
   SchemalessPropertiesFixture: require('./fixtures/define.schemalessProperties.fixture'),
+  CounterFixture: require('./fixtures/counter.fixture'),
 };
 
 

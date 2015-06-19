@@ -2,7 +2,8 @@
  * Test dependencies
  */
 var assert = require('assert'),
-    utils = require('../../lib/utils');
+    utils = require('../../lib/utils'),
+    RecordId = require('oriento').RID;
 
 
 describe('utils helper class', function () {
@@ -256,4 +257,45 @@ describe('utils helper class', function () {
       done();
     });
   });
+  
+  describe('matchRecordId:', function () {
+    
+    var fixturesTrue = [
+      new RecordId('#10:1'),
+      new RecordId('#0:0'),
+      new RecordId('#-2:1'),
+      '#5:5',
+      '#5:0',
+      '#-2:0',
+      '#-2:1'
+    ];
+    
+    var fixturesFalse = [
+      null,
+      undefined,
+      4,
+      '5',
+      '5:5',
+      '-2:1',
+      '#5',
+      '#5:5:5',
+      '#2:-1',
+      '#:1'
+    ];
+    
+    it('should match genuine Record IDs', function () {
+      fixturesTrue.forEach(function(rid){
+        assert.equal(utils.matchRecordId(rid), true, 'test failed for: ' + rid);
+      });
+    });
+    
+    it('should not match invalid Record IDs', function () {
+      fixturesFalse.forEach(function(rid){
+        assert.equal(utils.matchRecordId(rid), false, 'test failed for: ' + rid);
+      });
+    });
+  });
+  
+  
+  
 });

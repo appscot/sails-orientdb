@@ -55,6 +55,32 @@ describe('Adapter Custom Methods', function() {
         });       
       });
       
+      it('should return user in a promise', function(done) {
+        Associations.Friend.query("SELECT FROM friendTable WHERE name='friend query'")
+        .then(function(retrievedUsers){
+          assert.equal(retrievedUsers.length, 1);
+          assert.equal(retrievedUsers[0].id, user.id);
+          assert(!retrievedUsers[0]['@rid']);
+          done();
+        })
+        .catch(done);       
+      });
+      
+      it('should return user in a promise using parameterized query', function(done) {
+        Associations.Friend.query("SELECT FROM friendTable WHERE name=:name", {
+          params: {
+            name: 'friend query'
+          }
+        })
+        .then(function(retrievedUsers){
+          assert.equal(retrievedUsers.length, 1);
+          assert.equal(retrievedUsers[0].id, user.id);
+          assert(!retrievedUsers[0]['@rid']);
+          done();
+        })
+        .catch(done);       
+      });
+      
     });
     
   });

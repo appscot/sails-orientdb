@@ -253,13 +253,15 @@ usage:
   	console.log(retrievedUsers);
   });
   
-  // Using params
+  // Using params (and promise)
   Friend.query("SELECT FROM friendTable WHERE name=:name", {
     params: {
       name: 'friend query'
     }
-  }, function(err, retrievedUsers){
+  }).then(function(retrievedUsers){
   	console.log(retrievedUsers);
+  }).catch(function(err){
+    console.error(err);
   });
   ```
 
@@ -321,7 +323,13 @@ usage:
   ```javascript
   // Assume a model named "Post"
   Post.createEdge('#12:1', '#13:1', { '@class':'Comments' }, function(err, result){
-    console.log('Edges deleted', result);
+    console.log('Edge created', result);
+  });
+  
+  // Adding param createdAt to the edge (and using promise)
+  Post.createEdge('#12:2', '#13:2', { '@class':'Comments', createdAt: new Date() })
+  .then(function(result){
+    console.log('Edge created', result);
   });
   ```
 > Note: when using many-to-many or many-to-many through associations edges will automatically be created. This method is for manual edge manipulation only and it's not required for maintaining associations.
@@ -333,10 +341,27 @@ usage:
   ```javascript
   // Assume a model named "Post"
   Post.deleteEdges('#12:1', '#13:1', null, function(err, result){
-    console.log('Edge created', result);
+    console.log('Edge deleted', result);
   });
   ```
 > Note: when using many-to-many or many-to-many through associations edges will automatically be deleted when using the conventional waterline methods. This method is for manual edge manipulation only and it's not required for maintaining associations.
+
+#### .increment (criteria, field[, amount][, cb])
+Increments the given field by amount (defaults to `1`). This can be used to generate sequencial numbers, more about this in [OrientDB docs](http://orientdb.com/docs/last/Sequences-and-auto-increment.html).
+
+usage: 
+  ```javascript
+  // Given a model Counter with attributes `name` and `value`
+  Counter.increment({ name: 'counter1' }, 'value', function (err, counter) {
+    console.log('counter1 has increased by 1 to:', counter.value);
+  });
+  
+  // To decrement use negative numbers
+  Counter.increment({ name: 'counter1' }, 'value', -2)
+  .then(function (counter) {
+    console.log('counter1 haas decreased by 2 to:', counter.value);
+  });
+  ```
 
 #### .removeCircularReferences (object)
 Convenience method that replaces circular references with `id` when one is available, otherwise it replaces the object with string '[Circular]'.
@@ -419,7 +444,7 @@ module.exports = Waterline.Collection.extend({
       via: 'team',
       dominant: true
     }
-
+  }
 });
 ```
 
