@@ -92,7 +92,7 @@ describe('Issue: Found class name null', function () {
 
             self.collections.Answer.create({
                 question:questionRecord.id,
-                answer: {binary:'Yes'}
+                Answer: {binary:'Yes'}
             }, function (err, question) {
 
                 if (err) {
