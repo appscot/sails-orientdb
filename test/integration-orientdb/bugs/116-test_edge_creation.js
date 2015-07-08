@@ -2,7 +2,7 @@ var assert = require('assert');
 
 var self = this;
 
-describe('Bug #116: Found class name null', function () {
+describe('Bug #116: Found class name null or empty', function () {
     before(function (done) {
 
         var fixtures = {
