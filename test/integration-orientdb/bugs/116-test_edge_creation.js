@@ -2,7 +2,7 @@ var assert = require('assert');
 
 var self = this;
 
-describe('Issue: Found class name null', function () {
+describe('Bug #116: Found class name null', function () {
     before(function (done) {
 
         var fixtures = {
@@ -52,10 +52,10 @@ describe('Issue: Found class name null', function () {
 
         };
 
-        CREATE_TEST_WATERLINE(self, 'test_join_relationship', fixtures, done);
+        CREATE_TEST_WATERLINE(self, 'test_bug_116', fixtures, done);
     });
     after(function (done) {
-        DELETE_TEST_WATERLINE('test_join_relationship', done);
+        DELETE_TEST_WATERLINE('test_bug_116', done);
     });
 
     describe('Create answer', function () {
