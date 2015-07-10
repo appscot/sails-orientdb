@@ -13,7 +13,7 @@ env:
   matrix:
     - ORIENTDB_VERSION=1.7.10
     - ORIENTDB_VERSION=2.0.12
-    - ORIENTDB_VERSION=2.1-SNAPSHOT
+    - ORIENTDB_VERSION=2.1-rc5
 addons:
   code_climate:
     repo_token: 9048159e3344dd9ba3afbc6044c1648f472de839baf7cc9eb73089b71439052b
