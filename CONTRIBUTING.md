@@ -37,7 +37,7 @@ Bugs in old versions of sails-orientdb may have already been fixed. In order to 
 
 3. **Use the Issues search** &mdash; check if the issue has already been reported. If it has been, please comment on the existing issue.
 
-4. **Provide a means to reproduce the problem** &mdash; Please provide as much details as possible, e.g. `sails-orientdb` logs, and of course the steps to reproduce the problem. Ideally, submit an automated test such as [47-schema_with_id.js](https://github.com/appscot/sails-orientdb/blob/master/test/integration-orientdb/bugs/47-schema_with_id.js).
+4. **Provide a means to reproduce the problem** &mdash; Please provide as much details as possible, e.g. `sails-orientdb` logs, `sails-orientdb`, `OrientDB` and `waterline` versions, and of course the steps to reproduce the problem. Ideally, submit an automated test such as [47-schema_with_id.js](https://github.com/appscot/sails-orientdb/blob/master/test/integration-orientdb/bugs/47-schema_with_id.js).
 
 ### Report a bug
 
