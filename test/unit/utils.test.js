@@ -3,7 +3,7 @@
  */
 var assert = require('assert'),
     utils = require('../../lib/utils'),
-    RecordId = require('oriento').RID;
+    RecordId = require('orientjs').RID;
 
 
 describe('utils helper class', function () {

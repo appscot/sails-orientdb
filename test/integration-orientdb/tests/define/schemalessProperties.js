@@ -1,6 +1,6 @@
 var assert = require('assert'),
     _ = require('lodash'),
-    Oriento = require('oriento');
+    Oriento = require('orientjs');
 
 describe('Define related Operations', function() {
 
