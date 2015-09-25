@@ -56,13 +56,13 @@ coverage: clean-all
 
 clean:
 	@echo "\n\nDROPPING ALL COLLECTIONS from db: $(DB)"
-	@echo "NOTICE: If operation fails, please ensure you've set the correct credentials in oriento.opts file"
+	@echo "NOTICE: If operation fails, please ensure you've set the correct credentials in orientjs.opts file"
 	@echo "Note: you can choose which db to drop by appending 'DB=<db_name>', e.g. 'make clean DB=waterline-test-orientdb'\n"
 	./node_modules/.bin/oriento db drop $(DB) || true
 	
 clean-all:
 	@echo "\n\nDROPPING DATABASES: waterline-test-integration, waterline-test-orientdb"
-	@echo "NOTICE: If operation fails, please ensure you've set the correct credentials in oriento.opts file\n"
+	@echo "NOTICE: If operation fails, please ensure you've set the correct credentials in orientjs.opts file\n"
 	./node_modules/.bin/oriento db drop waterline-test-integration > /dev/null 2>&1 || true
 	./node_modules/.bin/oriento db drop waterline-test-orientdb > /dev/null 2>&1 || true
 	@echo "Done"

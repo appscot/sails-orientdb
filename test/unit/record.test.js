@@ -3,7 +3,7 @@
  */
 var assert = require('assert'),
     Record = require('../../lib/record'),
-    RID = require('oriento').RID,
+    RID = require('orientjs').RID,
     _ = require('lodash'),
     util = require('util');
 

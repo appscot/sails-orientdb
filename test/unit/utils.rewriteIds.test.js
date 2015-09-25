@@ -3,7 +3,7 @@
  */
 var assert = require('assert'),
     utils = require('../../lib/utils'),
-    RID = require('oriento').RID;
+    RID = require('orientjs').RID;
 
 var testSingleLevel = function(fnName){
   var resultSet1 = { '@rid': new RID('#13:1'), property: 'value' };

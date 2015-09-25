@@ -23,7 +23,7 @@ Sails-orientdb aims to work with Waterline v0.10.x and [OrientDB](http://www.ori
 
 From the waterline [adapter interfaces](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md) sails-orientdb supports `Semantic`, `Queryable`, `Associations`, `Migratable` and `SQL` interfaces. Sails-orientdb complies with waterline API and it's used in the same way as other waterline/sails adapters.
 
-Sails-orientdb connects to OrientDB using [Oriento](https://github.com/codemix/oriento) (OrientDB's official driver).
+Sails-orientdb connects to OrientDB using [OrientJS](https://github.com/orientechnologies/orientjs) (OrientDB's official driver).
 
 
 ## Table of Contents
