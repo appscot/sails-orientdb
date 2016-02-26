@@ -1,6 +1,6 @@
 {
   "name": "sails-orientdb",
-  "version": "0.10.55",
+  "version": "0.10.60",
   "description": "OrientDB adapter for Waterline / Sails.js ORM",
   "main": "./lib/adapter.js",
   "scripts": {
@@ -45,7 +45,7 @@
     "bluebird": "^2.9.24",
     "debug-logger": "^0.4.0",
     "lodash": "^3.3.0",
-    "orientjs": "git://github.com/orientechnologies/orientjs.git#e75583c8d44dfd102c79a800d6d2ae357a3be08a",
+    "orientjs": "2.1.11",
     "waterline-criteria": "~0.11.1",
     "waterline-cursor": "~0.0.5",
     "waterline-sequel-orientdb": "^0.1.0"
