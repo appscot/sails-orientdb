@@ -26,7 +26,7 @@ describe('Config tests', function() {
     
     config = {
       user : 'root',
-      password : 'root',
+      password : 'hello',
       database: 'test_config_options_db'
     };
 

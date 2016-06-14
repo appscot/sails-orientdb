@@ -38,7 +38,8 @@ describe('Performance', function() {
       this.timeout(3000);
       console.time('performance_define');
       CREATE_TEST_WATERLINE(self, 'test_performance_define', fixtures, function(err){
-        if(err) { done(err); }
+        if(err) return done(err);
+        
         console.timeEnd('performance_define');
         done();
       });

@@ -2,7 +2,7 @@
   "host": "localhost",
   "port": 2424,
   "user": "root",
-  "password": "root",
+  "password": "hello",
   "options": {
     "storage": "plocal"
   }

@@ -101,7 +101,7 @@
     </network>
     <storages/>
     <users>
-        <user resources="*" password="root" name="root"/>
+        <user resources="*" password="hello" name="root"/>
         <user resources="connect,server.listDatabases,server.dblist" password="guest" name="guest"/>
     </users>
     <properties>

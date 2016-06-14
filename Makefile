@@ -58,13 +58,16 @@ clean:
 	@echo "\n\nDROPPING ALL COLLECTIONS from db: $(DB)"
 	@echo "NOTICE: If operation fails, please ensure you've set the correct credentials in orientjs.opts file"
 	@echo "Note: you can choose which db to drop by appending 'DB=<db_name>', e.g. 'make clean DB=waterline-test-orientdb'\n"
-	./node_modules/.bin/oriento db drop $(DB) || true
+	./node_modules/.bin/orientjs db drop $(DB) || true
 	
 clean-all:
-	@echo "\n\nDROPPING DATABASES: waterline-test-integration, waterline-test-orientdb"
+	@echo "\n\nDROPPING DATABASES: waterline-test-integration, waterline-test-orientdb, test_index_invalid, test_performance_drop, test_performance_drop_unsafe"
 	@echo "NOTICE: If operation fails, please ensure you've set the correct credentials in orientjs.opts file\n"
-	./node_modules/.bin/oriento db drop waterline-test-integration > /dev/null 2>&1 || true
-	./node_modules/.bin/oriento db drop waterline-test-orientdb > /dev/null 2>&1 || true
+	./node_modules/.bin/orientjs db drop waterline-test-integration > /dev/null 2>&1 || true
+	./node_modules/.bin/orientjs db drop waterline-test-orientdb > /dev/null 2>&1 || true
+	./node_modules/.bin/orientjs db drop test_index_invalid > /dev/null 2>&1 || true
+	./node_modules/.bin/orientjs db drop test_performance_drop > /dev/null 2>&1 || true
+	./node_modules/.bin/orientjs db drop test_performance_drop_unsafe > /dev/null 2>&1 || true
 	@echo "Done"
 
 .PHONY: coverage

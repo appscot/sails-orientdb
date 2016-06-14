@@ -100,7 +100,8 @@ describe('Performance', function() {
         this.timeout(2000);
         var start = process.hrtime();
         DELETE_TEST_WATERLINE(baseConfig, function(err){
-          if(err) { done(err); }
+          if(err) return done(err);
+
           safeDuration = elapsedTime(start);
           console.log('performance_drop:', safeDuration, 'ms');
           done();
@@ -127,7 +128,7 @@ describe('Performance', function() {
         initializeDB(unsafeContex, unsafeConfig, function(err){
           if (err) {
             console.log(err); 
-            done(err);
+            return done(err);
           }
           done();
         });
@@ -142,7 +143,8 @@ describe('Performance', function() {
         this.timeout(2000);
         var start = process.hrtime();
         DELETE_TEST_WATERLINE(unsafeConfig, function(err){
-          if(err) { done(err); }
+          if(err) return done(err);
+
           unsafeDuration = elapsedTime(start);
           console.log('performance_drop_unsafe:', unsafeDuration, 'ms');
           done();

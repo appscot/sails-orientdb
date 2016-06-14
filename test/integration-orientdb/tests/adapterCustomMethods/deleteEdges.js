@@ -27,7 +27,7 @@ describe('Adapter Custom Methods', function() {
             
             assert(edge);
             
-            Associations.User_resource.createEdge(user.id, profile.id, { '@class': 'followsTable' }, function(err, edge){
+            Associations.User_resource.createEdge(user.id, profile.id, null , function(err, edge){
               if(err) return done(err);
               
               assert(edge);
