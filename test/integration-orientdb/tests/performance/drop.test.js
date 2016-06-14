@@ -127,7 +127,6 @@ describe('Performance', function() {
       before(function (done) {
         initializeDB(unsafeContex, unsafeConfig, function(err){
           if (err) {
-            console.log(err); 
             return done(err);
           }
           done();

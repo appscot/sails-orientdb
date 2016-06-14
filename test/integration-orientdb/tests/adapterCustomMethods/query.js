@@ -33,7 +33,7 @@ describe('Adapter Custom Methods', function() {
       
       it('should return user', function(done) {
         Associations.Friend.query("SELECT FROM friendTable WHERE name='friend query'", function(err, retrievedUsers){
-          if (err) { done(err); }
+          if (err) { return done(err); }
           assert.equal(retrievedUsers.length, 1);
           assert.equal(retrievedUsers[0].id, user.id);
           assert(!retrievedUsers[0]['@rid']);
@@ -47,7 +47,7 @@ describe('Adapter Custom Methods', function() {
             name: 'friend query'
           }
         }, function(err, retrievedUsers){
-          if (err) { done(err); }
+          if (err) { return done(err); }
           assert.equal(retrievedUsers.length, 1);
           assert.equal(retrievedUsers[0].id, user.id);
           assert(!retrievedUsers[0]['@rid']);

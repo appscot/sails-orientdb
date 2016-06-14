@@ -66,12 +66,12 @@ describe('Association Interface', function() {
         stadiumMultiple.teams.add(allTeams[1].id);
         stadiumMultiple.teams.add(allTeams[2].id);
         stadiumMultiple.save(function(err){
-          if(err) { done(err); }
+          if(err) { return done(err); }
         
           Associations.Stadium.findOne(stadiumMultiple.id)
           .populate('teams')
           .exec(function(err, stadium) {
-            if(err) done(err);
+            if(err) { return done(err); }
   
             assert(Array.isArray(stadium.teams));
             assert(stadium.teams.length === 2);

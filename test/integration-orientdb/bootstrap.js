@@ -80,7 +80,7 @@ before(function(done) {
   waterline.initialize({ adapters: { wl_tests: Adapter }, connections: connections, defaults: defaults }, function(err, _ontology) {
     if(err) {
       console.log('ERROR:', err);
-      done(err);
+      return done(err);
     }
 
     ontology = _ontology;
@@ -109,7 +109,7 @@ after(function(done) {
   async.each(Object.keys(ontology.collections), dropCollection, function(err) {
     if(err) {
       console.log('ERROR:', err);
-      done(err);
+      return done(err);
     }
     
     ontology.collections[Object.keys(ontology.collections)[0]].getServer(function(server){
