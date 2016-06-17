@@ -181,7 +181,11 @@ Sails-orientdb implements its own custom join function so when the user runs `.p
 ## Usage
 
 ### Documentation
-For a comprehensive reference on how to use `sails-orientdb`/waterline check the [Waterline Documentation](https://github.com/balderdashy/waterline-docs#waterline-v010-documentation). Below we describe how `sails-orientdb` approaches and adds to the waterline core experience.
+For a comprehensive reference on how to use `sails-orientdb`/waterline check the [Waterline Documentation](https://github.com/balderdashy/waterline-docs#waterline-v010-documentation).
+
+For a SailsJS/OrientDB tutorial check Chris' [Creating an application with SailsJS and OrientDB on your Mac](https://chstrongjavablog.blogspot.pt/2015/09/creating-application-with-sailsjs-and.html).
+
+Below we describe how `sails-orientdb` approaches and adds to the waterline core experience.
 
 ### Models
 `sails-orientdb` uses the standard [waterline model definition](https://github.com/balderdashy/waterline-docs/blob/master/models.md) and extends it in order to accommodate OrientDB features.
