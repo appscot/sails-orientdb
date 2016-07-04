@@ -44,7 +44,7 @@
     "async": "^1.0.0",
     "bluebird": "^3.4.1",
     "debug-logger": "^0.4.0",
-    "lodash": "^3.3.0",
+    "lodash": "^3.10.1",
     "orientjs": "^2.2.1",
     "waterline-criteria": "^1.0.1",
     "waterline-cursor": "~0.0.5",
