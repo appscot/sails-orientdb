@@ -67,7 +67,7 @@ describe('Adapter Custom Methods', function () {
         function complete(err, results){
           assert.equal(err, null);
           
-          var uniqueCounts = _.unique(results);
+          var uniqueCounts = _.uniq(results);
           assert.strictEqual(uniqueCounts.length, opsNumber);
           done();
         });
