@@ -40,9 +40,9 @@ describe('Config tests', function() {
   
     describe('pool', function() {
 
-    /////////////////////////////////////////////////////
-    // TEST SETUP
-    ////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////
+      // TEST SETUP
+      ////////////////////////////////////////////////////
       
       before(function (done) {
         // db created, let's close the connection so we can test logins
@@ -91,5 +91,62 @@ describe('Config tests', function() {
       });
       
     });
+
+
+    describe('useToken', function() {
+
+      /////////////////////////////////////////////////////
+      // TEST SETUP
+      ////////////////////////////////////////////////////
+      
+      before(function (done) {
+        // db created, let's close the connection so we can test logins
+        self.waterline.teardown(done);
+      });
+      
+      after(function (done) {
+        // let's log off last user because it may not have privileges to drop the db later on
+        self.waterline.teardown(function (err) {
+          if (err) {  return done(err); }
+          // and now we logon with original config
+          CREATE_TEST_WATERLINE(self, config, fixtures, done);
+        });
+      });
+      
+      /////////////////////////////////////////////////////
+      // TEST METHODS
+      ////////////////////////////////////////////////////
+      
+      it('should be false', function (done) {
+        CREATE_TEST_WATERLINE(self, config, fixtures, function (err) {
+          if (err) {  return done(err); }
+          var server = self.collections.User.getServer();
+          assert.equal(server.transport.useToken, false);
+          done();
+        });
+      });
+      
+      it('should be true', function (done) {
+        self.waterline.teardown(function (err) {
+          if (err) {  return done(err); }
+
+          var newConfig = _.cloneDeep(config);
+
+          newConfig.options = {
+            useToken: true
+          };
+
+          CREATE_TEST_WATERLINE(self, newConfig, fixtures, function (err) {
+            if (err) {  return done(err); }
+            var server = self.collections.User.getServer();
+            assert.equal(server.transport.useToken, true);
+            done();
+          });
+        });
+      });
+      
+    });
+
+    
   });
 });
