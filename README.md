@@ -10,6 +10,9 @@ Waterline adapter for OrientDB. [Waterline](https://github.com/balderdashy/water
 
 > **Warning**
 >
+> waterline-schema v0.10.19, a dependency of waterline, breaks sails-orientdb tests. As such we recommend using sails-orientdb with waterline <= 0.10.27 / waterline-schema <= 0.1.18. More about this on issue [#152](https://github.com/appscot/sails-orientdb/issues/152).
+>
+>
 > `sails-orientdb` maps the logical `id` attribute to the required `@rid` physical-layer OrientDB Record ID.
 >
 >
