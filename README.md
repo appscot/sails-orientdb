@@ -143,7 +143,7 @@ The values stated above represent the default values. For an up to date comprehe
 In a graph db Sails-orientdb will represent most models in OrientDB as vertexes, the exception being Many-to-Many join tables which are represented by Edges. If using a document db, all models will be represented by documents.
 
 ### Associations
-To learn how to create associations with Waterline/Sails.js check the Waterline Docs [Associations Page](https://github.com/balderdashy/waterline-docs/blob/master/associations.md). Below we go through how sails-orientdb represent each kind of association in an OrientDB database.
+To learn how to create associations with Waterline/Sails.js check the Waterline Docs [Associations Page](https://github.com/balderdashy/waterline-docs/blob/master/models/associations/associations.md). Below we go through how sails-orientdb represent each kind of association in an OrientDB database.
 
 #### One-to-One Associations
 For One-to-One Associations sails-orientdb creates a LINK ([OrientDB Types](http://www.orientechnologies.com/docs/last/orientdb.wiki/Types.html)) to associate records.
